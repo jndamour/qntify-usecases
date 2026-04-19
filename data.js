@@ -1,0 +1,118 @@
+// 8 tracked assets across the globe — lat/lon + type + details
+// Coordinate system: lat -90..90, lon -180..180
+// Asset types: PROPERTY, BANK, AIRCRAFT, BUSINESS
+
+window.ASSETS = [
+  {
+    id: 'AST-001',
+    codename: 'MERIDIAN HOLDINGS',
+    type: 'PROPERTY',
+    subtype: 'Commercial Tower',
+    lat: 25.2048, lon: 55.2708, // Dubai
+    city: 'DUBAI', region: 'AE',
+    status: 'ACTIVE',
+    value: '$148.2M',
+    lastSeen: '2026-04-18 14:22:07 UTC',
+    classification: 'CONFIDENTIAL',
+    description: 'Mixed-use commercial structure held through three-layer SPV in BVI. Beneficial owner flagged in adverse media cluster K-7.',
+    signals: ['Title deed filed 2019-03', 'Rental income $2.1M/qtr', 'Linked to 4 related entities'],
+  },
+  {
+    id: 'AST-002',
+    codename: 'NORTHWIND TRUST',
+    type: 'BANK',
+    subtype: 'Private Banking Account',
+    lat: 46.9480, lon: 7.4474, // Bern
+    city: 'BERN', region: 'CH',
+    status: 'ACTIVE',
+    value: '$62.9M',
+    lastSeen: '2026-04-19 09:11:44 UTC',
+    classification: 'SECRET',
+    description: 'Numbered account, tier-1 Swiss institution. Correspondent wires from 6 jurisdictions over trailing 180 days.',
+    signals: ['Avg balance $63M', '12 counter-parties', '3 STR-flagged transfers'],
+  },
+  {
+    id: 'AST-003',
+    codename: 'SKYCLAD-IX',
+    type: 'AIRCRAFT',
+    subtype: 'Gulfstream G650ER',
+    lat: 50.1109, lon: 8.6821, // Frankfurt (last known)
+    city: 'FRANKFURT', region: 'DE',
+    status: 'ACTIVE',
+    value: '$71.5M',
+    lastSeen: '2026-04-19 06:47:12 UTC',
+    classification: 'CONFIDENTIAL',
+    description: 'Tail registered to shell in Isle of Man. Trailing 90d flight log: 34 legs across 11 jurisdictions.',
+    signals: ['Tail N-redacted', 'Operator: Concord Aviation Ltd', 'Hangar lease FRA-C14'],
+  },
+  {
+    id: 'AST-004',
+    codename: 'HARBOR-FIVE',
+    type: 'PROPERTY',
+    subtype: 'Residential Estate',
+    lat: -33.8688, lon: 151.2093, // Sydney
+    city: 'SYDNEY', region: 'AU',
+    status: 'DORMANT',
+    value: '$34.7M',
+    lastSeen: '2026-03-02 18:02:00 UTC',
+    classification: 'CONFIDENTIAL',
+    description: 'Waterfront residence. Title held via nominee. No utilities activity detected 47 days.',
+    signals: ['Pool maintenance ceased', 'No inbound mail 6w', 'Security still active'],
+  },
+  {
+    id: 'AST-005',
+    codename: 'VERTEX LOGISTICS',
+    type: 'BUSINESS',
+    subtype: 'Shipping / Freight',
+    lat: 1.3521, lon: 103.8198, // Singapore
+    city: 'SINGAPORE', region: 'SG',
+    status: 'ACTIVE',
+    value: '$218.4M',
+    lastSeen: '2026-04-19 11:55:30 UTC',
+    classification: 'SECRET',
+    description: 'Freight-forwarder, 4 subsidiaries across SE Asia. Revenue trace inconsistent with declared fleet capacity.',
+    signals: ['14 bills of lading / week', 'Cross-holding with AST-007', 'Director overlap 3 entities'],
+  },
+  {
+    id: 'AST-006',
+    codename: 'BLACK RIVER CAP',
+    type: 'BANK',
+    subtype: 'Corporate Account Cluster',
+    lat: 40.7128, lon: -74.0060, // NYC
+    city: 'NEW YORK', region: 'US',
+    status: 'ACTIVE',
+    value: '$41.6M',
+    lastSeen: '2026-04-19 13:40:19 UTC',
+    classification: 'CONFIDENTIAL',
+    description: 'Six related operating accounts at tier-1 US bank. Aggregated flow volume $412M trailing 12mo.',
+    signals: ['Signers: 4 overlap', 'Wire corridors: CY, AE, SG', 'Flagged SAR 2025-Q4'],
+  },
+  {
+    id: 'AST-007',
+    codename: 'PORT KESTREL',
+    type: 'BUSINESS',
+    subtype: 'Holding Company',
+    lat: 22.3193, lon: 114.1694, // Hong Kong
+    city: 'HONG KONG', region: 'HK',
+    status: 'ACTIVE',
+    value: '$96.1M',
+    lastSeen: '2026-04-19 02:18:55 UTC',
+    classification: 'SECRET',
+    description: 'Parent of 11 trading subsidiaries. Beneficial chain traced through 3 jurisdictions including CY and VG.',
+    signals: ['Board overlap with AST-005', 'IPO shelved 2024', 'Audit qualified 2 yrs running'],
+  },
+  {
+    id: 'AST-008',
+    codename: 'CANARY-ONE',
+    type: 'AIRCRAFT',
+    subtype: 'Bombardier Global 7500',
+    lat: -23.5505, lon: -46.6333, // São Paulo (last known)
+    city: 'SAO PAULO', region: 'BR',
+    status: 'DORMANT',
+    value: '$78.0M',
+    lastSeen: '2026-02-14 21:33:08 UTC',
+    classification: 'CONFIDENTIAL',
+    description: 'No transponder activity 64 days. Hangar fees current. Ownership trace: Cayman → Panama → BVI.',
+    signals: ['Last flight: GRU→MIA', 'Transponder off 64d', 'Ownership 3-layer'],
+  },
+];
