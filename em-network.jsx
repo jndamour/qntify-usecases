@@ -54,7 +54,7 @@ function SupplyChainNetwork({ theme, focusFlag = null }) {
           ))}
         </div>
 
-        <svg viewBox="0 0 1 1" preserveAspectRatio="none"
+        <svg viewBox="0 0 1 1" preserveAspectRatio="xMidYMid meet"
           style={{ position: 'absolute', inset: '40px 40px 48px', width: 'calc(100% - 80px)', height: 'calc(100% - 88px)' }}>
           {/* edges */}
           {edges.map(([a, b], i) => {
