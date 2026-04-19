@@ -54,8 +54,9 @@ function SupplyChainNetwork({ theme, focusFlag = null }) {
           ))}
         </div>
 
-        <svg viewBox="0 0 1 1" preserveAspectRatio="xMidYMid meet"
-          style={{ position: 'absolute', inset: '40px 40px 48px', width: 'calc(100% - 80px)', height: 'calc(100% - 88px)' }}>
+        <div style={{ position: 'absolute', inset: '40px 40px 48px' }}>
+        <svg viewBox="0 0 1 1" preserveAspectRatio="none"
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}>
           {/* edges */}
           {edges.map(([a, b], i) => {
             const na = nodeById[a], nb = nodeById[b];
@@ -113,16 +114,35 @@ function SupplyChainNetwork({ theme, focusFlag = null }) {
                 <circle cx={pos.x} cy={pos.y} r={r}
                   fill={fill}
                   stroke={theme.panel} strokeWidth="0.003"/>
-                <text x={pos.x + 0.02} y={pos.y + 0.004}
-                  fontFamily="Inter, sans-serif" fontSize="0.018"
-                  fill={theme.fg}>{n.label}</text>
-                <text x={pos.x + 0.02} y={pos.y + 0.024}
-                  fontFamily="JetBrains Mono, monospace" fontSize="0.014"
-                  fill={theme.fgDim}>{n.sub}</text>
               </g>
             );
           })}
         </svg>
+
+        {/* HTML text overlay — renders in real pixels, not stretched */}
+        {nodes.map(n => {
+          const pos = nodeById[n.id];
+          return (
+            <div key={'label-' + n.id} style={{
+              position: 'absolute',
+              left: `${pos.x * 100}%`,
+              top: `${pos.y * 100}%`,
+              transform: 'translate(14px, -50%)',
+              pointerEvents: 'none',
+              whiteSpace: 'nowrap',
+            }}>
+              <div style={{
+                fontFamily: 'Inter, sans-serif', fontSize: 11,
+                color: theme.fg, lineHeight: 1.25, fontWeight: 500,
+              }}>{n.label}</div>
+              <div style={{
+                fontFamily: 'JetBrains Mono, monospace', fontSize: 9,
+                color: theme.fgDim, letterSpacing: 0.5, marginTop: 2,
+              }}>{n.sub}</div>
+            </div>
+          );
+        })}
+        </div>
 
         <div style={{
           position: 'absolute', bottom: 14, left: 40,
