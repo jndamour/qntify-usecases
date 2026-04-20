@@ -50,6 +50,7 @@ Or just use GitHub's web UI — drag all the files in this folder into a fresh r
 4. Wait ~1 minute. Your site will be live at:
    ```
    https://YOUR-USERNAME.github.io/qntify-usecases/
+   https://jndamour.github.io/qntify-usecases/
    ```
 
 ### 4. (Optional) Custom subdomain — e.g. `usecases.qntify.net`
