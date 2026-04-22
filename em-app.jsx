@@ -118,9 +118,7 @@ function EmApp() {
             marginTop: 32, maxWidth: 700,
             fontSize: 17, lineHeight: 1.6, color: theme.fgDim2,
           }}>
-            Qntify builds EM conviction from port data, customs filings, ownership registers,
-            and in-country sources — not consensus notes. Used by sovereign allocators,
-            trade-finance desks, and DD teams underwriting frontier exposure.
+            Qntify builds custom datasets for due diligence, trade and supply chain intelligence.
           </div>
         </RevealText>
 
@@ -216,16 +214,16 @@ function EmApp() {
         <DatasetsGrid theme={theme}/>
       </section>
 
-      <Rule theme={theme}/>
+      {/* <Rule theme={theme}/> */}
 
       {/* VIGNETTE */}
-      <section style={{ padding: '80px 48px', maxWidth: 1400, margin: '0 auto' }}>
+{/*       <section style={{ padding: '80px 48px', maxWidth: 1400, margin: '0 auto' }}>
         <Eyebrow theme={theme}>Case Vignette</Eyebrow>
         <Display theme={theme} style={{ fontSize: 'clamp(26px, 3vw, 38px)', marginBottom: 32, maxWidth: 820 }}>
           How a four-week engagement re-shaped a battery-metals off-take.
         </Display>
         <Vignette theme={theme}/>
-      </section>
+      </section> */}
 
       <Rule theme={theme}/>
 

@@ -30,10 +30,11 @@ function NavBar({ theme }) {
           ntify
         </div>
       </div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 28, fontFamily: 'Inter, sans-serif', fontSize: 13, fontWeight: 500 }}>
-        <a href="#" style={{ color: theme.fgDim, textDecoration: 'none' }}>Use Cases</a>
-        <a href="#" style={{ color: theme.fg, textDecoration: 'none', borderBottom: `1px solid ${theme.accent}`, paddingBottom: 2 }}>Asset Mapping</a>
-        <a href="#" style={{ color: theme.fgDim, textDecoration: 'none' }}>Methodology</a>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 24, fontFamily: 'Inter, sans-serif', fontSize: 13, fontWeight: 500 }}>
+        <a href="Global Asset Map.html" style={{ color: theme.fg, textDecoration: 'none', borderBottom: `1px solid ${theme.accent}`, paddingBottom: 2 }}>Asset Mapping</a>
+        <a href="Alternative Assets.html" style={{ color: theme.fgDim, textDecoration: 'none' }}>Alternative Assets</a>
+        <a href="Whistleblower Claims.html" style={{ color: theme.fgDim, textDecoration: 'none' }}>Whistleblower</a>
+        <a href="Emerging Markets.html" style={{ color: theme.fgDim, textDecoration: 'none' }}>Emerging Markets</a>
         <a href="#" style={{ color: theme.fgDim, textDecoration: 'none' }}>Request Demo</a>
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 16, fontFamily: 'JetBrains Mono, monospace', fontSize: 10, color: theme.fgDim, letterSpacing: 1 }}>

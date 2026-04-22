@@ -55,14 +55,32 @@ const THEMES = {
     imgBg2: 'rgba(94, 234, 212, 0.02)',
     glow: '94, 234, 212',
   },
+  paper: {
+    name: 'PAPER',
+    bg: '#f7f5f0',
+    bg2: '#fbfaf6',
+    fg: '#0f1a2e',
+    fgDim: '#7a7366',
+    fgDim2: '#4a4a44',
+    accent: '#4a5c9c',
+    warn: '#b5773a',
+    border: 'rgba(20, 30, 46, 0.14)',
+    panelBg: 'rgba(251, 250, 246, 0.92)',
+    headerBg: 'rgba(74, 92, 156, 0.05)',
+    landFill: 'rgba(74, 92, 156, 0.07)',
+    grid: 'rgba(20, 30, 46, 0.04)',
+    imgBg: 'rgba(74, 92, 156, 0.06)',
+    imgBg2: 'rgba(74, 92, 156, 0.02)',
+    glow: '74, 92, 156',
+  },
 };
 
 // ─── TWEAKS: tweakable defaults persisted to file ─────────────────────────
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
-  "colorScheme": "sentinel",
+  "colorScheme": "paper",
   "panelPosition": "floating",
   "cycleSeconds": 6,
-  "showAmbient": true
+  "showAmbient": false
 }/*EDITMODE-END*/;
 
 function App() {
@@ -436,15 +454,19 @@ function Watermark({ theme }) {
 
 // ─── Tweaks panel ─────────────────────────────────────────────────────────
 function TweaksPanel({ tweaks, onChange, theme }) {
+  const isLight = tweaks.colorScheme === 'paper';
+  const panelBg = isLight ? 'rgba(251, 250, 246, 0.96)' : 'rgba(10, 10, 14, 0.95)';
+  const panelText = isLight ? theme.fg : '#fff';
+  const labelColor = isLight ? theme.fgDim : '#888';
   return (
     <div style={{
       position: 'absolute', bottom: 48, right: 24, zIndex: 200,
       width: 240,
-      background: 'rgba(10, 10, 14, 0.95)',
+      background: panelBg,
       border: `1px solid ${theme.accent}`,
       boxShadow: `0 0 20px rgba(${theme.glow}, 0.3)`,
       fontFamily: 'JetBrains Mono, monospace',
-      color: '#fff',
+      color: panelText,
       backdropFilter: 'blur(12px)',
     }}>
       <div style={{
@@ -458,15 +480,14 @@ function TweaksPanel({ tweaks, onChange, theme }) {
       </div>
       <div style={{ padding: '14px' }}>
         <TweakRow label="COLOR SCHEME">
-          <div style={{ display: 'flex', gap: 6 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 6 }}>
             {Object.keys(THEMES).map(k => (
               <button key={k}
                 onClick={() => onChange('colorScheme', k)}
                 style={{
-                  flex: 1,
                   padding: '6px 4px',
                   background: tweaks.colorScheme === k ? THEMES[k].accent : 'transparent',
-                  color: tweaks.colorScheme === k ? '#000' : THEMES[k].accent,
+                  color: tweaks.colorScheme === k ? '#fff' : THEMES[k].accent,
                   border: `1px solid ${THEMES[k].accent}`,
                   fontSize: 9, letterSpacing: 1, cursor: 'pointer',
                   fontFamily: 'JetBrains Mono, monospace',
@@ -485,8 +506,8 @@ function TweaksPanel({ tweaks, onChange, theme }) {
                 style={{
                   flex: 1, padding: '6px 4px',
                   background: tweaks.panelPosition === p ? theme.accent : 'transparent',
-                  color: tweaks.panelPosition === p ? '#000' : '#ccc',
-                  border: `1px solid ${tweaks.panelPosition === p ? theme.accent : '#444'}`,
+                  color: tweaks.panelPosition === p ? '#fff' : panelText,
+                  border: `1px solid ${tweaks.panelPosition === p ? theme.accent : (isLight ? theme.border : '#444')}`,
                   fontSize: 9, letterSpacing: 1, cursor: 'pointer',
                   fontFamily: 'JetBrains Mono, monospace',
                   textTransform: 'uppercase',
@@ -513,8 +534,8 @@ function TweaksPanel({ tweaks, onChange, theme }) {
             style={{
               width: '100%', padding: '6px 4px',
               background: tweaks.showAmbient ? theme.accent : 'transparent',
-              color: tweaks.showAmbient ? '#000' : '#ccc',
-              border: `1px solid ${tweaks.showAmbient ? theme.accent : '#444'}`,
+              color: tweaks.showAmbient ? '#fff' : panelText,
+              border: `1px solid ${tweaks.showAmbient ? theme.accent : (isLight ? theme.border : '#444')}`,
               fontSize: 9, letterSpacing: 1, cursor: 'pointer',
               fontFamily: 'JetBrains Mono, monospace',
               fontWeight: 600,
@@ -529,7 +550,7 @@ function TweaksPanel({ tweaks, onChange, theme }) {
 function TweakRow({ label, children }) {
   return (
     <div style={{ marginBottom: 14 }}>
-      <div style={{ fontSize: 8, letterSpacing: 1.5, color: '#888', marginBottom: 6 }}>
+      <div style={{ fontSize: 8, letterSpacing: 1.5, color: 'inherit', opacity: 0.5, marginBottom: 6 }}>
         {label}
       </div>
       {children}
