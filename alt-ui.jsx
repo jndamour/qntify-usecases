@@ -39,21 +39,16 @@ function AltNav({ theme }) {
       background: `${theme.bg}e8`,
       backdropFilter: 'blur(8px)',
       borderBottom: `1px solid ${theme.rule}`,
-    }}>
-      <div style={{
-        fontFamily: '"Barlow Condensed", sans-serif',
-        fontWeight: 500, fontSize: 28, color: theme.fg, letterSpacing: 0.3,
-        display: 'inline-flex', alignItems: 'baseline', whiteSpace: 'nowrap',
-      }}>
-        <span style={{ position: 'relative', display: 'inline-block' }}>
-          Q
-          <span style={{
-            position: 'absolute', top: -4, right: -3,
-            width: 6, height: 6, background: theme.accent, borderRadius: '50%',
-          }}/>
-        </span>
-        <span>ntify</span>
-      </div>
+    }}><div>
+      <a href="/"
+  aria-label="Qntify"
+  style={{display: 'inline-block', lineHeight: 0, }}>
+  <img src="/assets/Qntify_logo_trans.png"
+    alt="Qntify"
+    // mobile default
+    style={{display: 'block', width: '120px', height: 'auto',}}/>
+</a>
+</div>
       <div style={{ display: 'flex', gap: 26, fontFamily: 'Inter, sans-serif', fontSize: 13, fontWeight: 500 }}>
         <a href="Global Asset Map.html" style={{ color: theme.fgDim, textDecoration: 'none' }}>Asset Mapping</a>
         <a href="#" style={{ color: theme.fg, textDecoration: 'none', borderBottom: `1px solid ${theme.accent}`, paddingBottom: 3 }}>Alternative Assets</a>
