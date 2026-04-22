@@ -105,7 +105,7 @@ function AltApp() {
             marginTop: 32, maxWidth: 680,
             fontSize: 17, lineHeight: 1.6, color: theme.fgDim2,
           }}>
-            Qntify underwrites two asset classes where information asymmetry is the
+            Qntify focuses on two asset classes where information asymmetry is the
             determinant of return: legal claims and enforcement recoveries, and
             productive farmland. Both reward depth over speed.
           </div>
@@ -149,7 +149,7 @@ function AltApp() {
 
       <Rule theme={theme}/>
 
-      <section style={{ padding: '80px 48px', maxWidth: 1400, margin: '0 auto' }}>
+{/*       <section style={{ padding: '80px 48px', maxWidth: 1400, margin: '0 auto' }}>
         <Eyebrow theme={theme}>Process</Eyebrow>
         <Display theme={theme} style={{ fontSize: 'clamp(26px, 3vw, 38px)', marginBottom: 48, maxWidth: 760 }}>
           From referral to recovery, five stages of underwriting discipline.
@@ -157,7 +157,7 @@ function AltApp() {
         <LifecycleFlow theme={theme}/>
       </section>
 
-      <Rule theme={theme}/>
+      <Rule theme={theme}/> */}
 
       <section style={{ padding: '80px 48px', maxWidth: 1400, margin: '0 auto' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 80, alignItems: 'end', marginBottom: 40 }}>
