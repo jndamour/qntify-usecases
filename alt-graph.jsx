@@ -81,7 +81,121 @@ function RelationshipGraph({ theme }) {
   );
 }
 
+
+
+// Size constraints for node boxes
+const NODE_MIN_W = 120;
+const NODE_MAX_W = 240;
+const NODE_MIN_H = 46;
+const NODE_MAX_H = 160;
+const NODE_PAD_X = 14;   // horizontal inner padding
+const NODE_PAD_Y = 10;   // vertical inner padding
+const LABEL_FS = 12;     // label font size
+const SUB_FS = 9;        // sub font size
+const SUB_LINE_H = 12;   // line-height for wrapped sub text
+const LABEL_SUB_GAP = 6; // gap between label and sub block
+
+// Rough per-character widths (in px) for the fonts/sizes used below.
+// SVG can't measure text synchronously without a DOM pass, so we approximate.
+const LABEL_CHAR_W = LABEL_FS * 0.58;         // Inter 600 @ 12px
+const SUB_CHAR_W = SUB_FS * 0.62 + 0.5;       // JetBrains Mono @ 9px + letterSpacing 0.5
+
+// Greedy word-wrap that breaks `text` into lines fitting within `maxWidth` px,
+// using `charW` as the average glyph advance. Falls back to hard-breaking
+// any single token that is itself wider than maxWidth.
+function wrapText(text, maxWidth, charW) {
+  if (!text) return [''];
+  const maxChars = Math.max(1, Math.floor(maxWidth / charW));
+  const words = String(text).split(/\s+/);
+  const lines = [];
+  let current = '';
+  for (const word of words) {
+    if (word.length > maxChars) {
+      // Flush current, then hard-break the oversized word
+      if (current) { lines.push(current); current = ''; }
+      for (let i = 0; i < word.length; i += maxChars) {
+        const chunk = word.slice(i, i + maxChars);
+        if (i + maxChars >= word.length) current = chunk;
+        else lines.push(chunk);
+      }
+      continue;
+    }
+    const candidate = current ? `${current} ${word}` : word;
+    if (candidate.length <= maxChars) {
+      current = candidate;
+    } else {
+      lines.push(current);
+      current = word;
+    }
+  }
+  if (current) lines.push(current);
+  return lines.length ? lines : [''];
+}
+
 function NodeShape({ x, y, node, theme }) {
+  const kindFill = {
+    origin: theme.nodePrimary,
+    counsel: theme.nodeNeutral,
+    forum: theme.nodeNeutral,
+    obligor: theme.nodePrimary,
+    asset: theme.nodeAccent,
+  }[node.kind];
+  const kindText = (node.kind === 'asset' || node.kind === 'origin' || node.kind === 'obligor')
+    ? theme.bg
+    : theme.fg;
+  const subText = (node.kind === 'asset' || node.kind === 'origin' || node.kind === 'obligor')
+    ? theme.bg
+    : theme.fgDim;
+
+  // Step 1: measure natural widths, clamped to [MIN, MAX].
+  const labelNaturalW = (node.label?.length || 0) * LABEL_CHAR_W + NODE_PAD_X * 2;
+  const subNaturalW = (node.sub?.length || 0) * SUB_CHAR_W + NODE_PAD_X * 2;
+  const unwrappedW = Math.max(labelNaturalW, subNaturalW);
+  const w = Math.min(NODE_MAX_W, Math.max(NODE_MIN_W, unwrappedW));
+
+  // Step 2: wrap sub text against the resulting inner width.
+  const innerW = w - NODE_PAD_X * 2;
+  const subLines = wrapText(node.sub, innerW, SUB_CHAR_W);
+
+  // Step 3: compute height from label + gap + sub lines + padding, clamped.
+  const contentH = LABEL_FS + LABEL_SUB_GAP + subLines.length * SUB_LINE_H;
+  const h = Math.min(NODE_MAX_H, Math.max(NODE_MIN_H, contentH + NODE_PAD_Y * 2));
+
+  // Vertical layout: center the (label + gap + sub block) stack in the box.
+  const stackH = LABEL_FS + LABEL_SUB_GAP + subLines.length * SUB_LINE_H;
+  const stackTop = y - stackH / 2;
+  const labelY = stackTop + LABEL_FS - 2; // baseline for label
+  const subStartY = stackTop + LABEL_FS + LABEL_SUB_GAP + SUB_FS - 1; // baseline for first sub line
+
+  const isInverted = node.kind === 'origin' || node.kind === 'obligor' || node.kind === 'asset';
+
+  return (
+    <g>
+      <rect x={x - w/2} y={y - h/2} width={w} height={h}
+        fill={kindFill}
+        stroke={theme.rule}
+        strokeWidth="1"
+      />
+      <text x={x} y={labelY} textAnchor="middle"
+        fontFamily="Inter, sans-serif" fontSize={LABEL_FS} fontWeight="600"
+        fill={kindText}>
+        {node.label}
+      </text>
+      <text x={x} y={subStartY} textAnchor="middle"
+        fontFamily="JetBrains Mono, monospace" fontSize={SUB_FS}
+        fill={subText}
+        opacity={isInverted ? 0.75 : 1}
+        letterSpacing="0.5">
+        {subLines.map((line, i) => (
+          <tspan key={i} x={x} dy={i === 0 ? 0 : SUB_LINE_H}>{line}</tspan>
+        ))}
+      </text>
+    </g>
+  );
+}
+
+
+function FixedNodeShape({ x, y, node, theme }) {
   const w = 150, h = 46;
   const kindFill = {
     origin: theme.nodePrimary,
