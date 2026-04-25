@@ -1,5 +1,8 @@
 // Emerging Markets Financial Intelligence — main app
-import NexusGraph from './NexusGraph';
+
+// ❌ DON'T do this with Babel Standalone:
+//import NexusGraph from './NexusGraph';
+
 const { useState, useEffect } = React;
 
 const EM_TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
