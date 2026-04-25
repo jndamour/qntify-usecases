@@ -1,0 +1,14 @@
+[
+  { "id": "claimant",  "label": "Claimant",                "sub": "Institutional holder",            "x": 0.08, "y": 0.50, "kind": "origin" },
+  { "id": "counsel-a", "label": "Counsel (Lead)",          "sub": "Magic-circle firm",               "x": 0.26, "y": 0.28, "kind": "counsel" },
+  { "id": "counsel-b", "label": "Local Counsel",           "sub": "In-jurisdiction",                 "x": 0.26, "y": 0.72, "kind": "counsel" },
+  { "id": "forum-a",   "label": "Forum · ICSID",           "sub": "Washington, DC",                  "x": 0.48, "y": 0.18, "kind": "forum" },
+  { "id": "forum-b",   "label": "Forum · UNCITRAL",        "sub": "Seat: Paris",                     "x": 0.48, "y": 0.42, "kind": "forum" },
+  { "id": "forum-c",   "label": "Forum · NY Supreme Court","sub": "Judgment recognition",            "x": 0.48, "y": 0.65, "kind": "forum" },
+  { "id": "forum-d",   "label": "Forum · High Court UK",   "sub": "§ 101 enforcement",               "x": 0.48, "y": 0.85, "kind": "forum" },
+  { "id": "obligor",   "label": "Obligor",                 "sub": "Sovereign / Corporate / Individual","x": 0.70,"y": 0.50, "kind": "obligor" },
+  { "id": "asset-1",   "label": "Recoverable",             "sub": "Commercial real estate",          "x": 0.90, "y": 0.18, "kind": "asset" },
+  { "id": "asset-2",   "label": "Recoverable",             "sub": "Aircraft registry",               "x": 0.90, "y": 0.38, "kind": "asset" },
+  { "id": "asset-3",   "label": "Recoverable",             "sub": "Blocked bank accounts",           "x": 0.90, "y": 0.62, "kind": "asset" },
+  { "id": "asset-4",   "label": "Recoverable",             "sub": "Shareholding / equity",           "x": 0.90, "y": 0.82, "kind": "asset" }
+]

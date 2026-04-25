@@ -1,0 +1,43 @@
+{
+  "stages": [
+    { "id": "mine",    "label": "MINE",     "x": 0.07 },
+    { "id": "refin",   "label": "REFINERY", "x": 0.32 },
+    { "id": "cathode", "label": "CATHODE",  "x": 0.58 },
+    { "id": "battery", "label": "BATTERY",  "x": 0.82 }
+  ],
+  "nodes": [
+    { "id": "m1", "stage": "mine", "label": "DRC-A · Katanga",     "y": 0.15, "sub": "Cobalt · 42kt/y" },
+    { "id": "m2", "stage": "mine", "label": "ZMB-B · Copperbelt",  "y": 0.40, "sub": "Copper · 180kt/y" },
+    { "id": "m3", "stage": "mine", "label": "KAZ-C · Karaganda",   "y": 0.65, "sub": "Lithium brine" },
+    { "id": "m4", "stage": "mine", "label": "IDN-D · Sulawesi",    "y": 0.88, "sub": "Nickel laterite" },
+
+    { "id": "r1", "stage": "refin", "label": "Refiner · Tianjin",   "y": 0.22, "sub": "Cobalt sulfate · PGM" },
+    { "id": "r2", "stage": "refin", "label": "Refiner · Foshan",    "y": 0.55, "sub": "Mixed hydroxide",
+      "flag": "chokepoint", "flagDetail": "Sole processor for 60%+ of Cu-Co feed from Southern Africa." },
+    { "id": "r3", "stage": "refin", "label": "Refiner · Rotterdam", "y": 0.85, "sub": "Nickel class I" },
+
+    { "id": "c1", "stage": "cathode", "label": "Cathode · Changsha", "y": 0.25, "sub": "NMC 811",
+      "flag": "sanctions", "flagDetail": "Parent entity subject to expanded export-control listing (Oct 2025)." },
+    { "id": "c2", "stage": "cathode", "label": "Cathode · Ulsan",    "y": 0.55, "sub": "LFP / NMC" },
+    { "id": "c3", "stage": "cathode", "label": "Cathode · Dalian",   "y": 0.82, "sub": "High-Ni NMC",
+      "flag": "ownership", "flagDetail": "Beneficial ownership traces to same holding as Refiner · Foshan." },
+
+    { "id": "b1", "stage": "battery", "label": "OEM · K1", "y": 0.30, "sub": "EV platform A" },
+    { "id": "b2", "stage": "battery", "label": "OEM · K2", "y": 0.55, "sub": "EV platform B" },
+    { "id": "b3", "stage": "battery", "label": "OEM · K3", "y": 0.80, "sub": "ESS / grid" }
+  ],
+  "edges": [
+    ["m1", "r1"], ["m1", "r2"],
+    ["m2", "r2"],
+    ["m3", "r2"], ["m3", "r3"],
+    ["m4", "r3"],
+
+    ["r1", "c1"], ["r1", "c2"],
+    ["r2", "c1"], ["r2", "c2"], ["r2", "c3"],
+    ["r3", "c2"], ["r3", "c3"],
+
+    ["c1", "b1"],
+    ["c2", "b1"], ["c2", "b2"],
+    ["c3", "b2"], ["c3", "b3"]
+  ]
+}

@@ -1,0 +1,5 @@
+[
+  { "tag": "POL-CORR",   "label": "Political corruption" },
+  { "tag": "CORP-FRAUD", "label": "Corporate fraud & malfeasance" },
+  { "tag": "TBML",       "label": "Trade-based money laundering" }
+]

@@ -1,0 +1,16 @@
+[
+  ["claimant", "counsel-a"],
+  ["claimant", "counsel-b"],
+  ["counsel-a", "forum-a"],
+  ["counsel-a", "forum-b"],
+  ["counsel-b", "forum-c"],
+  ["counsel-b", "forum-d"],
+  ["forum-a", "obligor"],
+  ["forum-b", "obligor"],
+  ["forum-c", "obligor"],
+  ["forum-d", "obligor"],
+  ["obligor", "asset-1"],
+  ["obligor", "asset-2"],
+  ["obligor", "asset-3"],
+  ["obligor", "asset-4"]
+]

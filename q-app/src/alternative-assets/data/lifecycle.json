@@ -1,0 +1,7 @@
+[
+  { "n": "01", "title": "Origination",              "body": "Referral, broker-dealer, or direct claimant outreach. Initial review of jurisdiction, theory, and quantum." },
+  { "n": "02", "title": "Diligence",                "body": "Merits opinion, enforcement analysis, obligor-asset tracing, counter-party risk, insurance." },
+  { "n": "03", "title": "Funding",                  "body": "Non-recourse capital deployment against defined case budget. Alignment through return waterfalls." },
+  { "n": "04", "title": "Litigation / Arbitration", "body": "Active case management. Monitoring of docket, discovery, and strategic inflection points." },
+  { "n": "05", "title": "Enforcement & Recovery",   "body": "Post-award execution across jurisdictions. Asset tracing, freezing orders, attachment, and monetization." }
+]

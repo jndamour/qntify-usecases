@@ -14,8 +14,8 @@ export function DetailPanel({ asset, theme, position, index, total }) {
     boxShadow: `0 0 0 1px ${theme.accent}15, 0 20px 60px rgba(0,0,0,0.5)`,
   }
 
-  if (pos === 'right') Object.assign(containerStyle, { right: 24, top: 96, bottom: 40 })
-  else if (pos === 'left') Object.assign(containerStyle, { left: 24, top: 96, bottom: 40 })
+  if (pos === 'right') Object.assign(containerStyle, { right: 24, top: 104, bottom: 40 })
+  else if (pos === 'left') Object.assign(containerStyle, { left: 24, top: 104, bottom: 40 })
   else Object.assign(containerStyle, { right: 40, bottom: 40, maxHeight: 'calc(100vh - 140px)' })
 
   return (

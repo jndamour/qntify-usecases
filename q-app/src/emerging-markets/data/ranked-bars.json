@@ -1,0 +1,14 @@
+{
+  "name": "Sector exposure — frontier composite",
+  "unit": "Share of tracked inflows, trailing 12m",
+  "rows": [
+    { "label": "Critical minerals",        "value": 0.28 },
+    { "label": "Agricultural commodities", "value": 0.19 },
+    { "label": "Hydrocarbons",             "value": 0.15 },
+    { "label": "Light manufacturing",      "value": 0.12 },
+    { "label": "Port / logistics",         "value": 0.10 },
+    { "label": "Telecom / fiber",          "value": 0.08 },
+    { "label": "Renewables",               "value": 0.05 },
+    { "label": "Other",                    "value": 0.03 }
+  ]
+}

@@ -1,0 +1,8 @@
+[
+  { "n": "01", "name": "Port AIS vessel dwell",     "body": "Hourly vessel positions and berth-dwell metrics across 340 EM container and bulk terminals." },
+  { "n": "02", "name": "Frontier customs filings",  "body": "De-duplicated HS-code level trade filings from 22 countries, cleaned of re-exports." },
+  { "n": "03", "name": "Sovereign MOF disclosures", "body": "Machine-readable Ministry of Finance issuance, debt stock, and guarantee filings." },
+  { "n": "04", "name": "LCA licensing registers",   "body": "Local content and licensing records for extractive concessions in 14 jurisdictions." },
+  { "n": "05", "name": "Regional power dispatch",   "body": "Day-ahead and real-time dispatch from EM ISOs where published or FOI-recovered." },
+  { "n": "06", "name": "State-enterprise filings",  "body": "Annual reports and audited financials of SOEs below listing thresholds." }
+]

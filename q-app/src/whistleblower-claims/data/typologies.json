@@ -1,0 +1,10 @@
+[
+  { "n": "01", "name": "Invoice misvaluation",     "body": "Systematic over- or under-pricing of cross-border goods to move value." },
+  { "n": "02", "name": "Phantom-shipment cycles",  "body": "Trade finance extended against goods that never ship — or that ship repeatedly." },
+  { "n": "03", "name": "Third-party pass-through", "body": "Beneficial ownership obscured through intermediaries in low-transparency jurisdictions." },
+  { "n": "04", "name": "Channel stuffing",         "body": "Revenue recognition pulled forward through inventory pushed to captive distributors." },
+  { "n": "05", "name": "Round-tripping",           "body": "Funds exit and re-enter via offshore vehicles to reclassify source or purpose." },
+  { "n": "06", "name": "Procurement collusion",    "body": "Repeated bid patterns consistent with information leakage or allocation." },
+  { "n": "07", "name": "Shell layering",           "body": "Entity chains registered and dissolved within transaction windows." },
+  { "n": "08", "name": "Sanctions masking",        "body": "Counterparty substitution or intermediary insertion to obscure restricted parties." }
+]

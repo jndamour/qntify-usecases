@@ -1,0 +1,61 @@
+[
+  {
+    "id": "CLIP-A",
+    "kicker": "FINANCIAL · Europe",
+    "headline": "Shell network routes freight contracts through third jurisdictions",
+    "body": "Invoices reviewed by regulators show repeated over-valuation of commodity shipments moving between a Mediterranean port authority and an intermediary in the Gulf. The price gap, averaging twenty-two percent above market, has persisted across three fiscal years and recurs in seven related filings.",
+    "highlights": [
+      { "start": 55,  "end": 116 },
+      { "start": 175, "end": 215 }
+    ],
+    "tag": "TBML",
+    "x": 0.04, "y": 0.10, "rot": -2.2, "w": 320
+  },
+  {
+    "id": "CLIP-B",
+    "kicker": "POLITICAL · Capitol",
+    "headline": "Senate committee chair tied to undisclosed consulting fees",
+    "body": "Campaign-adjacent payments flowing through a limited liability partnership appear to correlate with favorable subcommittee scheduling decisions. The entity was registered two weeks before the first of four six-figure transfers and dissolved within ninety days of the final one.",
+    "highlights": [
+      { "start": 50,  "end": 115 },
+      { "start": 165, "end": 235 }
+    ],
+    "tag": "POL-CORR",
+    "x": 0.54, "y": 0.04, "rot": 1.6, "w": 320
+  },
+  {
+    "id": "CLIP-C",
+    "kicker": "MARKETS · Q2",
+    "headline": "Revenue-recognition inquiry deepens at industrial conglomerate",
+    "body": "Internal audit memos describe a pattern in which service contracts were booked as fulfilled ahead of delivery milestones, inflating recognized revenue for at least six consecutive quarters. A former regional controller resigned without cause shortly after raising concerns to the audit committee.",
+    "highlights": [
+      { "start": 48,  "end": 130 },
+      { "start": 180, "end": 240 }
+    ],
+    "tag": "CORP-FRAUD",
+    "x": 0.30, "y": 0.42, "rot": 0.8, "w": 340
+  },
+  {
+    "id": "CLIP-D",
+    "kicker": "REGULATORY · Filing",
+    "headline": "Correspondent bank flags trade finance irregularities",
+    "body": "A Tier-1 correspondent bank filed suspicious-activity reports covering letters of credit drawn against shipments that could not be reconciled with port manifests. The filings identified the same beneficial owner across four ostensibly unrelated trading companies.",
+    "highlights": [
+      { "start": 60,  "end": 145 },
+      { "start": 180, "end": 245 }
+    ],
+    "tag": "TBML",
+    "x": 0.70, "y": 0.46, "rot": -1.4, "w": 320
+  },
+  {
+    "id": "CLIP-E",
+    "kicker": "CIVIL SOCIETY",
+    "headline": "Procurement audit surfaces repeat low-bidder anomalies",
+    "body": "An independent audit of three agency procurement cycles identified a vendor that consistently submitted winning bids within two percent of the internal estimate — a figure that, according to the audit, should not have been available to external bidders at the time of submission.",
+    "highlights": [
+      { "start": 70, "end": 160 }
+    ],
+    "tag": "POL-CORR",
+    "x": 0.08, "y": 0.66, "rot": 2.4, "w": 310
+  }
+]

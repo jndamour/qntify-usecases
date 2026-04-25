@@ -28,6 +28,7 @@ Static Web Apps root paths without needing a rebuild for each target.
 ```bash
 npm install
 npm run dev          # http://localhost:5173/
+# to stop the dev server use Ctrl+C in the terminal window
 ```
 
 The dev server serves all five pages. Use `index.html` to navigate, or hit

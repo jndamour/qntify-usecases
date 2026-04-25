@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Eyebrow, Display, Rule, RevealText } from '../shared/ui'
-import { AltNav } from './AltNav'
+import { SiteNav } from '../shared/SiteNav'
+import { SiteFooter } from '../shared/SiteFooter'
 import { RelationshipGraph } from './graph'
 import { JurisdictionsMap } from './globe'
 
@@ -80,7 +81,7 @@ export default function AltApp() {
         ::selection { background: ${theme.accent}30; }
       `}</style>
 
-      <AltNav theme={theme}/>
+      <SiteNav theme={theme} currentPage="alternative-assets"/>
 
       <section style={{ padding: '120px 48px 100px', maxWidth: 1400, margin: '0 auto' }}>
         <Eyebrow theme={theme}>Use Case · 04</Eyebrow>
@@ -179,14 +180,7 @@ export default function AltApp() {
         </div>
       </section>
 
-      <footer style={{
-        padding: '32px 48px', borderTop: `1px solid ${theme.rule}`,
-        display: 'flex', justifyContent: 'space-between',
-        fontFamily: 'JetBrains Mono, monospace', fontSize: 10, letterSpacing: 1.5, color: theme.fgDim,
-      }}>
-        <span>© Qntify · 2026</span>
-        <span>Qntify.net · Legal · Privacy</span>
-      </footer>
+      <SiteFooter theme={theme}/>
 
       {editMode && <AltTweaks tweaks={tweaks} onChange={update} theme={theme}/>}
     </div>

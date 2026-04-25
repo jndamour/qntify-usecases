@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
 import { ASSETS } from './data'
 import { MAP, getMapPaths } from '../shared/worldmap'
-import { NavBar, Marker, Reticle } from './components'
+import { SiteNav } from '../shared/SiteNav'
+import { SiteFooter } from '../shared/SiteFooter'
+import { LiveClock, Marker, Reticle } from './components'
 import { DetailPanel } from './panel'
 
 const THEMES = {
@@ -66,7 +68,7 @@ const THEMES = {
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "colorScheme": "paper",
   "panelPosition": "floating",
-  "cycleSeconds": 6,
+  "cycleSeconds": 3,
   "showAmbient": false
 }/*EDITMODE-END*/
 
@@ -131,7 +133,21 @@ export default function App() {
       <GlobalStyles theme={theme}/>
       <BackgroundGradient theme={theme}/>
       {tweaks.showAmbient && <ScanLines theme={theme}/>}
-      <NavBar theme={theme}/>
+      <SiteNav
+        theme={theme}
+        currentPage="asset-mapping"
+        variant="overlay"
+        extras={<>
+          <LiveClock />
+          <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+            <span style={{
+              width: 6, height: 6, background: theme.accent, borderRadius: '50%',
+              animation: 'qnt-pulse 2s infinite',
+            }}/>
+            LIVE
+          </span>
+        </>}
+      />
       <MapView
         assets={assets}
         activeIdx={activeIdx}
@@ -153,6 +169,7 @@ export default function App() {
         onSelect={handleMarkerClick}
       />
       <Watermark theme={theme}/>
+      <SiteFooter theme={theme} variant="overlay"/>
       {editMode && <TweaksPanel tweaks={tweaks} onChange={updateTweak} theme={theme}/>}
     </div>
   )
@@ -192,7 +209,7 @@ function MapView({ assets, activeIdx, theme, onMarkerClick }) {
     <div style={{
       position: 'absolute', inset: 0,
       display: 'flex', alignItems: 'center', justifyContent: 'center',
-      paddingTop: 64, paddingBottom: 80,
+      paddingTop: 72, paddingBottom: 80,
     }}>
       <svg viewBox="0 0 1000 500" style={{ width: '100%', height: '100%', maxWidth: '100%' }} preserveAspectRatio="xMidYMid meet">
         <defs>
@@ -280,7 +297,7 @@ function MapView({ assets, activeIdx, theme, onMarkerClick }) {
 function Sidebar({ theme, assets, activeIdx, onSelect }) {
   return (
     <div style={{
-      position: 'absolute', left: 24, top: 96, zIndex: 30,
+      position: 'absolute', left: 24, top: 104, zIndex: 30,
       width: 260,
       background: theme.panelBg,
       border: `1px solid ${theme.border}`,
@@ -337,7 +354,7 @@ function Sidebar({ theme, assets, activeIdx, onSelect }) {
 function Watermark({ theme }) {
   return (
     <div style={{
-      position: 'absolute', top: 80, right: 24, zIndex: 10,
+      position: 'absolute', top: 88, right: 24, zIndex: 10,
       fontFamily: 'JetBrains Mono, monospace',
       fontSize: 8, letterSpacing: 2, color: theme.fgDim,
       textAlign: 'right', pointerEvents: 'none',

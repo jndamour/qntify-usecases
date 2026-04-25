@@ -1,0 +1,23 @@
+{
+  "standard": {
+    "id": "W-2025-047",
+    "program": "SEC Whistleblower Program",
+    "statute": "§ 21F, Securities Exchange Act",
+    "sanctionRange": "$40M – $120M",
+    "jurisdictions": ["US · SDNY", "UK · SFO", "Luxembourg"],
+    "status": "Intake complete · Tips consolidated"
+  },
+  "dossier": {
+    "id": "W-2025-047",
+    "subject": "████████████ (financial-industrial group)",
+    "program": "SEC WB · FinCEN AML",
+    "statute": "§ 21F · 31 U.S.C. 5323",
+    "projectedAward": "$8M – $24M",
+    "stage": "Counsel engaged"
+  },
+  "narrative": {
+    "headline": "Four independent signals, one entity.",
+    "body": "Five clippings. One beneficial owner across three jurisdictions. A consolidated tip is now under review with the SEC Office of the Whistleblower.",
+    "id": "W-2025-047"
+  }
+}

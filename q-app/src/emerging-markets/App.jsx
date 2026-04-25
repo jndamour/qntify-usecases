@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Eyebrow, Display, Rule, RevealText } from '../shared/ui'
+import { SiteNav } from '../shared/SiteNav'
+import { SiteFooter } from '../shared/SiteFooter'
 import NexusGraph from '../nexus-graph/NexusGraph'
 import { EM_DATA } from './data'
 import { HeroSparkline, Heatmap, RankedBars } from './charts'
@@ -35,40 +37,6 @@ const EM_ACCENTS = {
   navy:   '#0f1a2e',
 }
 
-function EmNav({ theme }) {
-  return (
-    <nav style={{
-      position: 'sticky', top: 0, zIndex: 50,
-      height: 72, display: 'flex', alignItems: 'center',
-      padding: '0 48px', justifyContent: 'space-between',
-      background: `${theme.bg}e8`, backdropFilter: 'blur(8px)',
-      borderBottom: `1px solid ${theme.rule}`,
-    }}>
-      <div style={{
-        fontFamily: '"Barlow Condensed", sans-serif',
-        fontWeight: 500, fontSize: 28, color: theme.fg, letterSpacing: 0.3,
-        display: 'inline-flex', alignItems: 'baseline', whiteSpace: 'nowrap',
-      }}>
-        <span style={{ position: 'relative', display: 'inline-block' }}>
-          Q
-          <span style={{
-            position: 'absolute', top: -4, right: -3,
-            width: 6, height: 6, background: theme.accent, borderRadius: '50%',
-          }}/>
-        </span>
-        <span>ntify</span>
-      </div>
-      <div style={{ display: 'flex', gap: 28, fontFamily: 'Inter, sans-serif', fontSize: 13, fontWeight: 500 }}>
-        <a href="global-asset-map.html" style={{ color: theme.fgDim, textDecoration: 'none' }}>Asset Mapping</a>
-        <a href="alternative-assets.html" style={{ color: theme.fgDim, textDecoration: 'none' }}>Alternative Assets</a>
-        <a href="whistleblower-claims.html" style={{ color: theme.fgDim, textDecoration: 'none' }}>Whistleblower</a>
-        <a href="#" style={{ color: theme.fg, textDecoration: 'none', borderBottom: `1px solid ${theme.accent}`, paddingBottom: 3 }}>Emerging Markets</a>
-        <a href="#" style={{ color: theme.fgDim, textDecoration: 'none' }}>Request Demo</a>
-      </div>
-    </nav>
-  )
-}
-
 export default function EmApp() {
   const [tweaks, setTweaks] = useState(EM_TWEAK_DEFAULTS)
   const [editMode, setEditMode] = useState(false)
@@ -102,7 +70,7 @@ export default function EmApp() {
         ::selection { background: ${theme.accent}30; }
       `}</style>
 
-      <EmNav theme={theme}/>
+      <SiteNav theme={theme} currentPage="emerging-markets"/>
 
       <section style={{ padding: '120px 48px 80px', maxWidth: 1400, margin: '0 auto' }}>
         <Eyebrow theme={theme}>Use Case · 05</Eyebrow>
@@ -269,14 +237,7 @@ export default function EmApp() {
         </div>
       </section>
 
-      <footer style={{
-        padding: '32px 48px', borderTop: `1px solid ${theme.rule}`,
-        display: 'flex', justifyContent: 'space-between',
-        fontFamily: 'JetBrains Mono, monospace', fontSize: 10, letterSpacing: 1.5, color: theme.fgDim,
-      }}>
-        <span>© Qntify · 2026</span>
-        <span>Qntify.net · Legal · Privacy</span>
-      </footer>
+      <SiteFooter theme={theme}/>
 
       {editMode && <EmTweaks tweaks={tweaks} onChange={update} theme={theme}/>}
     </div>

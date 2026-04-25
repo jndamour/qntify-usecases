@@ -1,0 +1,30 @@
+[
+  { "region": "Africa",         "country": "Nigeria",        "depth": "deep" },
+  { "region": "Africa",         "country": "Ghana",          "depth": "deep" },
+  { "region": "Africa",         "country": "Kenya",          "depth": "deep" },
+  { "region": "Africa",         "country": "DRC",            "depth": "deep" },
+  { "region": "Africa",         "country": "Zambia",         "depth": "deep" },
+  { "region": "Africa",         "country": "South Africa",   "depth": "deep" },
+  { "region": "Africa",         "country": "Ethiopia",       "depth": "selective" },
+  { "region": "Africa",         "country": "Côte d'Ivoire",  "depth": "selective" },
+  { "region": "Africa",         "country": "Senegal",        "depth": "selective" },
+  { "region": "Africa",         "country": "Tanzania",       "depth": "selective" },
+  { "region": "Africa",         "country": "Morocco",        "depth": "targeted" },
+  { "region": "Africa",         "country": "Egypt",          "depth": "targeted" },
+
+  { "region": "Central Asia",   "country": "Kazakhstan",     "depth": "deep" },
+  { "region": "Central Asia",   "country": "Uzbekistan",     "depth": "deep" },
+  { "region": "Central Asia",   "country": "Kyrgyzstan",     "depth": "selective" },
+  { "region": "Central Asia",   "country": "Tajikistan",     "depth": "selective" },
+  { "region": "Central Asia",   "country": "Mongolia",       "depth": "targeted" },
+  { "region": "Central Asia",   "country": "Turkmenistan",   "depth": "targeted" },
+
+  { "region": "Southeast Asia", "country": "Indonesia",      "depth": "deep" },
+  { "region": "Southeast Asia", "country": "Vietnam",        "depth": "deep" },
+  { "region": "Southeast Asia", "country": "Philippines",    "depth": "deep" },
+  { "region": "Southeast Asia", "country": "Malaysia",       "depth": "selective" },
+  { "region": "Southeast Asia", "country": "Thailand",       "depth": "selective" },
+  { "region": "Southeast Asia", "country": "Myanmar",        "depth": "targeted" },
+  { "region": "Southeast Asia", "country": "Cambodia",       "depth": "targeted" },
+  { "region": "Southeast Asia", "country": "Laos",           "depth": "targeted" }
+]

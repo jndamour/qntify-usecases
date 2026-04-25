@@ -1,49 +1,5 @@
 import { useEffect, useState } from 'react'
 
-export function NavBar({ theme }) {
-  return (
-    <nav style={{
-      position: 'absolute', top: 0, left: 0, right: 0, zIndex: 50,
-      height: 64, display: 'flex', alignItems: 'center',
-      padding: '0 32px', justifyContent: 'space-between',
-      background: 'transparent', color: theme.fg,
-      borderBottom: `1px solid ${theme.border}`,
-      backdropFilter: 'blur(4px)',
-    }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-        <div style={{
-          fontFamily: '"Barlow Condensed", "Oswald", sans-serif',
-          fontWeight: 500, fontSize: 26, letterSpacing: 0.5,
-          color: theme.fg, position: 'relative',
-        }}>
-          <span style={{ position: 'relative' }}>
-            Q
-            <span style={{
-              position: 'absolute', top: -4, right: -2,
-              width: 6, height: 6, background: theme.accent, borderRadius: '50%',
-            }}/>
-          </span>
-          ntify
-        </div>
-      </div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 24, fontFamily: 'Inter, sans-serif', fontSize: 13, fontWeight: 500 }}>
-        <a href="global-asset-map.html" style={{ color: theme.fg, textDecoration: 'none', borderBottom: `1px solid ${theme.accent}`, paddingBottom: 2 }}>Asset Mapping</a>
-        <a href="alternative-assets.html" style={{ color: theme.fgDim, textDecoration: 'none' }}>Alternative Assets</a>
-        <a href="whistleblower-claims.html" style={{ color: theme.fgDim, textDecoration: 'none' }}>Whistleblower</a>
-        <a href="emerging-markets.html" style={{ color: theme.fgDim, textDecoration: 'none' }}>Emerging Markets</a>
-        <a href="#" style={{ color: theme.fgDim, textDecoration: 'none' }}>Request Demo</a>
-      </div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 16, fontFamily: 'JetBrains Mono, monospace', fontSize: 10, color: theme.fgDim, letterSpacing: 1 }}>
-        <LiveClock />
-        <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-          <span style={{ width: 6, height: 6, background: theme.accent, borderRadius: '50%', animation: 'qnt-pulse 2s infinite' }}/>
-          LIVE
-        </span>
-      </div>
-    </nav>
-  )
-}
-
 export function LiveClock() {
   const [now, setNow] = useState(() => new Date())
   useEffect(() => {

@@ -1,0 +1,26 @@
+[
+  {
+    "abbr": "SEC",
+    "name": "SEC Whistleblower Program",
+    "statute": "Dodd-Frank § 21F · 2010",
+    "scope": "Securities law violations: disclosure fraud, market manipulation, FCPA, accounting fraud.",
+    "award": "10–30% of sanctions over $1M",
+    "note": "Anti-retaliation protections under § 21F-17."
+  },
+  {
+    "abbr": "CFTC",
+    "name": "CFTC Whistleblower Program",
+    "statute": "Dodd-Frank § 748 · 2010",
+    "scope": "Commodities, derivatives, and swaps manipulation; spoofing; benchmark rigging.",
+    "award": "10–30% of sanctions over $1M",
+    "note": "Confidentiality maintained to the extent permitted by law."
+  },
+  {
+    "abbr": "FinCEN",
+    "name": "FinCEN AML Whistleblower Program",
+    "statute": "AMLA § 6314 · 2020 / expanded 2022",
+    "scope": "BSA/AML violations, sanctions evasion, trade-based money laundering, beneficial-ownership reporting.",
+    "award": "10–30% of sanctions over $1M",
+    "note": "Includes sanctions-evasion whistleblower expansion (Dec 2022)."
+  }
+]

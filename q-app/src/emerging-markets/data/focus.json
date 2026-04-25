@@ -1,0 +1,5 @@
+[
+  { "tag": "DD",    "label": "Due diligence" },
+  { "tag": "TRADE", "label": "Trade & supply chain" },
+  { "tag": "DATA",  "label": "Unique datasets" }
+]

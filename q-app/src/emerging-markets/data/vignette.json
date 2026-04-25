@@ -1,0 +1,13 @@
+{
+  "id": "EM-C-2025-019",
+  "region": "Southeast Asia",
+  "subject": "Battery metals consortium, cross-listed Jakarta / Singapore",
+  "body": "Initial mandate: confirm the operational independence of three 'unaffiliated' suppliers feeding a proposed off-take agreement. Source reconciliation across customs filings, port AIS, and corporate disclosures surfaced common beneficial ownership and a shared logistics agent. The off-take was re-scoped with tighter representations and an audit-step prior to closing.",
+  "stages": [
+    { "label": "Intake",    "body": "Mandate, KYC, scoping of jurisdictions and entities." },
+    { "label": "Signals",   "body": "Filings, customs, AIS, ownership — reconciled against named counterparties." },
+    { "label": "Fieldwork", "body": "In-country sources, operational visits, local counsel consultations." },
+    { "label": "Report",    "body": "Findings, exposures, and recommended deal mechanics." }
+  ],
+  "outcome": "Off-take closed · audit-step inserted · two counterparties removed from scope"
+}

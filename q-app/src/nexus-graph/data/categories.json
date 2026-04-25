@@ -1,0 +1,8 @@
+{
+  "tech":     { "label": "Technology",     "color": "#2c6fb8" },
+  "politics": { "label": "Politics",       "color": "#c94530" },
+  "science":  { "label": "Science",        "color": "#2f8a5f" },
+  "business": { "label": "Business",       "color": "#b8860b" },
+  "culture":  { "label": "Culture & Arts", "color": "#8a4fb0" },
+  "sports":   { "label": "Sports",         "color": "#d96a2b" }
+}
