@@ -135,6 +135,7 @@ export default function App() {
       {tweaks.showAmbient && <ScanLines theme={theme}/>}
       <SiteNav
         theme={theme}
+        topPage="use-cases"
         currentPage="asset-mapping"
         variant="overlay"
         extras={<>
@@ -209,7 +210,7 @@ function MapView({ assets, activeIdx, theme, onMarkerClick }) {
     <div style={{
       position: 'absolute', inset: 0,
       display: 'flex', alignItems: 'center', justifyContent: 'center',
-      paddingTop: 72, paddingBottom: 80,
+      paddingTop: 112, paddingBottom: 80,
     }}>
       <svg viewBox="0 0 1000 500" style={{ width: '100%', height: '100%', maxWidth: '100%' }} preserveAspectRatio="xMidYMid meet">
         <defs>
@@ -297,7 +298,7 @@ function MapView({ assets, activeIdx, theme, onMarkerClick }) {
 function Sidebar({ theme, assets, activeIdx, onSelect }) {
   return (
     <div style={{
-      position: 'absolute', left: 24, top: 104, zIndex: 30,
+      position: 'absolute', left: 24, top: 144, zIndex: 30,
       width: 260,
       background: theme.panelBg,
       border: `1px solid ${theme.border}`,
@@ -354,7 +355,7 @@ function Sidebar({ theme, assets, activeIdx, onSelect }) {
 function Watermark({ theme }) {
   return (
     <div style={{
-      position: 'absolute', top: 88, right: 24, zIndex: 10,
+      position: 'absolute', top: 128, right: 24, zIndex: 10,
       fontFamily: 'JetBrains Mono, monospace',
       fontSize: 8, letterSpacing: 2, color: theme.fgDim,
       textAlign: 'right', pointerEvents: 'none',

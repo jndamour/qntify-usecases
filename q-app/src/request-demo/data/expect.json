@@ -1,0 +1,17 @@
+[
+  {
+    "n": "01",
+    "t": "Live walkthrough of an asset map",
+    "d": "We pull a real entity through Global Asset Tracing and show the corporate, real-property, and beneficial-ownership layers we surface."
+  },
+  {
+    "n": "02",
+    "t": "Source coverage for your jurisdiction",
+    "d": "Filings, registries, sanctioned-party datasets, court records and trade flows — scoped to where you operate."
+  },
+  {
+    "n": "03",
+    "t": "Methodology + delivery options",
+    "d": "How human analysts qualify the machine output, plus API, dossier, and bespoke-engagement formats."
+  }
+]

@@ -29,16 +29,21 @@
       padding: 0 48px; justify-content: space-between;
       position: relative; z-index: 2;
     }
-    .hero-nav img.logo { height: 45px; width: auto; display: block; }
-    .hero-nav .nav-tag {
-      font-family: "JetBrains Mono", monospace; font-size: 11px;
-      letter-spacing: 2px; color: rgba(255,255,255,0.8);
-      text-transform: uppercase;
-      display: inline-flex; align-items: center; gap: 10px;
+    .hero-nav .brand { line-height: 0; display: inline-block; }
+    .hero-nav img.logo { height: 55px; width: auto; display: block; }
+    .hero-nav .hero-links {
+      display: flex; gap: 32px;
+      font-family: Inter, sans-serif; font-size: 14px; font-weight: 500;
     }
-    .hero-nav .nav-tag::before {
-      content: ""; width: 6px; height: 6px; background: #fff;
-      border-radius: 50%; box-shadow: 0 0 8px rgba(255,255,255,0.8);
+    .hero-nav .hero-links a {
+      color: rgba(255, 255, 255, 0.78);
+      transition: color 0.15s ease, border-color 0.15s ease;
+      padding-bottom: 4px; border-bottom: 1px solid transparent;
+    }
+    .hero-nav .hero-links a:hover { color: #fff; }
+    .hero-nav .hero-links a.active {
+      color: #fff;
+      border-bottom-color: rgba(255, 255, 255, 0.85);
     }
 
     .hero-body { flex: 1; }
@@ -160,8 +165,14 @@
 <body>
   <header class="hero">
     <nav class="hero-nav">
-      <img class="logo" src="assets/qntify-logo-white.png" alt="Qntify"/>
-      <a class="nav-tag" href="#use-cases">Use Cases</a>
+      <a href="index.html" class="brand" aria-label="Qntify home">
+        <img class="logo" src="assets/qntify-logo-white.png" alt="Qntify"/>
+      </a>
+      <div class="hero-links">
+        <a href="#use-cases" class="active">Use Cases</a>
+        <a href="about.html">About Us</a>
+        <a href="request-demo.html">Request Demo</a>
+      </div>
     </nav>
 
     <div class="hero-body"></div>
@@ -173,8 +184,8 @@
     </div>
   </header>
 
-  <main id="use-cases">
-    <div class="eyebrow">Qntify · Use Cases</div>
+  <main>
+    <div id="use-cases" class="eyebrow">Qntify · Use Cases</div>
     <h1>Research and risk analysis tools, built for <em>enforcement-era</em> capital.</h1>
     <p class="lede">These are our core use cases. As a custom software and bespoke intelligence firm, we will gladly help if your problem is outside the scope of these categories.</p>
 

@@ -81,7 +81,7 @@ export default function AltApp() {
         ::selection { background: ${theme.accent}30; }
       `}</style>
 
-      <SiteNav theme={theme} currentPage="alternative-assets"/>
+      <SiteNav theme={theme} topPage="use-cases" currentPage="alternative-assets"/>
 
       <section style={{ padding: '120px 48px 100px', maxWidth: 1400, margin: '0 auto' }}>
         <Eyebrow theme={theme}>Use Case · 04</Eyebrow>

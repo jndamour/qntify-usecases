@@ -70,7 +70,7 @@ export default function EmApp() {
         ::selection { background: ${theme.accent}30; }
       `}</style>
 
-      <SiteNav theme={theme} currentPage="emerging-markets"/>
+      <SiteNav theme={theme} topPage="use-cases" currentPage="emerging-markets"/>
 
       <section style={{ padding: '120px 48px 80px', maxWidth: 1400, margin: '0 auto' }}>
         <Eyebrow theme={theme}>Use Case · 05</Eyebrow>

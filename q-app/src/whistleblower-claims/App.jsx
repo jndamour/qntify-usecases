@@ -73,7 +73,7 @@ export default function WBApp() {
         ::selection { background: ${theme.accent}30; }
       `}</style>
 
-      <SiteNav theme={theme} currentPage="whistleblower"/>
+      <SiteNav theme={theme} topPage="use-cases" currentPage="whistleblower"/>
 
       <section style={{ padding: '120px 48px 80px', maxWidth: 1400, margin: '0 auto' }}>
         <Eyebrow theme={theme}>Use Case · 05</Eyebrow>

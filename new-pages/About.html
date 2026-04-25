@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qntify · About</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;padding:0;background:#f7f5f0;color:#1a1d24;font-family:Inter,sans-serif;-webkit-font-smoothing:antialiased}
+  *{box-sizing:border-box}
+  a{color:inherit;text-decoration:none}
+
+  /* topbar */
+  .topbar{height:72px;display:flex;align-items:center;padding:0 48px;justify-content:space-between;border-bottom:1px solid rgba(20,20,30,0.10);background:#f7f5f0;position:sticky;top:0;z-index:30}
+  .topbar img.logo{height:26px;width:auto;display:block;filter:brightness(0)}
+  .topbar .nav-tag{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:2px;color:#4a4a44;text-transform:uppercase;display:inline-flex;align-items:center;gap:10px}
+  .topbar .nav-tag::before{content:"";width:6px;height:6px;background:#4a5c9c;border-radius:50%}
+  .crumbs{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:1.8px;color:#7a7366;text-transform:uppercase}
+  .crumbs a:hover{color:#1a1d24}
+  .crumbs span.sep{margin:0 10px;color:rgba(20,20,30,0.25)}
+
+  /* shared type */
+  .eyebrow{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:2px;color:#7a7366;text-transform:uppercase;display:inline-flex;align-items:center;gap:12px}
+  .eyebrow::after{content:"";width:40px;height:1px;background:rgba(20,20,30,0.20)}
+
+  /* ---------- hero ---------- */
+  .hero{max-width:1400px;margin:0 auto;padding:104px 48px 88px;border-bottom:1px solid rgba(20,20,30,0.10)}
+  .hero .eyebrow{margin-bottom:28px}
+  .hero h1{font-family:"IBM Plex Serif",Georgia,serif;font-weight:400;font-size:clamp(38px,4.6vw,64px);letter-spacing:-0.6px;line-height:1.04;margin:0 0 32px;max-width:980px;text-wrap:pretty}
+  .hero h1 em{font-style:italic;color:#4a5c9c}
+  .hero .lede{max-width:680px;font-size:17px;line-height:1.6;color:#4a4a44;margin:0}
+
+  /* ---------- principles strip ---------- */
+  .principles{max-width:1400px;margin:0 auto;padding:0 48px;border-bottom:1px solid rgba(20,20,30,0.10)}
+  .p-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(20,20,30,0.12);border-left:1px solid rgba(20,20,30,0.12);border-right:1px solid rgba(20,20,30,0.12)}
+  .p-cell{background:#f7f5f0;padding:40px 36px 44px;display:flex;flex-direction:column;gap:14px}
+  .p-num{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:1.8px;color:#4a5c9c}
+  .p-cell h3{font-family:"IBM Plex Serif",Georgia,serif;font-weight:400;font-size:22px;line-height:1.2;margin:0;letter-spacing:-0.2px}
+  .p-cell p{font-size:14px;line-height:1.6;color:#4a4a44;margin:0}
+
+  /* ---------- founders ---------- */
+  .founders{max-width:1400px;margin:0 auto;padding:120px 48px 80px}
+  .founders .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;margin-bottom:64px;flex-wrap:wrap}
+  .section-head h2{font-family:"IBM Plex Serif",Georgia,serif;font-weight:400;font-size:clamp(28px,3vw,40px);letter-spacing:-0.3px;line-height:1.1;margin:14px 0 0;max-width:680px;text-wrap:pretty}
+  .section-head h2 em{font-style:italic;color:#4a5c9c}
+  .section-head .head-meta{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:1.5px;color:#7a7366;text-transform:uppercase;text-align:right;line-height:1.7}
+  .section-head .head-meta b{color:#1a1d24;font-weight:500}
+
+  .founder-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(20,20,30,0.12);border:1px solid rgba(20,20,30,0.12)}
+  .founder{background:#fbfaf6;padding:48px 44px 52px;display:grid;grid-template-columns:140px 1fr;gap:32px;align-items:start}
+
+  .portrait{width:140px;height:170px;background:#1a1d24;position:relative;overflow:hidden;border:1px solid rgba(20,20,30,0.14)}
+  .portrait::before{content:"";position:absolute;inset:0;background-image:repeating-linear-gradient(135deg,rgba(255,255,255,0.05) 0 1px,transparent 1px 9px);}
+  .portrait .ph{position:absolute;inset:0;display:flex;align-items:flex-end;padding:10px;font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:1.4px;color:rgba(255,255,255,0.55);text-transform:uppercase;line-height:1.4}
+  .portrait .initials{position:absolute;top:14px;left:14px;font-family:"IBM Plex Serif",Georgia,serif;font-style:italic;font-size:26px;color:#cbd5e8}
+
+  .founder-body .role-tag{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:2px;color:#4a5c9c;text-transform:uppercase;margin-bottom:14px;display:inline-flex;align-items:center;gap:10px}
+  .founder-body .role-tag::before{content:"";width:6px;height:6px;background:#4a5c9c;border-radius:50%}
+  .founder-body h3.name{font-family:"IBM Plex Serif",Georgia,serif;font-weight:400;font-size:30px;letter-spacing:-0.3px;line-height:1.1;margin:0 0 6px}
+  .founder-body .title{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:1.6px;color:#4a4a44;text-transform:uppercase;margin-bottom:24px}
+  .founder-body p{font-size:14.5px;line-height:1.65;color:#1a1d24;margin:0 0 14px}
+  .founder-body p.muted{color:#4a4a44}
+
+  .creds{margin-top:18px;padding-top:18px;border-top:1px dashed rgba(20,20,30,0.20);display:flex;flex-direction:column;gap:8px}
+  .cred{display:grid;grid-template-columns:80px 1fr;gap:14px;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:1.3px;text-transform:uppercase;line-height:1.5}
+  .cred .k{color:#7a7366}
+  .cred .v{color:#1a1d24}
+
+  /* ---------- partners ---------- */
+  .partners{max-width:1400px;margin:0 auto;padding:80px 48px 120px;border-top:1px solid rgba(20,20,30,0.10)}
+  .partners .section-head{margin-bottom:48px}
+  .partners .lede{max-width:640px;font-size:15.5px;line-height:1.6;color:#4a4a44;margin:14px 0 0}
+  .partner-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(20,20,30,0.12);border:1px solid rgba(20,20,30,0.12)}
+  .partner{background:#f7f5f0;padding:32px 28px;display:flex;flex-direction:column;gap:10px;min-height:160px}
+  .partner .kind{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:1.6px;color:#4a5c9c;text-transform:uppercase}
+  .partner h4{font-family:"IBM Plex Serif",Georgia,serif;font-weight:400;font-size:18px;line-height:1.2;margin:0;letter-spacing:-0.2px}
+  .partner p{font-size:13px;line-height:1.55;color:#4a4a44;margin:0;flex:1}
+  .partner .geo{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:1.4px;color:#7a7366;text-transform:uppercase;margin-top:auto;padding-top:12px;border-top:1px solid rgba(20,20,30,0.10)}
+
+  /* ---------- cta band ---------- */
+  .cta{background:#0f1a2e;color:#fff;position:relative;overflow:hidden}
+  .cta::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle at 20% 50%,rgba(74,92,156,0.30),transparent 45%),radial-gradient(circle at 90% 30%,rgba(74,92,156,0.18),transparent 50%);pointer-events:none}
+  .cta-inner{position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:88px 48px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
+  .cta h2{font-family:"IBM Plex Serif",Georgia,serif;font-weight:400;font-size:clamp(28px,3vw,42px);line-height:1.08;letter-spacing:-0.3px;margin:0;max-width:680px}
+  .cta h2 em{font-style:italic;color:#cbd5e8}
+  .cta-actions{display:flex;gap:14px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;justify-content:center;height:52px;padding:0 26px;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:2.2px;text-transform:uppercase;gap:12px;transition:background .18s ease,color .18s ease,border-color .18s ease;cursor:pointer;border:1px solid transparent}
+  .btn-primary{background:#f7f5f0;color:#0f1a2e}
+  .btn-primary:hover{background:#cbd5e8}
+  .btn-ghost{border-color:rgba(255,255,255,0.30);color:#fff}
+  .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,0.06)}
+
+  /* footer */
+  footer{padding:32px 48px;border-top:1px solid rgba(20,20,30,0.12);display:flex;justify-content:space-between;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:1.5px;color:#7a7366}
+
+  /* responsive */
+  @media (max-width:980px){
+    .p-grid{grid-template-columns:1fr}
+    .founder-grid{grid-template-columns:1fr}
+    .founder{grid-template-columns:110px 1fr;gap:24px;padding:36px 28px}
+    .portrait{width:110px;height:140px}
+    .partner-grid{grid-template-columns:repeat(2,1fr)}
+    .cta-inner{grid-template-columns:1fr;padding:64px 32px}
+    .hero,.founders,.partners,.principles{padding-left:32px;padding-right:32px}
+    .founders .section-head,.partners .section-head{flex-direction:column;align-items:flex-start}
+    .section-head .head-meta{text-align:left}
+  }
+  @media (max-width:560px){
+    .topbar{padding:0 24px;height:64px}
+    .topbar img.logo{height:22px}
+    .crumbs{display:none}
+    .hero{padding:64px 24px 56px}
+    .principles{padding:0 24px}
+    .founders,.partners{padding:64px 24px 64px}
+    .founder{grid-template-columns:1fr}
+    .portrait{width:100%;max-width:200px;height:160px}
+    .partner-grid{grid-template-columns:1fr}
+    .cta-inner{padding:56px 24px}
+    footer{padding:24px;flex-direction:column;gap:8px}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a href="https://jndamour.github.io/qntify-usecases/" aria-label="Qntify home">
+    <img class="logo" src="data:image/png;base64,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" alt="Qntify">
+  </a>
+  <div class="crumbs">
+    <a href="https://jndamour.github.io/qntify-usecases/">Use Cases</a>
+    <span class="sep">/</span>
+    <span style="color:#1a1d24">About</span>
+  </div>
+  <span class="nav-tag">About Qntify</span>
+</header>
+
+<section class="hero" data-screen-label="01 About hero">
+  <div class="eyebrow">Qntify · Who We Are</div>
+  <h1>A two-person firm, a wide bench of <em>field operators</em>.</h1>
+  <p class="lede">
+    Qntify was founded to assemble difficult datasets — beneficial ownership, asset trails, supply-chain provenance — for legal and financial clients operating in enforcement-era markets. We run lean by design, and bring in vetted partners when a brief calls for boots, languages, or jurisdictions we don't keep in-house.
+  </p>
+</section>
+
+<section class="principles" data-screen-label="02 Principles">
+  <div class="p-grid">
+    <div class="p-cell">
+      <span class="p-num">01 · Posture</span>
+      <h3>Custom over off-the-shelf.</h3>
+      <p>Every engagement starts with the question, not the platform. We build the dataset that answers your specific brief, then keep monitoring it.</p>
+    </div>
+    <div class="p-cell">
+      <span class="p-num">02 · Method</span>
+      <h3>Machine-assembled, human-qualified.</h3>
+      <p>Pipelines do the breadth; analysts handle the judgment calls. Nothing leaves the building unless a person has signed off on it.</p>
+    </div>
+    <div class="p-cell">
+      <span class="p-num">03 · Footprint</span>
+      <h3>Small core, deep network.</h3>
+      <p>Two founders. A trusted bench of subject-matter partners across litigation, on-the-ground research, and regional intelligence.</p>
+    </div>
+  </div>
+</section>
+
+<section class="founders" data-screen-label="03 Founders">
+  <div class="section-head">
+    <div>
+      <span class="eyebrow">The Founders</span>
+      <h2>Two backgrounds, one <em>operating thesis</em>.</h2>
+    </div>
+    <div class="head-meta">
+      Headcount · <b>2</b><br>
+      Founded · <b>Independently held</b><br>
+      Bench · <b>Vetted partners only</b>
+    </div>
+  </div>
+
+  <div class="founder-grid">
+
+    <article class="founder">
+      <div class="portrait" aria-hidden="true">
+        <span class="initials">CC</span>
+        <span class="ph">Portrait · Christian Cali</span>
+      </div>
+      <div class="founder-body">
+        <span class="role-tag">Co-Founder · Intelligence</span>
+        <h3 class="name">Christian Cali</h3>
+        <div class="title">Tradecraft &amp; Client Engagements</div>
+        <p>Christian leads how Qntify scopes and runs investigations. He brings a career in government intelligence to the firm — translating the discipline of source handling, target development, and verification into work product that holds up in court and in front of investment committees.</p>
+        <p class="muted">He owns relationships with counsel, claims investors, and government counterparties, and personally directs every sensitive engagement.</p>
+        <div class="creds">
+          <div class="cred"><span class="k">Background</span><span class="v">Government Intelligence</span></div>
+          <div class="cred"><span class="k">Focus</span><span class="v">Investigations · Counsel · Recovery</span></div>
+          <div class="cred"><span class="k">Based</span><span class="v">Available on request</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="founder">
+      <div class="portrait" aria-hidden="true">
+        <span class="initials">ND</span>
+        <span class="ph">Portrait · Nelson D'Amour</span>
+      </div>
+      <div class="founder-body">
+        <span class="role-tag">Co-Founder · Technology</span>
+        <h3 class="name">Nelson D'Amour</h3>
+        <div class="title">Data Pipelines &amp; Engineering</div>
+        <p>Nelson is the technologist behind Qntify's data infrastructure. He designs the ingestion, entity-resolution, and monitoring systems that let two people cover the breadth normally reserved for much larger firms — and treats every dataset as something that has to be reproducible, auditable, and defensible.</p>
+        <p class="muted">A scientist by training, he brings the rigor of experimental work to intelligence problems: hypothesis, instrumentation, measurement, falsification.</p>
+        <div class="creds">
+          <div class="cred"><span class="k">Education</span><span class="v">PhD · Chemical Engineering · Stanford</span></div>
+          <div class="cred"><span class="k">Focus</span><span class="v">Data · Pipelines · Methodology</span></div>
+          <div class="cred"><span class="k">Background</span><span class="v">Science &amp; Engineering</span></div>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section class="partners" data-screen-label="04 Partners">
+  <div class="section-head">
+    <div>
+      <span class="eyebrow">Bench · Partners</span>
+      <h2>The rest is a <em>vetted network</em>, not a payroll.</h2>
+      <p class="lede">For specialist work — local source networks, forensic accounting, regional language coverage — we engage partners we've worked with directly. Below are the firm types we routinely co-engage; specific names are disclosed under NDA.</p>
+    </div>
+  </div>
+  <div class="partner-grid">
+    <div class="partner">
+      <span class="kind">Partner · 01</span>
+      <h4>Litigation Counsel</h4>
+      <p>Plaintiff and recovery firms in the US, UK, and EU who instruct us as part of asset-tracing or enforcement matters.</p>
+      <span class="geo">NA · UK · EU</span>
+    </div>
+    <div class="partner">
+      <span class="kind">Partner · 02</span>
+      <h4>Field Investigators</h4>
+      <p>Licensed investigators on the ground in jurisdictions where in-person verification is required by counsel or court.</p>
+      <span class="geo">LATAM · MENA · APAC</span>
+    </div>
+    <div class="partner">
+      <span class="kind">Partner · 03</span>
+      <h4>Forensic Accounting</h4>
+      <p>Specialist accountants we co-engage for tracing flows of funds, related-party analysis, and quantum work.</p>
+      <span class="geo">UK · CH · US</span>
+    </div>
+    <div class="partner">
+      <span class="kind">Partner · 04</span>
+      <h4>Regional Intelligence</h4>
+      <p>Language-specific research desks for primary-source coverage in Russian, Mandarin, Arabic, Portuguese and Spanish.</p>
+      <span class="geo">Multi-lingual</span>
+    </div>
+  </div>
+</section>
+
+<section class="cta" data-screen-label="05 CTA">
+  <div class="cta-inner">
+    <h2>Have a brief that needs more than a <em>standard dataset?</em></h2>
+    <div class="cta-actions">
+      <a class="btn btn-primary" href="Request Demo.html"><span>Request a demo</span><span>→</span></a>
+      <a class="btn btn-ghost" href="mailto:hello@qntify.net"><span>Email the founders</span><span>→</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© Qntify · 2026</span>
+  <span>Qntify.net · Legal · Privacy</span>
+</footer>
+
+</body>
+</html>

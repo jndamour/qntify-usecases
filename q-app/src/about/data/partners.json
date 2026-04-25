@@ -1,0 +1,26 @@
+[
+  {
+    "kind": "Partner · 01",
+    "name": "Litigation Counsel",
+    "body": "Plaintiff and recovery firms in the US, UK, and EU who instruct us as part of asset-tracing or enforcement matters.",
+    "geo":  "NA · UK · EU"
+  },
+  {
+    "kind": "Partner · 02",
+    "name": "Field Investigators",
+    "body": "Licensed investigators on the ground in jurisdictions where in-person verification is required by counsel or court.",
+    "geo":  "LATAM · MENA · APAC"
+  },
+  {
+    "kind": "Partner · 03",
+    "name": "Forensic Accounting",
+    "body": "Specialist accountants we co-engage for tracing flows of funds, related-party analysis, and quantum work.",
+    "geo":  "UK · CH · US"
+  },
+  {
+    "kind": "Partner · 04",
+    "name": "Regional Intelligence",
+    "body": "Language-specific research desks for primary-source coverage in Russian, Mandarin, Arabic, Portuguese and Spanish.",
+    "geo":  "Multi-lingual"
+  }
+]

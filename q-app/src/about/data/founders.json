@@ -1,0 +1,34 @@
+[
+  {
+    "initials": "CC",
+    "portraitCaption": "Portrait · Christian Cali",
+    "roleTag": "Co-Founder · Intelligence",
+    "name": "Christian Cali",
+    "title": "Tradecraft & Client Engagements",
+    "paragraphs": [
+      "Christian leads how Qntify scopes and runs investigations. He brings a career in government intelligence to the firm — translating the discipline of source handling, target development, and verification into work product that holds up in court and in front of investment committees.",
+      "He owns relationships with counsel, claims investors, and government counterparties, and personally directs every sensitive engagement."
+    ],
+    "creds": [
+      { "k": "Background", "v": "Government Intelligence" },
+      { "k": "Focus",      "v": "Investigations · Counsel · Recovery" },
+      { "k": "Based",      "v": "Available on request" }
+    ]
+  },
+  {
+    "initials": "ND",
+    "portraitCaption": "Portrait · Nelson D'Amour",
+    "roleTag": "Co-Founder · Technology",
+    "name": "Nelson D'Amour",
+    "title": "Data Pipelines & Engineering",
+    "paragraphs": [
+      "Nelson is the technologist behind Qntify's data infrastructure. He designs the ingestion, entity-resolution, and monitoring systems that let two people cover the breadth normally reserved for much larger firms — and treats every dataset as something that has to be reproducible, auditable, and defensible.",
+      "A scientist by training, he brings the rigor of experimental work to intelligence problems: hypothesis, instrumentation, measurement, falsification."
+    ],
+    "creds": [
+      { "k": "Education",  "v": "PhD · Chemical Engineering · Stanford" },
+      { "k": "Focus",      "v": "Data · Pipelines · Methodology" },
+      { "k": "Background", "v": "Science & Engineering" }
+    ]
+  }
+]

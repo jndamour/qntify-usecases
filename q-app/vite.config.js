@@ -15,6 +15,8 @@ export default defineConfig({
         alternativeAssets: resolve(__dirname, 'alternative-assets.html'),
         whistleblowerClaims: resolve(__dirname, 'whistleblower-claims.html'),
         emergingMarkets: resolve(__dirname, 'emerging-markets.html'),
+        about: resolve(__dirname, 'about.html'),
+        requestDemo: resolve(__dirname, 'request-demo.html'),
       },
     },
   },

@@ -14,8 +14,8 @@ export function DetailPanel({ asset, theme, position, index, total }) {
     boxShadow: `0 0 0 1px ${theme.accent}15, 0 20px 60px rgba(0,0,0,0.5)`,
   }
 
-  if (pos === 'right') Object.assign(containerStyle, { right: 24, top: 104, bottom: 40 })
-  else if (pos === 'left') Object.assign(containerStyle, { left: 24, top: 104, bottom: 40 })
+  if (pos === 'right') Object.assign(containerStyle, { right: 24, top: 144, bottom: 40 })
+  else if (pos === 'left') Object.assign(containerStyle, { left: 24, top: 144, bottom: 40 })
   else Object.assign(containerStyle, { right: 40, bottom: 40, maxHeight: 'calc(100vh - 140px)' })
 
   return (
@@ -38,12 +38,23 @@ export function DetailPanel({ asset, theme, position, index, total }) {
 
       <div style={{
         height: 160,
-        background: `repeating-linear-gradient(45deg, ${theme.imgBg} 0 8px, ${theme.imgBg2} 8px 16px)`,
+        background: asset.image
+          ? '#000'
+          : `repeating-linear-gradient(45deg, ${theme.imgBg} 0 8px, ${theme.imgBg2} 8px 16px)`,
         borderBottom: `1px solid ${theme.border}`,
         position: 'relative',
         overflow: 'hidden',
       }}>
-        <AssetGlyph type={asset.type} theme={theme}/>
+        {asset.image ? (
+          <img src={asset.image} alt={asset.codename}
+            style={{
+              position: 'absolute', inset: 0,
+              width: '100%', height: '100%',
+              objectFit: 'cover',
+            }}/>
+        ) : (
+          <AssetGlyph type={asset.type} theme={theme}/>
+        )}
         <div style={{
           position: 'absolute', inset: 0,
           background: `linear-gradient(180deg, transparent 50%, ${theme.accent}08 50%)`,
@@ -189,21 +200,35 @@ function AssetGlyph({ type, theme }) {
       )}
       {type === 'BANK' && (
         <g {...common}>
-          <polygon points="30,22 70,22 50,12"/>
+          {/* Pediment */}
+          <polygon points="26,22 74,22 50,11"/>
+          {/* Frieze + architrave (double horizontal) */}
           <line x1="26" y1="22" x2="74" y2="22"/>
-          <line x1="34" y1="22" x2="34" y2="46"/>
-          <line x1="44" y1="22" x2="44" y2="46"/>
-          <line x1="56" y1="22" x2="56" y2="46"/>
-          <line x1="66" y1="22" x2="66" y2="46"/>
-          <line x1="26" y1="46" x2="74" y2="46"/>
+          <line x1="26" y1="25" x2="74" y2="25"/>
+          {/* Four columns drawn as thin outlined rectangles */}
+          <rect x="31" y="25" width="3" height="22"/>
+          <rect x="42" y="25" width="3" height="22"/>
+          <rect x="55" y="25" width="3" height="22"/>
+          <rect x="66" y="25" width="3" height="22"/>
+          {/* Stylobate + two-step base */}
+          <line x1="26" y1="47" x2="74" y2="47"/>
           <line x1="24" y1="50" x2="76" y2="50"/>
+          <line x1="22" y1="53" x2="78" y2="53"/>
         </g>
       )}
       {type === 'AIRCRAFT' && (
         <g {...common}>
-          <path d="M 20 30 L 80 30 L 86 33 L 80 34 L 60 34 L 50 42 L 46 42 L 50 34 L 30 34 L 22 40 L 20 40 L 24 32 L 20 30 Z"/>
-          <line x1="50" y1="30" x2="50" y2="22"/>
-          <line x1="46" y1="22" x2="54" y2="22"/>
+          {/* Top-down silhouette · nose right, tail left */}
+          {/* Fuselage */}
+          <path d="M 18 30 L 26 27 L 76 27 L 84 30 L 76 33 L 26 33 Z"/>
+          {/* Main wings (swept back from mid-fuselage) */}
+          <path d="M 50 27 L 30 14 L 38 27 Z"/>
+          <path d="M 50 33 L 30 46 L 38 33 Z"/>
+          {/* Horizontal tail stabilizers */}
+          <path d="M 70 27 L 60 19 L 66 27 Z"/>
+          <path d="M 70 33 L 60 41 L 66 33 Z"/>
+          {/* Cockpit window line near nose */}
+          <line x1="78" y1="29" x2="82" y2="30"/>
         </g>
       )}
       {type === 'BUSINESS' && (
