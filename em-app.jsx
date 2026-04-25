@@ -1,4 +1,5 @@
 // Emerging Markets Financial Intelligence — main app
+import NexusGraph from './NexusGraph';
 const { useState, useEffect } = React;
 
 const EM_TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
@@ -213,6 +214,26 @@ function EmApp() {
         </div>
         <DatasetsGrid theme={theme}/>
       </section>
+
+      <Rule theme={theme}/>
+
+      {/* Network Analysis */}
+      <section style={{ padding: '80px 48px', maxWidth: 1400, margin: '0 auto' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 80, alignItems: 'end', marginBottom: 40 }}>
+          <div>
+            <Eyebrow theme={theme}>Part IV</Eyebrow>
+            <Display theme={theme} style={{ fontSize: 'clamp(28px, 3.4vw, 44px)' }}>Network Analysis.</Display>
+          </div>
+          <div style={{ fontSize: 15, lineHeight: 1.7, color: theme.fgDim2, maxWidth: 540 }}>
+            Six of thirty-one. Each is built, cleaned, and reconciled in-house — not
+            licensed. FOI-recovered where necessary. Available to partners under
+            standard data terms.
+          </div>
+        </div>
+        <NexusGraph showHeader={false}  showFooter={false}  style={{ height: '720px', borderRadius: '12px' }}/>
+      </section>
+
+
 
       {/* <Rule theme={theme}/> */}
 

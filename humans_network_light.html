@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>NEXUS — A Map of Human Connections</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f2ea;
+    --bg-panel: #ffffff;
+    --bg-soft: #ebe6da;
+    --ink: #1a1814;
+    --ink-dim: #6e6a60;
+    --ink-dimmer: #b5afa0;
+    --line: #e4dfd2;
+    --line-strong: #c9c2b1;
+    --accent: #b8860b;
+    --accent-2: #c94530;
+    --cat-tech: #2c6fb8;
+    --cat-politics: #c94530;
+    --cat-science: #2f8a5f;
+    --cat-business: #b8860b;
+    --cat-culture: #8a4fb0;
+    --cat-sports: #d96a2b;
+    --serif: "Fraunces", "Times New Roman", serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    height: 100%;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--serif);
+    overflow: hidden;
+    cursor: crosshair;
+  }
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(184,134,11,0.08), transparent 40%),
+      radial-gradient(circle at 85% 80%, rgba(201,69,48,0.06), transparent 45%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  body::after {
+    content: "";
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(26,24,20,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(26,24,20,0.025) 1px, transparent 1px);
+    background-size: 64px 64px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .app {
+    position: relative;
+    display: grid;
+    grid-template-columns: 320px 1fr 340px;
+    grid-template-rows: 64px 1fr 48px;
+    grid-template-areas:
+      "header header header"
+      "sidebar canvas detail"
+      "footer footer footer";
+    height: 100vh;
+    z-index: 2;
+  }
+
+  /* HEADER */
+  header {
+    grid-area: header;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 28px;
+    border-bottom: 1px solid var(--line);
+    background: rgba(245,242,234,0.85);
+    backdrop-filter: blur(14px);
+    position: relative;
+    z-index: 10;
+  }
+  .brand {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+  }
+  .brand-mark {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: 28px;
+    letter-spacing: -0.04em;
+    font-style: italic;
+  }
+  .brand-mark span { color: var(--accent); font-style: normal; }
+  .brand-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--ink-dim);
+  }
+  .header-meta {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+  }
+  .header-meta .dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    background: var(--cat-science);
+    border-radius: 50%;
+    margin-right: 8px;
+    box-shadow: 0 0 8px var(--cat-science);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.35; }
+  }
+
+  /* SIDEBAR */
+  aside.sidebar {
+    grid-area: sidebar;
+    border-right: 1px solid var(--line);
+    background: var(--bg-panel);
+    padding: 28px 24px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .section-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--ink-dim);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-label::before {
+    content: "";
+    width: 20px; height: 1px; background: var(--ink-dimmer);
+  }
+  .search-wrap {
+    position: relative;
+  }
+  .search-wrap input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--line-strong);
+    color: var(--ink);
+    padding: 10px 0 10px 24px;
+    font-family: var(--serif);
+    font-size: 18px;
+    font-style: italic;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  .search-wrap input:focus { border-bottom-color: var(--accent); }
+  .search-wrap input::placeholder { color: var(--ink-dimmer); font-style: italic; }
+  .search-wrap::before {
+    content: "⌕";
+    position: absolute;
+    left: 0; top: 50%;
+    transform: translateY(-50%);
+    color: var(--ink-dim);
+    font-size: 18px;
+  }
+
+  .filters {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .filter-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 2px;
+    border-bottom: 1px solid var(--line);
+    cursor: pointer;
+    transition: padding-left 0.2s;
+    user-select: none;
+  }
+  .filter-item:hover { padding-left: 8px; }
+  .filter-item.off { opacity: 0.35; }
+  .filter-left {
+    display: flex; align-items: center; gap: 12px;
+    font-size: 15px;
+  }
+  .filter-swatch {
+    width: 8px; height: 8px; border-radius: 50%;
+  }
+  .filter-count {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-dim);
+  }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .stat {
+    background: var(--bg-panel);
+    padding: 16px 14px;
+  }
+  .stat-value {
+    font-family: var(--serif);
+    font-size: 32px;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--ink-dim);
+    margin-top: 6px;
+  }
+
+  .legend-note {
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink-dim);
+    font-style: italic;
+    border-left: 2px solid var(--accent);
+    padding-left: 14px;
+  }
+
+  /* CANVAS */
+  .canvas-wrap {
+    grid-area: canvas;
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse at center, rgba(255,255,255,0.6), transparent 70%),
+      var(--bg);
+  }
+  canvas#graph {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: grab;
+  }
+  canvas#graph:active { cursor: grabbing; }
+
+  .canvas-overlay {
+    position: absolute;
+    top: 24px; left: 24px;
+    z-index: 5;
+    pointer-events: none;
+  }
+  .canvas-title {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 44px;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: var(--ink);
+    max-width: 520px;
+  }
+  .canvas-title em {
+    color: var(--accent);
+    font-style: italic;
+  }
+  .canvas-sub {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--ink-dim);
+    margin-top: 14px;
+  }
+
+  .canvas-controls {
+    position: absolute;
+    bottom: 20px; right: 20px;
+    display: flex;
+    gap: 2px;
+    z-index: 5;
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    box-shadow: 0 2px 12px rgba(26,24,20,0.06);
+  }
+
+  /* Layout selector */
+  .layout-selector {
+    position: absolute;
+    top: 24px; right: 24px;
+    z-index: 5;
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    box-shadow: 0 2px 12px rgba(26,24,20,0.06);
+    display: flex;
+    flex-direction: column;
+    min-width: 180px;
+  }
+  .layout-selector .ls-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--ink-dim);
+    padding: 10px 14px 8px;
+    border-bottom: 1px solid var(--line);
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    transition: color 0.2s, background 0.2s;
+  }
+  .layout-selector .ls-label:hover { color: var(--accent); background: rgba(184,134,11,0.04); }
+  .layout-selector.collapsed .ls-label { border-bottom-color: transparent; padding-bottom: 10px; }
+  .layout-selector .ls-label-text { display: flex; align-items: center; gap: 8px; }
+  .layout-selector .ls-current {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 12px;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--ink);
+  }
+  .layout-selector .ls-chevron {
+    width: 8px; height: 8px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: rotate(45deg) translate(-1px, -1px);
+    transition: transform 0.25s ease;
+    color: var(--ink-dim);
+  }
+  .layout-selector.collapsed .ls-chevron {
+    transform: rotate(-45deg) translate(1px, -1px);
+  }
+  .layout-selector .ls-options {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    max-height: 400px;
+    transition: max-height 0.3s ease, opacity 0.2s ease;
+    opacity: 1;
+  }
+  .layout-selector.collapsed .ls-options {
+    max-height: 0;
+    opacity: 0;
+  }
+  .layout-selector button.ls-opt {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+    padding: 9px 14px;
+    cursor: pointer;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.15s, color 0.15s, padding-left 0.2s;
+  }
+  .layout-selector button.ls-opt:last-child { border-bottom: none; }
+  .layout-selector button.ls-opt:hover {
+    background: rgba(184,134,11,0.06);
+    padding-left: 18px;
+  }
+  .layout-selector button.ls-opt.active {
+    color: var(--accent);
+    background: rgba(184,134,11,0.08);
+  }
+  .layout-selector button.ls-opt .ls-key {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--ink-dimmer);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .layout-selector button.ls-opt.active .ls-key { color: var(--accent); }
+  .canvas-controls button {
+    background: transparent;
+    border: none;
+    color: var(--ink-dim);
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 10px 14px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    transition: color 0.2s, background 0.2s;
+  }
+  .canvas-controls button:hover { color: var(--accent); background: rgba(184,134,11,0.08); }
+  .canvas-controls button + button { border-left: 1px solid var(--line); }
+
+  .compass {
+    position: absolute;
+    bottom: 20px; left: 20px;
+    z-index: 5;
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--ink-dim);
+  }
+  .compass .coord { color: var(--accent); }
+
+  /* DETAIL PANEL */
+  aside.detail {
+    grid-area: detail;
+    border-left: 1px solid var(--line);
+    background: var(--bg-panel);
+    padding: 28px 26px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+  .detail-empty {
+    color: var(--ink-dim);
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.5;
+    padding-top: 60px;
+  }
+  .detail-empty .big {
+    font-size: 72px;
+    font-family: var(--serif);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-dimmer);
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    margin-bottom: 18px;
+  }
+  .person-card { animation: fadeUp 0.4s ease; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+  .person-category {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .person-category::before {
+    content: "";
+    width: 8px; height: 8px; border-radius: 50%;
+    background: currentColor;
+  }
+  .person-name {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 34px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin: 14px 0 8px;
+  }
+  .person-role {
+    font-style: italic;
+    color: var(--ink-dim);
+    font-size: 16px;
+    margin-bottom: 18px;
+  }
+  .person-bio {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink);
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+  }
+
+  .connections {
+    display: flex;
+    flex-direction: column;
+  }
+  .connection-item {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: padding-left 0.2s, color 0.2s;
+  }
+  .connection-item:hover { padding-left: 6px; color: var(--accent); }
+  .connection-item .c-name { font-size: 15px; }
+  .connection-item .c-rel {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ink-dim);
+  }
+
+  /* FOOTER */
+  footer {
+    grid-area: footer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 28px;
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--ink-dim);
+    background: var(--bg-panel);
+  }
+  footer .pager { display: flex; gap: 24px; }
+  footer .pager span { color: var(--accent); }
+
+  /* tooltip */
+  .tooltip {
+    position: absolute;
+    pointer-events: none;
+    background: var(--bg-panel);
+    border: 1px solid var(--accent);
+    padding: 8px 12px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+    white-space: nowrap;
+    z-index: 20;
+    opacity: 0;
+    transition: opacity 0.15s;
+    transform: translate(-50%, -130%);
+    box-shadow: 0 4px 14px rgba(26,24,20,0.08);
+    color: var(--ink);
+  }
+  .tooltip.visible { opacity: 1; }
+  .tooltip::after {
+    content: "";
+    position: absolute;
+    bottom: -5px; left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 8px; height: 8px;
+    background: var(--bg-panel);
+    border-right: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+  }
+
+  /* Scrollbars */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--ink-dimmer); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--ink-dim); }
+
+  @media (max-width: 1100px) {
+    .app { grid-template-columns: 260px 1fr 280px; }
+    .canvas-title { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <header>
+    <div class="brand">
+      <div class="brand-mark">Nex<span>u</span>s</div>
+      <div class="brand-tag">Atlas of Public Figures · v0.4</div>
+    </div>
+    <div class="header-meta">
+      <div><span class="dot"></span>Live Simulation</div>
+      <div id="fps-meter">— FPS</div>
+      <div>Last indexed · 24.IV.2026</div>
+    </div>
+  </header>
+
+  <aside class="sidebar">
+    <div>
+      <div class="section-label">Search the Atlas</div>
+      <div class="search-wrap">
+        <input type="text" id="search" placeholder="by name, field, era…" autocomplete="off"/>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">Domains</div>
+      <div class="filters" id="filters"></div>
+    </div>
+
+    <div>
+      <div class="section-label">Figures</div>
+      <div class="stat-grid">
+        <div class="stat"><div class="stat-value" id="stat-nodes">0</div><div class="stat-label">Nodes</div></div>
+        <div class="stat"><div class="stat-value" id="stat-edges">0</div><div class="stat-label">Edges</div></div>
+        <div class="stat"><div class="stat-value" id="stat-domains">6</div><div class="stat-label">Domains</div></div>
+        <div class="stat"><div class="stat-value" id="stat-density">—</div><div class="stat-label">Density</div></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">Legend</div>
+      <div class="legend-note">
+        Each node is a public figure. Edges represent documented associations — mentorships, rivalries, collaborations, public disputes. Node size scales with centrality in the network.
+      </div>
+    </div>
+  </aside>
+
+  <div class="canvas-wrap">
+    <canvas id="graph"></canvas>
+    <div class="canvas-overlay">
+      <h1 class="canvas-title">Who <em>knows</em> whom, and how does it <em>matter</em>?</h1>
+      <div class="canvas-sub">Click any node to inspect · drag to reposition · scroll to zoom</div>
+    </div>
+    <div class="layout-selector collapsed" id="layout-selector">
+      <div class="ls-label" id="ls-toggle">
+        <div class="ls-label-text">
+          <span>Layout</span>
+          <span class="ls-current" id="ls-current">· Force-directed</span>
+        </div>
+        <div class="ls-chevron"></div>
+      </div>
+      <div class="ls-options">
+        <button class="ls-opt active" data-layout="force"><span>Force-directed</span><span class="ls-key">1</span></button>
+        <button class="ls-opt" data-layout="radial"><span>Radial</span><span class="ls-key">2</span></button>
+        <button class="ls-opt" data-layout="tree"><span>Tree</span><span class="ls-key">3</span></button>
+        <button class="ls-opt" data-layout="balloon"><span>Balloon</span><span class="ls-key">4</span></button>
+        <button class="ls-opt" data-layout="hierarchical"><span>Hierarchical</span><span class="ls-key">5</span></button>
+      </div>
+    </div>
+    <div class="compass">
+      <div>Zoom · <span class="coord" id="zoom-level">1.00×</span></div>
+      <div>Origin · <span class="coord" id="origin-coord">0, 0</span></div>
+    </div>
+    <div class="canvas-controls">
+      <button id="btn-reheat">Reheat</button>
+      <button id="btn-center">Center</button>
+      <button id="btn-pause">Pause</button>
+    </div>
+    <div class="tooltip" id="tooltip"></div>
+  </div>
+
+  <aside class="detail" id="detail-panel">
+    <div class="detail-empty">
+      <div class="big">Ø</div>
+      No node selected.<br/>
+      Hover over the web to see names. Click to dive deeper into any figure's connections and biography.
+    </div>
+  </aside>
+
+  <footer>
+    <div>Nexus Research · An open map of human associations</div>
+    <div class="pager">
+      <div>Dataset: <span>Public · Demo</span></div>
+      <div>Rendering: <span>HTML5 Canvas</span></div>
+      <div>Physics: <span>Barnes-Hut-lite</span></div>
+    </div>
+  </footer>
+</div>
+
+<script>
+/* ============================================================
+   DATA — a hand-curated demo network of public figures
+   ============================================================ */
+const CATEGORIES = {
+  tech:       { label: "Technology",     color: "#2c6fb8" },
+  politics:   { label: "Politics",       color: "#c94530" },
+  science:    { label: "Science",        color: "#2f8a5f" },
+  business:   { label: "Business",       color: "#b8860b" },
+  culture:    { label: "Culture & Arts", color: "#8a4fb0" },
+  sports:     { label: "Sports",         color: "#d96a2b" },
+};
+
+const PEOPLE = [
+  // TECH
+  { id: "turing",     name: "Alan Turing",         cat: "science",  role: "Mathematician, cryptanalyst",             bio: "Pioneer of theoretical computer science and artificial intelligence. Formalized the concepts of algorithm and computation with the Turing machine." },
+  { id: "vonneumann", name: "John von Neumann",    cat: "science",  role: "Mathematician, physicist",                bio: "Contributed to game theory, quantum mechanics, and computing architecture that still bears his name." },
+  { id: "berners",    name: "Tim Berners-Lee",     cat: "tech",     role: "Inventor of the World Wide Web",           bio: "Proposed the hypertext system that became the Web while at CERN in 1989." },
+  { id: "jobs",       name: "Steve Jobs",          cat: "business", role: "Co-founder, Apple",                        bio: "Design-obsessed co-founder whose return to Apple reshaped consumer technology." },
+  { id: "woz",        name: "Steve Wozniak",       cat: "tech",     role: "Engineer, co-founder Apple",               bio: "Designed the Apple I and Apple II. The engineering heart of early Apple." },
+  { id: "gates",      name: "Bill Gates",          cat: "business", role: "Co-founder, Microsoft",                    bio: "Built Microsoft into a software empire; now focuses on philanthropy via the Gates Foundation." },
+  { id: "allen",      name: "Paul Allen",          cat: "business", role: "Co-founder, Microsoft",                    bio: "Co-founded Microsoft with Gates; later invested broadly in science and sports." },
+  { id: "musk",       name: "Elon Musk",           cat: "business", role: "CEO, Tesla & SpaceX",                      bio: "Serial entrepreneur pushing into electric vehicles, private spaceflight, and beyond." },
+  { id: "bezos",      name: "Jeff Bezos",          cat: "business", role: "Founder, Amazon",                          bio: "Built Amazon from an online bookstore into a global logistics and cloud giant." },
+  { id: "zuck",       name: "Mark Zuckerberg",     cat: "tech",     role: "Founder, Meta",                            bio: "Founded Facebook in a Harvard dorm room; now leads Meta's push into social and VR." },
+  { id: "page",       name: "Larry Page",          cat: "tech",     role: "Co-founder, Google",                       bio: "Co-invented PageRank with Sergey Brin; co-founded Google in a Stanford dorm." },
+  { id: "brin",       name: "Sergey Brin",         cat: "tech",     role: "Co-founder, Google",                       bio: "Mathematician and co-founder of Google; met Page at Stanford." },
+  { id: "altman",     name: "Sam Altman",          cat: "tech",     role: "CEO, OpenAI",                              bio: "Former Y Combinator president; leads OpenAI's push for general-purpose AI." },
+  { id: "hinton",     name: "Geoffrey Hinton",     cat: "science",  role: "Computer scientist",                       bio: "Godfather of deep learning; Turing Award laureate whose backpropagation work underlies modern AI." },
+  { id: "lecun",      name: "Yann LeCun",          cat: "science",  role: "Chief AI Scientist, Meta",                 bio: "Developed convolutional neural networks; a Turing Award-winning deep learning pioneer." },
+
+  // POLITICS
+  { id: "obama",      name: "Barack Obama",        cat: "politics", role: "44th U.S. President",                     bio: "First African-American U.S. president; known for the Affordable Care Act and a measured oratorical style." },
+  { id: "michelle",   name: "Michelle Obama",      cat: "politics", role: "Former First Lady, author",               bio: "Attorney, author, and advocate for education and nutrition." },
+  { id: "biden",      name: "Joe Biden",           cat: "politics", role: "46th U.S. President",                     bio: "Six-term senator from Delaware, vice president under Obama, elected president in 2020." },
+  { id: "harris",     name: "Kamala Harris",       cat: "politics", role: "49th U.S. Vice President",                bio: "Former California AG and senator; first woman to hold the U.S. vice presidency." },
+  { id: "merkel",     name: "Angela Merkel",       cat: "politics", role: "Former Chancellor of Germany",             bio: "Led Germany for sixteen years through financial, refugee, and pandemic crises." },
+  { id: "macron",     name: "Emmanuel Macron",     cat: "politics", role: "President of France",                     bio: "Former investment banker who founded En Marche; youngest French president since Napoleon." },
+
+  // SCIENCE
+  { id: "einstein",   name: "Albert Einstein",     cat: "science",  role: "Theoretical physicist",                    bio: "Reshaped physics with relativity and laid groundwork for quantum theory." },
+  { id: "curie",      name: "Marie Curie",         cat: "science",  role: "Physicist, chemist",                       bio: "Pioneer of radioactivity; first person to win Nobel Prizes in two different sciences." },
+  { id: "hawking",    name: "Stephen Hawking",     cat: "science",  role: "Theoretical physicist",                    bio: "Black hole thermodynamics and cosmology, plus a rare gift for public explanation." },
+  { id: "tyson",      name: "Neil deGrasse Tyson", cat: "science",  role: "Astrophysicist, communicator",             bio: "Director of the Hayden Planetarium; popular science communicator." },
+  { id: "doudna",     name: "Jennifer Doudna",     cat: "science",  role: "Biochemist",                               bio: "Shared 2020 Nobel Prize in Chemistry for the development of CRISPR-Cas9." },
+
+  // CULTURE
+  { id: "oprah",      name: "Oprah Winfrey",       cat: "culture",  role: "Media executive, philanthropist",          bio: "Transformed daytime television and built a cross-media empire with OWN and Harpo." },
+  { id: "beyonce",    name: "Beyoncé",             cat: "culture",  role: "Singer, performer",                        bio: "From Destiny's Child to solo icon; one of the most decorated artists in Grammy history." },
+  { id: "jayz",       name: "Jay-Z",               cat: "culture",  role: "Rapper, mogul",                            bio: "Built Roc Nation and Tidal alongside a decades-long recording career." },
+  { id: "taylor",     name: "Taylor Swift",        cat: "culture",  role: "Singer-songwriter",                        bio: "Pop phenomenon whose Eras Tour became one of the highest-grossing in history." },
+  { id: "kanye",      name: "Kanye West",          cat: "culture",  role: "Musician, designer",                       bio: "Producer turned rapper turned fashion provocateur; frequently controversial." },
+  { id: "scorsese",   name: "Martin Scorsese",     cat: "culture",  role: "Filmmaker",                                bio: "New Hollywood auteur behind Taxi Driver, Goodfellas, and The Irishman." },
+  { id: "deniro",     name: "Robert De Niro",      cat: "culture",  role: "Actor",                                    bio: "Scorsese's long-time collaborator and one of the defining actors of his generation." },
+
+  // SPORTS
+  { id: "jordan",     name: "Michael Jordan",      cat: "sports",   role: "Basketball legend",                        bio: "Six-time NBA champion; redefined basketball's global reach." },
+  { id: "lebron",     name: "LeBron James",        cat: "sports",   role: "Basketball player",                        bio: "Four-time NBA champion; all-time scoring leader with a media and business footprint to match." },
+  { id: "serena",     name: "Serena Williams",     cat: "sports",   role: "Tennis champion",                          bio: "23 Grand Slam singles titles in the Open Era; retired 2022 as one of tennis's greatest." },
+  { id: "messi",      name: "Lionel Messi",        cat: "sports",   role: "Footballer",                               bio: "Eight-time Ballon d'Or winner; led Argentina to the 2022 World Cup." },
+  { id: "ronaldo",    name: "Cristiano Ronaldo",   cat: "sports",   role: "Footballer",                               bio: "Five-time Ballon d'Or; career-long rival to Messi and one of the most prolific goalscorers ever." },
+
+  // BUSINESS (additional)
+  { id: "buffett",    name: "Warren Buffett",      cat: "business", role: "Investor, CEO Berkshire Hathaway",         bio: "The 'Oracle of Omaha'; proponent of value investing and large-scale philanthropy." },
+  { id: "munger",     name: "Charlie Munger",      cat: "business", role: "Investor, Berkshire Hathaway",             bio: "Buffett's long-time partner and intellectual sparring partner." },
+  { id: "soros",      name: "George Soros",        cat: "business", role: "Investor, philanthropist",                 bio: "Hedge fund manager known for the 1992 Bank of England short and Open Society Foundations." },
+  { id: "thiel",      name: "Peter Thiel",         cat: "business", role: "Investor, PayPal co-founder",              bio: "Founded PayPal with Musk and Levchin; later backed Palantir and Facebook early." },
+  { id: "hoffman",    name: "Reid Hoffman",        cat: "business", role: "Co-founder, LinkedIn",                     bio: "PayPal mafia alum; co-founded LinkedIn and invested across early Web 2.0." },
+];
+
+const EDGES = [
+  // Tech / PayPal mafia
+  ["musk","thiel","Co-founded PayPal"],
+  ["musk","hoffman","PayPal era"],
+  ["thiel","hoffman","Co-workers at PayPal"],
+  ["thiel","zuck","Early Facebook investor"],
+  // Apple
+  ["jobs","woz","Co-founded Apple"],
+  ["jobs","gates","Rivals and occasional allies"],
+  ["gates","allen","Co-founded Microsoft"],
+  ["gates","buffett","Friendship & philanthropy"],
+  // Google
+  ["page","brin","Co-founded Google at Stanford"],
+  ["page","hinton","Hired at Google Brain"],
+  ["brin","musk","Early Tesla investor"],
+  // AI
+  ["hinton","lecun","Deep learning godfathers"],
+  ["altman","musk","Co-founded OpenAI"],
+  ["altman","thiel","Y Combinator network"],
+  ["altman","hoffman","Tech investor network"],
+  ["lecun","zuck","Meta Chief AI Scientist"],
+  // Foundational CS
+  ["turing","vonneumann","Contemporaries in early computing"],
+  ["vonneumann","einstein","Princeton IAS colleagues"],
+  ["berners","turing","Intellectual lineage"],
+  // Politics
+  ["obama","michelle","Married"],
+  ["obama","biden","President & VP"],
+  ["biden","harris","President & VP"],
+  ["obama","harris","Democratic allies"],
+  ["merkel","macron","European Council counterparts"],
+  ["obama","merkel","Close diplomatic ties"],
+  ["obama","oprah","Public endorsement & friendship"],
+  // Science
+  ["einstein","curie","Solvay Conference contemporaries"],
+  ["hawking","tyson","Fellow cosmology communicators"],
+  ["doudna","hinton","Scientific contemporaries"],
+  // Culture
+  ["beyonce","jayz","Married & collaborators"],
+  ["jayz","kanye","Longtime collaborators, later feud"],
+  ["kanye","taylor","Public feud (2009–)"],
+  ["oprah","michelle","Public friendship"],
+  ["oprah","jayz","Interview & mutual respect"],
+  ["scorsese","deniro","Ten films together"],
+  // Sports
+  ["jordan","lebron","GOAT debate"],
+  ["messi","ronaldo","Defining rivalry"],
+  ["serena","lebron","Close friends, Nike stablemates"],
+  ["jordan","obama","Chicago connections"],
+  // Business
+  ["buffett","munger","Berkshire partners"],
+  ["buffett","gates","Close friendship & Giving Pledge"],
+  ["soros","macron","Public policy dialogue"],
+  ["bezos","musk","Space industry rivals"],
+  ["zuck","gates","Younger tech generation"],
+  // Cross-domain
+  ["musk","obama","White House visits"],
+  ["tyson","obama","Science advocacy"],
+  ["hawking","obama","Medal of Freedom"],
+  ["taylor","beyonce","Mutual public admiration"],
+];
+
+/* ============================================================
+   GRAPH ENGINE — canvas-based force-directed layout
+   ============================================================ */
+(function(){
+  const canvas = document.getElementById('graph');
+  const ctx = canvas.getContext('2d');
+  const tooltip = document.getElementById('tooltip');
+
+  // State
+  let width = 0, height = 0, dpr = Math.max(1, window.devicePixelRatio || 1);
+  let nodes = [], links = [];
+  let selectedId = null, hoveredId = null;
+  let transform = { x: 0, y: 0, k: 1 };
+  let isDragging = false;
+  let draggedNode = null;
+  let dragStart = null;
+  let paused = false;
+  const activeCats = new Set(Object.keys(CATEGORIES));
+  let searchQuery = "";
+
+  // Build graph
+  const nodeById = {};
+  PEOPLE.forEach((p, i) => {
+    const angle = (i / PEOPLE.length) * Math.PI * 2;
+    const r = 180 + Math.random() * 60;
+    const n = {
+      ...p,
+      x: Math.cos(angle) * r + (Math.random() - 0.5) * 40,
+      y: Math.sin(angle) * r + (Math.random() - 0.5) * 40,
+      vx: 0, vy: 0,
+      degree: 0,
+      fixed: false,
+    };
+    nodes.push(n);
+    nodeById[p.id] = n;
+  });
+
+  EDGES.forEach(([a, b, rel]) => {
+    if (nodeById[a] && nodeById[b]) {
+      links.push({ source: nodeById[a], target: nodeById[b], rel });
+      nodeById[a].degree++;
+      nodeById[b].degree++;
+    }
+  });
+
+  // Resize
+  function resize() {
+    const rect = canvas.getBoundingClientRect();
+    width = rect.width;
+    height = rect.height;
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Layout state
+  let currentLayout = 'force';
+  // For non-force layouts, we ease nodes toward target positions instead of using physics
+  // Each node gets tx/ty target coords; we lerp x,y toward them.
+
+  function findRootNode() {
+    // Pick the highest-degree node as root
+    let best = nodes[0];
+    nodes.forEach(n => { if (n.degree > best.degree) best = n; });
+    return best;
+  }
+
+  function buildBFSTree(rootId) {
+    // Returns { parent: {id: parentId|null}, children: {id: [ids]}, depth: {id: number}, order: [ids by BFS] }
+    const parent = {}, children = {}, depth = {};
+    const order = [];
+    const visited = new Set();
+    const queue = [rootId];
+    parent[rootId] = null;
+    depth[rootId] = 0;
+    visited.add(rootId);
+    nodes.forEach(n => { children[n.id] = []; });
+
+    while (queue.length) {
+      const id = queue.shift();
+      order.push(id);
+      // collect neighbors
+      links.forEach(l => {
+        let other = null;
+        if (l.source.id === id) other = l.target.id;
+        else if (l.target.id === id) other = l.source.id;
+        if (other && !visited.has(other)) {
+          visited.add(other);
+          parent[other] = id;
+          children[id].push(other);
+          depth[other] = depth[id] + 1;
+          queue.push(other);
+        }
+      });
+    }
+    // disconnected nodes — attach to root with depth = maxDepth+1
+    let maxDepth = 0;
+    Object.values(depth).forEach(d => { if (d > maxDepth) maxDepth = d; });
+    nodes.forEach(n => {
+      if (!visited.has(n.id)) {
+        parent[n.id] = rootId;
+        depth[n.id] = maxDepth + 1;
+        children[rootId].push(n.id);
+        order.push(n.id);
+        visited.add(n.id);
+      }
+    });
+    return { parent, children, depth, order };
+  }
+
+  // Compute target positions for each layout
+  function computeTargets(layout) {
+    const targets = {};
+
+    if (layout === 'force') {
+      // No targets — physics handles it
+      return null;
+    }
+
+    if (layout === 'radial') {
+      // Concentric rings by depth from highest-degree node
+      const root = findRootNode();
+      const tree = buildBFSTree(root.id);
+      // Group by depth
+      const byDepth = {};
+      nodes.forEach(n => {
+        const d = tree.depth[n.id] ?? 0;
+        if (!byDepth[d]) byDepth[d] = [];
+        byDepth[d].push(n.id);
+      });
+      const depths = Object.keys(byDepth).map(Number).sort((a,b)=>a-b);
+      const ringStep = 130;
+      depths.forEach(d => {
+        const ids = byDepth[d];
+        if (d === 0) {
+          targets[ids[0]] = { x: 0, y: 0 };
+        } else {
+          const radius = d * ringStep;
+          ids.forEach((id, i) => {
+            const angle = (i / ids.length) * Math.PI * 2 - Math.PI / 2;
+            targets[id] = { x: Math.cos(angle) * radius, y: Math.sin(angle) * radius };
+          });
+        }
+      });
+      return targets;
+    }
+
+    if (layout === 'tree') {
+      // Top-down classical tree, BFS from highest-degree root
+      const root = findRootNode();
+      const tree = buildBFSTree(root.id);
+
+      // Compute layout via post-order: assign leaf x positions sequentially
+      // and parent x = average of child x's
+      const xPos = {};
+      let leafCounter = 0;
+      const xSpacing = 90;
+
+      function assign(id) {
+        const kids = tree.children[id];
+        if (kids.length === 0) {
+          xPos[id] = leafCounter * xSpacing;
+          leafCounter++;
+        } else {
+          kids.forEach(assign);
+          const first = xPos[kids[0]];
+          const last = xPos[kids[kids.length - 1]];
+          xPos[id] = (first + last) / 2;
+        }
+      }
+      assign(root.id);
+
+      // Center horizontally
+      let minX = Infinity, maxX = -Infinity;
+      Object.values(xPos).forEach(x => { if (x < minX) minX = x; if (x > maxX) maxX = x; });
+      const cx = (minX + maxX) / 2;
+
+      // Vertical spacing
+      const ySpacing = 110;
+      let maxDepth = 0;
+      Object.values(tree.depth).forEach(d => { if (d > maxDepth) maxDepth = d; });
+      const cy = (maxDepth * ySpacing) / 2;
+
+      nodes.forEach(n => {
+        targets[n.id] = {
+          x: (xPos[n.id] ?? 0) - cx,
+          y: (tree.depth[n.id] ?? 0) * ySpacing - cy,
+        };
+      });
+      return targets;
+    }
+
+    if (layout === 'balloon') {
+      // Each subtree is a circle around its parent; subtree size determines circle radius
+      const root = findRootNode();
+      const tree = buildBFSTree(root.id);
+
+      // Count descendants for each node
+      const subtreeSize = {};
+      function countDesc(id) {
+        let total = 1;
+        tree.children[id].forEach(c => { total += countDesc(c); });
+        subtreeSize[id] = total;
+        return total;
+      }
+      countDesc(root.id);
+
+      // Recursive placement: place root at (cx, cy), children on a circle around it
+      function place(id, cx, cy, parentAngle, allowedAngle) {
+        targets[id] = { x: cx, y: cy };
+        const kids = tree.children[id];
+        if (kids.length === 0) return;
+
+        // Radius scales with subtree size and number of children
+        const totalKidWeight = kids.reduce((s, k) => s + Math.sqrt(subtreeSize[k]), 0);
+        const baseRadius = 60 + Math.sqrt(subtreeSize[id]) * 22;
+
+        let angleCursor = parentAngle - allowedAngle / 2;
+        kids.forEach(k => {
+          const kidWeight = Math.sqrt(subtreeSize[k]);
+          const kidAngleSpan = (kidWeight / totalKidWeight) * allowedAngle;
+          const kidAngle = angleCursor + kidAngleSpan / 2;
+          const kx = cx + Math.cos(kidAngle) * baseRadius;
+          const ky = cy + Math.sin(kidAngle) * baseRadius;
+          // Children of this kid get a cone pointing away from current node
+          const childCone = Math.min(Math.PI * 1.5, kidAngleSpan * 2.5 + 0.5);
+          place(k, kx, ky, kidAngle, childCone);
+          angleCursor += kidAngleSpan;
+        });
+      }
+      place(root.id, 0, 0, 0, Math.PI * 2);
+      return targets;
+    }
+
+    if (layout === 'hierarchical') {
+      // Nodes ordered top-to-bottom by category, left-to-right by degree
+      const catOrder = ['politics', 'business', 'tech', 'science', 'culture', 'sports'];
+      const byCat = {};
+      catOrder.forEach(c => byCat[c] = []);
+      nodes.forEach(n => {
+        if (byCat[n.cat]) byCat[n.cat].push(n);
+        else { byCat[n.cat] = [n]; }
+      });
+      // Sort each row by degree (most connected first, centered)
+      Object.values(byCat).forEach(row => row.sort((a, b) => b.degree - a.degree));
+
+      const xSpacing = 95;
+      const ySpacing = 130;
+      const totalRows = catOrder.length;
+      catOrder.forEach((cat, rowIdx) => {
+        const row = byCat[cat] || [];
+        const rowWidth = (row.length - 1) * xSpacing;
+        row.forEach((n, i) => {
+          targets[n.id] = {
+            x: i * xSpacing - rowWidth / 2,
+            y: rowIdx * ySpacing - ((totalRows - 1) * ySpacing) / 2,
+          };
+        });
+      });
+      return targets;
+    }
+
+    return null;
+  }
+
+  let layoutTargets = null;
+
+  function applyLayout(name) {
+    currentLayout = name;
+    layoutTargets = computeTargets(name);
+    // reset velocities for clean transitions
+    nodes.forEach(n => { n.vx = 0; n.vy = 0; });
+  }
+
+  // Physics / layout step
+  function step() {
+    if (paused) return;
+
+    if (currentLayout === 'force') {
+      // Force-directed simulation
+      const centerX = 0, centerY = 0;
+      const repulsion = 1200;
+      const linkDist = 90;
+      const linkStrength = 0.04;
+      const centerPull = 0.003;
+      const damping = 0.82;
+
+      for (let i = 0; i < nodes.length; i++) {
+        const a = nodes[i];
+        if (a.fixed) continue;
+        for (let j = i + 1; j < nodes.length; j++) {
+          const b = nodes[j];
+          const dx = b.x - a.x;
+          const dy = b.y - a.y;
+          let d2 = dx * dx + dy * dy;
+          if (d2 < 0.01) d2 = 0.01;
+          const d = Math.sqrt(d2);
+          const force = repulsion / d2;
+          const fx = (dx / d) * force;
+          const fy = (dy / d) * force;
+          a.vx -= fx; a.vy -= fy;
+          if (!b.fixed) { b.vx += fx; b.vy += fy; }
+        }
+      }
+
+      links.forEach(l => {
+        const dx = l.target.x - l.source.x;
+        const dy = l.target.y - l.source.y;
+        const d = Math.sqrt(dx*dx + dy*dy) || 0.01;
+        const diff = (d - linkDist) * linkStrength;
+        const fx = (dx / d) * diff;
+        const fy = (dy / d) * diff;
+        if (!l.source.fixed) { l.source.vx += fx; l.source.vy += fy; }
+        if (!l.target.fixed) { l.target.vx -= fx; l.target.vy -= fy; }
+      });
+
+      nodes.forEach(n => {
+        if (n.fixed) return;
+        n.vx += (centerX - n.x) * centerPull;
+        n.vy += (centerY - n.y) * centerPull;
+        n.vx *= damping;
+        n.vy *= damping;
+        n.x += n.vx;
+        n.y += n.vy;
+      });
+    } else if (layoutTargets) {
+      // Ease toward target positions
+      const ease = 0.08;
+      nodes.forEach(n => {
+        if (n.fixed) return;
+        const t = layoutTargets[n.id];
+        if (!t) return;
+        n.x += (t.x - n.x) * ease;
+        n.y += (t.y - n.y) * ease;
+      });
+    }
+  }
+
+  function worldToScreen(x, y) {
+    return {
+      x: (x * transform.k) + transform.x + width / 2,
+      y: (y * transform.k) + transform.y + height / 2,
+    };
+  }
+  function screenToWorld(sx, sy) {
+    return {
+      x: (sx - width / 2 - transform.x) / transform.k,
+      y: (sy - height / 2 - transform.y) / transform.k,
+    };
+  }
+  function nodeAt(sx, sy) {
+    for (let i = nodes.length - 1; i >= 0; i--) {
+      const n = nodes[i];
+      if (!isNodeVisible(n)) continue;
+      const p = worldToScreen(n.x, n.y);
+      const r = nodeRadius(n);
+      const dx = sx - p.x, dy = sy - p.y;
+      if (dx*dx + dy*dy <= (r + 3) * (r + 3)) return n;
+    }
+    return null;
+  }
+
+  function nodeRadius(n) {
+    return 4 + Math.sqrt(n.degree) * 3.2;
+  }
+  function isNodeVisible(n) {
+    if (!activeCats.has(n.cat)) return false;
+    if (searchQuery) {
+      const q = searchQuery.toLowerCase();
+      if (!n.name.toLowerCase().includes(q) &&
+          !n.role.toLowerCase().includes(q) &&
+          !CATEGORIES[n.cat].label.toLowerCase().includes(q)) return false;
+    }
+    return true;
+  }
+
+  function neighborsOf(id) {
+    const set = new Set([id]);
+    links.forEach(l => {
+      if (l.source.id === id) set.add(l.target.id);
+      if (l.target.id === id) set.add(l.source.id);
+    });
+    return set;
+  }
+
+  let fpsLast = performance.now(), fpsFrames = 0, fpsValue = 60;
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+
+    ctx.save();
+    ctx.translate(width/2 + transform.x, height/2 + transform.y);
+    ctx.scale(transform.k, transform.k);
+
+    const focusId = selectedId || hoveredId;
+    const focusSet = focusId ? neighborsOf(focusId) : null;
+
+    // Draw links (darker ink tones for light theme)
+    links.forEach(l => {
+      const vis = isNodeVisible(l.source) && isNodeVisible(l.target);
+      if (!vis) return;
+      const active = focusSet && (focusSet.has(l.source.id) && focusSet.has(l.target.id));
+      const dim = focusSet && !active;
+      ctx.strokeStyle = active
+        ? "rgba(184,134,11,0.7)"
+        : dim
+          ? "rgba(26,24,20,0.04)"
+          : "rgba(26,24,20,0.15)";
+      ctx.lineWidth = active ? 1.6 / transform.k : 0.9 / transform.k;
+      ctx.beginPath();
+      ctx.moveTo(l.source.x, l.source.y);
+      ctx.lineTo(l.target.x, l.target.y);
+      ctx.stroke();
+    });
+
+    // Draw nodes
+    nodes.forEach(n => {
+      if (!isNodeVisible(n)) return;
+      const r = nodeRadius(n);
+      const isFocus = focusId === n.id;
+      const inFocus = focusSet ? focusSet.has(n.id) : true;
+      const cat = CATEGORIES[n.cat];
+
+      // Halo for focused/hovered
+      if (isFocus) {
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, r + 8 / transform.k, 0, Math.PI * 2);
+        ctx.fillStyle = hexToRgba(cat.color, 0.18);
+        ctx.fill();
+      }
+
+      // Node fill
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+      ctx.fillStyle = inFocus ? cat.color : hexToRgba(cat.color, 0.28);
+      ctx.fill();
+
+      // Subtle darker stroke around each node for definition on light bg
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+      ctx.strokeStyle = inFocus ? hexToRgba(cat.color, 0.85) : "rgba(26,24,20,0.12)";
+      ctx.lineWidth = 1 / transform.k;
+      ctx.stroke();
+
+      // Inner highlight dot (light bg version: white center)
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, r * 0.42, 0, Math.PI * 2);
+      ctx.fillStyle = inFocus ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.55)";
+      ctx.fill();
+
+      // Ring on selected
+      if (selectedId === n.id) {
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, r + 4 / transform.k, 0, Math.PI * 2);
+        ctx.strokeStyle = "#1a1814";
+        ctx.lineWidth = 1.3 / transform.k;
+        ctx.stroke();
+      }
+
+      // Label
+      const showLabel = isFocus || (focusSet && focusSet.has(n.id)) || (n.degree >= 4 && transform.k > 0.8);
+      if (showLabel) {
+        ctx.font = `${Math.max(11, 12 / transform.k * 0.9)}px "Fraunces", serif`;
+        // soft paper-colored outline under the label for legibility
+        ctx.lineWidth = 3 / transform.k;
+        ctx.strokeStyle = "rgba(245,242,234,0.9)";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "top";
+        ctx.strokeText(n.name, n.x, n.y + r + 4 / transform.k);
+        ctx.fillStyle = inFocus ? "#1a1814" : "rgba(26,24,20,0.55)";
+        ctx.fillText(n.name, n.x, n.y + r + 4 / transform.k);
+      }
+    });
+
+    ctx.restore();
+
+    fpsFrames++;
+    const now = performance.now();
+    if (now - fpsLast >= 500) {
+      fpsValue = Math.round((fpsFrames * 1000) / (now - fpsLast));
+      fpsLast = now; fpsFrames = 0;
+      document.getElementById('fps-meter').textContent = fpsValue + " FPS";
+    }
+  }
+
+  function hexToRgba(hex, a) {
+    const h = hex.replace('#','');
+    const r = parseInt(h.slice(0,2), 16);
+    const g = parseInt(h.slice(2,4), 16);
+    const b = parseInt(h.slice(4,6), 16);
+    return `rgba(${r},${g},${b},${a})`;
+  }
+
+  function loop() {
+    step();
+    draw();
+    requestAnimationFrame(loop);
+  }
+  loop();
+
+  /* ------------ Interaction ------------ */
+  canvas.addEventListener('mousemove', e => {
+    const rect = canvas.getBoundingClientRect();
+    const sx = e.clientX - rect.left, sy = e.clientY - rect.top;
+    if (isDragging && draggedNode) {
+      const w = screenToWorld(sx, sy);
+      draggedNode.x = w.x; draggedNode.y = w.y;
+      draggedNode.vx = 0; draggedNode.vy = 0;
+    } else if (isDragging && !draggedNode && dragStart) {
+      transform.x += sx - dragStart.x;
+      transform.y += sy - dragStart.y;
+      dragStart = { x: sx, y: sy };
+      updateCompass();
+    } else {
+      const n = nodeAt(sx, sy);
+      hoveredId = n ? n.id : null;
+      if (n) {
+        canvas.style.cursor = "pointer";
+        tooltip.textContent = n.name;
+        tooltip.style.left = sx + "px";
+        tooltip.style.top = sy + "px";
+        tooltip.classList.add("visible");
+      } else {
+        canvas.style.cursor = "grab";
+        tooltip.classList.remove("visible");
+      }
+    }
+  });
+  canvas.addEventListener('mousedown', e => {
+    const rect = canvas.getBoundingClientRect();
+    const sx = e.clientX - rect.left, sy = e.clientY - rect.top;
+    const n = nodeAt(sx, sy);
+    isDragging = true;
+    if (n) {
+      draggedNode = n;
+      n.fixed = true;
+    } else {
+      dragStart = { x: sx, y: sy };
+    }
+  });
+  window.addEventListener('mouseup', e => {
+    if (draggedNode) {
+      draggedNode.fixed = false;
+      const rect = canvas.getBoundingClientRect();
+      const sx = e.clientX - rect.left, sy = e.clientY - rect.top;
+      const n = nodeAt(sx, sy);
+      if (n && n.id === draggedNode.id) {
+        selectNode(n.id);
+      }
+      draggedNode = null;
+    } else if (isDragging && dragStart) {
+      const rect = canvas.getBoundingClientRect();
+      const sx = e.clientX - rect.left, sy = e.clientY - rect.top;
+      const moved = Math.hypot(sx - dragStart.x, sy - dragStart.y) > 3;
+      if (!moved) { selectNode(null); }
+    }
+    isDragging = false;
+    dragStart = null;
+  });
+  canvas.addEventListener('wheel', e => {
+    e.preventDefault();
+    const rect = canvas.getBoundingClientRect();
+    const sx = e.clientX - rect.left, sy = e.clientY - rect.top;
+    const wBefore = screenToWorld(sx, sy);
+    const factor = Math.pow(1.0015, -e.deltaY);
+    transform.k = Math.min(3, Math.max(0.3, transform.k * factor));
+    const wAfter = screenToWorld(sx, sy);
+    transform.x += (wAfter.x - wBefore.x) * transform.k;
+    transform.y += (wAfter.y - wBefore.y) * transform.k;
+    updateCompass();
+  }, { passive: false });
+
+  function updateCompass() {
+    document.getElementById('zoom-level').textContent = transform.k.toFixed(2) + "×";
+    document.getElementById('origin-coord').textContent = `${Math.round(-transform.x)}, ${Math.round(-transform.y)}`;
+  }
+  updateCompass();
+
+  function selectNode(id) {
+    selectedId = id;
+    renderDetail();
+  }
+
+  function renderDetail() {
+    const panel = document.getElementById('detail-panel');
+    if (!selectedId) {
+      panel.innerHTML = `
+        <div class="detail-empty">
+          <div class="big">Ø</div>
+          No node selected.<br/>
+          Hover over the web to see names. Click to dive deeper into any figure's connections and biography.
+        </div>`;
+      return;
+    }
+    const n = nodeById[selectedId];
+    const cat = CATEGORIES[n.cat];
+    const neighbors = [];
+    links.forEach(l => {
+      if (l.source.id === n.id) neighbors.push({ node: l.target, rel: l.rel });
+      else if (l.target.id === n.id) neighbors.push({ node: l.source, rel: l.rel });
+    });
+    panel.innerHTML = `
+      <div class="person-card">
+        <div class="person-category" style="color:${cat.color}">${cat.label}</div>
+        <h2 class="person-name">${n.name}</h2>
+        <div class="person-role">${n.role}</div>
+        <div>
+          <div class="section-label">Connections · ${neighbors.length}</div>
+          <div class="connections">
+            ${neighbors.map(nb => `
+              <div class="connection-item" data-id="${nb.node.id}">
+                <div class="c-name">${nb.node.name}</div>
+                <div class="c-rel">${nb.rel}</div>
+              </div>
+            `).join("")}
+          </div>
+        </div>
+        <div class="person-bio">${n.bio}</div>
+      </div>
+    `;
+    panel.querySelectorAll('.connection-item').forEach(el => {
+      el.addEventListener('click', () => selectNode(el.dataset.id));
+    });
+  }
+
+  const filtersEl = document.getElementById('filters');
+  Object.entries(CATEGORIES).forEach(([key, cat]) => {
+    const count = nodes.filter(n => n.cat === key).length;
+    const el = document.createElement('div');
+    el.className = "filter-item";
+    el.dataset.cat = key;
+    el.innerHTML = `
+      <div class="filter-left">
+        <div class="filter-swatch" style="background:${cat.color}"></div>
+        <div>${cat.label}</div>
+      </div>
+      <div class="filter-count">${count.toString().padStart(2,'0')}</div>
+    `;
+    el.addEventListener('click', () => {
+      if (activeCats.has(key)) activeCats.delete(key);
+      else activeCats.add(key);
+      el.classList.toggle('off', !activeCats.has(key));
+    });
+    filtersEl.appendChild(el);
+  });
+
+  document.getElementById('search').addEventListener('input', e => {
+    searchQuery = e.target.value.trim();
+  });
+
+  document.getElementById('btn-reheat').addEventListener('click', () => {
+    if (currentLayout === 'force') {
+      nodes.forEach(n => {
+        n.vx += (Math.random() - 0.5) * 30;
+        n.vy += (Math.random() - 0.5) * 30;
+      });
+    } else {
+      // For target-based layouts, scatter nodes then re-apply targets
+      nodes.forEach(n => {
+        n.x += (Math.random() - 0.5) * 200;
+        n.y += (Math.random() - 0.5) * 200;
+      });
+    }
+  });
+  document.getElementById('btn-center').addEventListener('click', () => {
+    transform = { x: 0, y: 0, k: 1 };
+    updateCompass();
+  });
+  const pauseBtn = document.getElementById('btn-pause');
+  pauseBtn.addEventListener('click', () => {
+    paused = !paused;
+    pauseBtn.textContent = paused ? "Resume" : "Pause";
+  });
+
+  // Layout selector wiring
+  const layoutSelector = document.getElementById('layout-selector');
+  const layoutToggle = document.getElementById('ls-toggle');
+  const layoutCurrent = document.getElementById('ls-current');
+  const layoutButtons = document.querySelectorAll('.ls-opt');
+
+  layoutToggle.addEventListener('click', () => {
+    layoutSelector.classList.toggle('collapsed');
+  });
+
+  layoutButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const layout = btn.dataset.layout;
+      layoutButtons.forEach(b => b.classList.toggle('active', b === btn));
+      const labelText = btn.querySelector('span').textContent;
+      layoutCurrent.textContent = '· ' + labelText;
+      applyLayout(layout);
+      // Reset view so the new layout is centered
+      transform = { x: 0, y: 0, k: 1 };
+      updateCompass();
+      // Auto-collapse after selection
+      layoutSelector.classList.add('collapsed');
+    });
+  });
+
+  // Keyboard shortcuts 1-5 for layouts
+  window.addEventListener('keydown', e => {
+    if (e.target.tagName === 'INPUT') return;
+    const map = { '1': 'force', '2': 'radial', '3': 'tree', '4': 'balloon', '5': 'hierarchical' };
+    if (map[e.key]) {
+      const btn = document.querySelector(`.ls-opt[data-layout="${map[e.key]}"]`);
+      if (btn) btn.click();
+    }
+  });
+
+  document.getElementById('stat-nodes').textContent = nodes.length;
+  document.getElementById('stat-edges').textContent = links.length;
+  const maxEdges = nodes.length * (nodes.length - 1) / 2;
+  const density = (links.length / maxEdges * 100).toFixed(1);
+  document.getElementById('stat-density').textContent = density + "%";
+
+})();
+</script>
+</body>
+</html>
