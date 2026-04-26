@@ -4,6 +4,7 @@ import { MAP, getMapPaths } from '../shared/worldmap'
 import { SiteNav } from '../shared/SiteNav'
 import { SiteFooter } from '../shared/SiteFooter'
 import { LiveClock, Marker, Reticle } from './components'
+import { Eyebrow, Display, Rule, RevealText } from '../shared/ui'
 import { DetailPanel } from './panel'
 
 const THEMES = {
@@ -20,6 +21,10 @@ const THEMES = {
     imgBg: 'rgba(0, 255, 159, 0.05)',
     imgBg2: 'rgba(0, 255, 159, 0.02)',
     glow: '0, 255, 159',
+    // Map-element colors (independent of accent)
+    reticle: '#5ddfff',           // targeting crosshair + corner registration marks
+    markerActive: '#00ff9f',      // status point: ACTIVE
+    markerDormant: '#ffb347',     // status point: DORMANT
   },
   redline: {
     name: 'REDLINE',
@@ -34,6 +39,9 @@ const THEMES = {
     imgBg: 'rgba(255, 46, 61, 0.05)',
     imgBg2: 'rgba(255, 255, 255, 0.02)',
     glow: '255, 46, 61',
+    reticle: '#ffd040',
+    markerActive: '#ff2e3d',
+    markerDormant: '#ffa500',
   },
   sentinel: {
     name: 'SENTINEL',
@@ -48,6 +56,9 @@ const THEMES = {
     imgBg: 'rgba(94, 234, 212, 0.05)',
     imgBg2: 'rgba(94, 234, 212, 0.02)',
     glow: '94, 234, 212',
+    reticle: '#a78bfa',
+    markerActive: '#5eead4',
+    markerDormant: '#fbbf24',
   },
   paper: {
     name: 'PAPER',
@@ -62,6 +73,9 @@ const THEMES = {
     imgBg: 'rgba(74, 92, 156, 0.06)',
     imgBg2: 'rgba(74, 92, 156, 0.02)',
     glow: '74, 92, 156',
+    reticle: '#4a5c9c',
+    markerActive: '#4a9c5e',
+    markerDormant: '#b5773a',
   },
 }
 
@@ -170,9 +184,29 @@ export default function App() {
         onSelect={handleMarkerClick}
       />
       <Watermark theme={theme}/>
+
+{/*       <section style={{ padding: '120px 48px 140px', maxWidth: 1400, margin: '0 auto' }}>
+        <div style={{ maxWidth: 820 }}>
+          <Eyebrow theme={theme}>Next</Eyebrow>
+          <Display theme={theme}>
+            The alpha in frontier is in the reconstruction. Qntify reconstructs.
+          </Display>
+          <div style={{ marginTop: 40, display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+            <button style={{
+              padding: '14px 28px', fontSize: 14, fontWeight: 500,
+              fontFamily: 'Inter, sans-serif',
+              background: theme.fg, color: theme.bg,
+              border: 'none', cursor: 'pointer', letterSpacing: 0.5,
+            }}>Request a briefing →</button>
+          </div>
+        </div>
+      </section> */}
+
       <SiteFooter theme={theme} variant="overlay"/>
       {editMode && <TweaksPanel tweaks={tweaks} onChange={updateTweak} theme={theme}/>}
     </div>
+
+    
   )
 }
 
@@ -277,17 +311,17 @@ function MapView({ assets, activeIdx, theme, onMarkerClick }) {
         </g>
 
         {[[20,84],[980,84],[20,480],[980,480]].map(([x,y], i) => (
-          <g key={i} stroke={theme.accent} strokeWidth="0.5" fill="none" opacity="0.5">
+          <g key={i} stroke={theme.reticle || theme.accent} strokeWidth="0.5" fill="none" opacity="0.5">
             <line x1={x-6} y1={y} x2={x+6} y2={y}/>
             <line x1={x} y1={y-6} x2={x} y2={y+6}/>
             <circle cx={x} cy={y} r="2"/>
           </g>
         ))}
 
-        <text x="24" y="96" fill={theme.fgDim} fontFamily="JetBrains Mono, monospace" fontSize="9" letterSpacing="2">
+        <text x="24" y="10" fill={theme.fgDim} fontFamily="JetBrains Mono, monospace" fontSize="9" letterSpacing="2">
           GEO.VIEW // EQUIRECTANGULAR // ZOOM {ZOOM.toFixed(1)}×
         </text>
-        <text x="976" y="96" fill={theme.fgDim} fontFamily="JetBrains Mono, monospace" fontSize="9" letterSpacing="2" textAnchor="end">
+        <text x="976" y="46" fill={theme.fgDim} fontFamily="JetBrains Mono, monospace" fontSize="9" letterSpacing="2" textAnchor="end">
           TRACKING {String(activeIdx + 1).padStart(2, '0')}/{String(assets.length).padStart(2, '0')}
         </text>
       </svg>
@@ -312,7 +346,7 @@ function Sidebar({ theme, assets, activeIdx, onSelect }) {
         background: theme.headerBg,
         display: 'flex', justifyContent: 'space-between',
       }}>
-        <span>ASSET.INDEX</span>
+        <span>ASSET.LIST</span>
         <span style={{ color: theme.accent }}>{assets.length} RECORDS</span>
       </div>
       <div>
@@ -334,8 +368,12 @@ function Sidebar({ theme, assets, activeIdx, onSelect }) {
                 <span style={{ fontSize: 9, color: theme.fgDim, letterSpacing: 1 }}>{a.id}</span>
                 <span style={{
                   width: 5, height: 5, borderRadius: '50%',
-                  background: a.status === 'ACTIVE' ? theme.accent : theme.warn,
-                  boxShadow: a.status === 'ACTIVE' ? `0 0 6px ${theme.accent}` : 'none',
+                  background: a.status === 'ACTIVE'
+                    ? (theme.markerActive || theme.accent)
+                    : (theme.markerDormant || theme.warn),
+                  boxShadow: a.status === 'ACTIVE'
+                    ? `0 0 6px ${theme.markerActive || theme.accent}`
+                    : 'none',
                 }}/>
               </div>
               <div style={{ fontSize: 11, color: active ? theme.fg : theme.fgDim2, marginTop: 2, fontWeight: active ? 600 : 400 }}>

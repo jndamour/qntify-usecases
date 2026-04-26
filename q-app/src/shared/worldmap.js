@@ -34,6 +34,47 @@ let mapFeatures = []
 export function getMapPaths() { return mapPaths }
 export function getMapFeatures() { return mapFeatures }
 
+// Walks a GeoJSON ring and splits it wherever consecutive vertices jump more
+// than 180° in longitude (the antimeridian crossing — Russia, Fiji, etc.).
+// At each crossing we interpolate the latitude where the edge meets ±180°
+// and insert a seam vertex on both sides, so each resulting sub-ring closes
+// cleanly along the map's east/west edge instead of cutting diagonally back
+// to the ring's starting vertex.
+function splitRingAtAntimeridian(ring) {
+  if (ring.length < 2) return [ring]
+  const runs = []
+  let current = [ring[0]]
+  let crossings = 0
+  for (let i = 1; i < ring.length; i++) {
+    const [lonPrev, latPrev] = ring[i - 1]
+    const [lon, lat] = ring[i]
+    if (Math.abs(lon - lonPrev) > 180) {
+      crossings++
+      const sideI = lonPrev > 0 ? 180 : -180
+      const sideJ = -sideI
+      const distI = Math.abs(sideI - lonPrev)
+      const totalDist = 360 - Math.abs(lon - lonPrev)
+      const t = totalDist > 0 ? distI / totalDist : 0
+      const seamLat = latPrev + t * (lat - latPrev)
+      current.push([sideI, seamLat])
+      runs.push(current)
+      current = [[sideJ, seamLat], [lon, lat]]
+    } else {
+      current.push([lon, lat])
+    }
+  }
+  runs.push(current)
+  // GeoJSON rings are closed (ring[0] === ring[n-1]). When crossings happen,
+  // the very first run and the very last run are two halves of the same piece
+  // separated only by that closure — stitch them back together.
+  if (crossings > 0 && runs.length >= 2) {
+    const first = runs.shift()
+    const last = runs[runs.length - 1]
+    runs[runs.length - 1] = last.concat(first.slice(1))
+  }
+  return runs
+}
+
 function geoJsonToPathD(geom) {
   const parts = []
   const rings = geom.type === 'MultiPolygon'
@@ -42,15 +83,18 @@ function geoJsonToPathD(geom) {
     ? geom.coordinates
     : []
   for (const ring of rings) {
-    if (!ring.length) continue
-    let d = ''
-    for (let i = 0; i < ring.length; i++) {
-      const [lon, lat] = ring[i]
-      const x = ((lon + 180) / 360) * W
-      const y = ((90 - lat) / 180) * H
-      d += (i === 0 ? 'M' : 'L') + x.toFixed(2) + ' ' + y.toFixed(2)
+    if (ring.length < 2) continue
+    for (const run of splitRingAtAntimeridian(ring)) {
+      if (run.length < 2) continue
+      let d = ''
+      for (let i = 0; i < run.length; i++) {
+        const [lon, lat] = run[i]
+        const x = ((lon + 180) / 360) * W
+        const y = ((90 - lat) / 180) * H
+        d += (i === 0 ? 'M' : 'L') + x.toFixed(2) + ' ' + y.toFixed(2)
+      }
+      parts.push(d + 'Z')
     }
-    parts.push(d + 'Z')
   }
   return parts.join(' ')
 }

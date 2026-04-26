@@ -72,8 +72,8 @@ export default function EmApp() {
 
       <SiteNav theme={theme} topPage="use-cases" currentPage="emerging-markets"/>
 
-      <section style={{ padding: '120px 48px 80px', maxWidth: 1400, margin: '0 auto' }}>
-        <Eyebrow theme={theme}>Use Case · 05</Eyebrow>
+      <section style={{ padding: '80px 48px 100px', maxWidth: 1400, margin: '0 auto' }}>
+        <Eyebrow theme={theme}>Use Case · 04</Eyebrow>
         <RevealText>
           <Display theme={theme} style={{ maxWidth: 1080 }}>
             Emerging Markets research, built from <em style={{ fontStyle: 'italic', color: theme.accent }}>primary signals</em>.
@@ -227,12 +227,12 @@ export default function EmApp() {
               background: theme.fg, color: theme.bg,
               border: 'none', cursor: 'pointer', letterSpacing: 0.5,
             }}>Request a briefing →</button>
-            <button style={{
+{/*             <button style={{
               padding: '14px 28px', fontSize: 14, fontWeight: 500,
               fontFamily: 'Inter, sans-serif',
               background: 'transparent', color: theme.fg,
               border: `1px solid ${theme.rule}`, cursor: 'pointer', letterSpacing: 0.5,
-            }}>Download sample report (PDF)</button>
+            }}>Download sample report (PDF)</button> */}
           </div>
         </div>
       </section>

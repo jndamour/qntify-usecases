@@ -99,14 +99,20 @@ export function DetailPanel({ asset, theme, position, index, total }) {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 12 }}>
           <FieldBlock label="STATUS" theme={theme}>
             <span style={{
-              color: asset.status === 'ACTIVE' ? theme.accent : theme.warn,
+              color: asset.status === 'ACTIVE'
+                ? (theme.markerActive || theme.accent)
+                : (theme.markerDormant || theme.warn),
               display: 'inline-flex', alignItems: 'center', gap: 6,
             }}>
               <span style={{
                 width: 6, height: 6, borderRadius: '50%',
-                background: asset.status === 'ACTIVE' ? theme.accent : theme.warn,
+                background: asset.status === 'ACTIVE'
+                  ? (theme.markerActive || theme.accent)
+                  : (theme.markerDormant || theme.warn),
                 animation: asset.status === 'ACTIVE' ? 'qnt-pulse 1.4s infinite' : 'none',
-                boxShadow: `0 0 8px ${asset.status === 'ACTIVE' ? theme.accent : theme.warn}`,
+                boxShadow: `0 0 8px ${asset.status === 'ACTIVE'
+                  ? (theme.markerActive || theme.accent)
+                  : (theme.markerDormant || theme.warn)}`,
               }}/>
               {asset.status}
             </span>
@@ -218,17 +224,9 @@ function AssetGlyph({ type, theme }) {
       )}
       {type === 'AIRCRAFT' && (
         <g {...common}>
-          {/* Top-down silhouette · nose right, tail left */}
-          {/* Fuselage */}
-          <path d="M 18 30 L 26 27 L 76 27 L 84 30 L 76 33 L 26 33 Z"/>
-          {/* Main wings (swept back from mid-fuselage) */}
-          <path d="M 50 27 L 30 14 L 38 27 Z"/>
-          <path d="M 50 33 L 30 46 L 38 33 Z"/>
-          {/* Horizontal tail stabilizers */}
-          <path d="M 70 27 L 60 19 L 66 27 Z"/>
-          <path d="M 70 33 L 60 41 L 66 33 Z"/>
-          {/* Cockpit window line near nose */}
-          <line x1="78" y1="29" x2="82" y2="30"/>
+          {/* Side-view silhouette · nose right, tail left */}
+          {/* Entire outline */}
+          <path d="M21.74 19.18 L26.68 19.52 C29.77 25.31 33.47 31.09 40.89 31.43 L54.47 31.43 L54.47 22.59 L57.87 22.59 L60.34 31.43 L70.84 31.43 C76.40 31.43 81.03 34.49 83.19 37.89 C81.34 40.95 76.40 42.65 70.84 42.65 L55.40 42.65 C56.02 43.67 56.64 45.37 56.02 46.73 C54.78 48.43 51.07 47.75 47.67 46.39 L38.09 51.50 L27.91 51.50 L44.60 41.29 C38.71 39.59 33.47 37.55 30.08 35.51 L18.64 37.55 L28.22 30.41 Z"/>
         </g>
       )}
       {type === 'BUSINESS' && (

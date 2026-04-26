@@ -75,8 +75,8 @@ export default function WBApp() {
 
       <SiteNav theme={theme} topPage="use-cases" currentPage="whistleblower"/>
 
-      <section style={{ padding: '120px 48px 80px', maxWidth: 1400, margin: '0 auto' }}>
-        <Eyebrow theme={theme}>Use Case · 05</Eyebrow>
+      <section style={{ padding: '80px 48px 100px', maxWidth: 1400, margin: '0 auto' }}>
+        <Eyebrow theme={theme}>Use Case · 03</Eyebrow>
         <RevealText>
           <Display theme={theme} style={{ maxWidth: 1040 }}>
             Where fraud is revealed in <em style={{ fontStyle: 'italic', color: theme.accent }}>signals</em>, not sources.
@@ -200,12 +200,12 @@ export default function WBApp() {
               background: theme.fg, color: theme.bg,
               border: 'none', cursor: 'pointer', letterSpacing: 0.5,
             }}>Request intake →</button>
-            <button style={{
+{/*             <button style={{
               padding: '14px 28px', fontSize: 14, fontWeight: 500,
               fontFamily: 'Inter, sans-serif',
               background: 'transparent', color: theme.fg,
               border: `1px solid ${theme.rule}`, cursor: 'pointer', letterSpacing: 0.5,
-            }}>Secure contact</button>
+            }}>Secure contact</button> */}
           </div>
         </div>
       </section>

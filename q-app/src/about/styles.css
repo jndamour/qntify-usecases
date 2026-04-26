@@ -17,7 +17,7 @@
 /* hero */
 .about-page .hero {
   max-width: 1400px; margin: 0 auto;
-  padding: 104px 48px 88px;
+  padding: 80px 48px 88px;
   border-bottom: 1px solid rgba(20, 20, 30, 0.10);
 }
 .about-page .hero .eyebrow { margin-bottom: 28px; }

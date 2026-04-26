@@ -14,10 +14,11 @@ export function Reticle({ cx, cy, theme, size = 80 }) {
   const half = size / 2
   const tick = 8
   const gap = 4
+  const color = theme.reticle || theme.accent
   return (
     <g style={{ pointerEvents: 'none' }}>
       <g transform={`translate(${cx} ${cy})`}>
-        <circle r={half} fill="none" stroke={theme.accent} strokeWidth="0.6" opacity="0.7"
+        <circle r={half} fill="none" stroke={color} strokeWidth="0.6" opacity="0.7"
           strokeDasharray="2 4">
           <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="8s" repeatCount="indefinite"/>
         </circle>
@@ -25,23 +26,25 @@ export function Reticle({ cx, cy, theme, size = 80 }) {
       {[[-1,-1],[1,-1],[-1,1],[1,1]].map(([sx,sy],i) => {
         const x = cx + sx*half, y = cy + sy*half
         return (
-          <g key={i} stroke={theme.accent} strokeWidth="1.2" fill="none">
+          <g key={i} stroke={color} strokeWidth="1.2" fill="none">
             <line x1={x} y1={y} x2={x - sx*tick} y2={y} />
             <line x1={x} y1={y} x2={x} y2={y - sy*tick} />
           </g>
         )
       })}
-      <line x1={cx - half - 6} y1={cy} x2={cx - gap} y2={cy} stroke={theme.accent} strokeWidth="0.6" opacity="0.6"/>
-      <line x1={cx + gap} y1={cy} x2={cx + half + 6} y2={cy} stroke={theme.accent} strokeWidth="0.6" opacity="0.6"/>
-      <line x1={cx} y1={cy - half - 6} x2={cx} y2={cy - gap} stroke={theme.accent} strokeWidth="0.6" opacity="0.6"/>
-      <line x1={cx} y1={cy + gap} x2={cx} y2={cy + half + 6} stroke={theme.accent} strokeWidth="0.6" opacity="0.6"/>
-      <circle cx={cx} cy={cy} r="1.2" fill={theme.accent}/>
+      <line x1={cx - half - 6} y1={cy} x2={cx - gap} y2={cy} stroke={color} strokeWidth="0.6" opacity="0.6"/>
+      <line x1={cx + gap} y1={cy} x2={cx + half + 6} y2={cy} stroke={color} strokeWidth="0.6" opacity="0.6"/>
+      <line x1={cx} y1={cy - half - 6} x2={cx} y2={cy - gap} stroke={color} strokeWidth="0.6" opacity="0.6"/>
+      <line x1={cx} y1={cy + gap} x2={cx} y2={cy + half + 6} stroke={color} strokeWidth="0.6" opacity="0.6"/>
+      <circle cx={cx} cy={cy} r="1.2" fill={color}/>
     </g>
   )
 }
 
 export function Marker({ x, y, active, status, theme, onClick, index }) {
-  const color = status === 'ACTIVE' ? theme.accent : theme.warn
+  const color = status === 'ACTIVE'
+    ? (theme.markerActive || theme.accent)
+    : (theme.markerDormant || theme.warn)
   return (
     <g onClick={onClick} style={{ cursor: 'pointer' }}>
       {active && (

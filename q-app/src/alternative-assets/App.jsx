@@ -83,8 +83,8 @@ export default function AltApp() {
 
       <SiteNav theme={theme} topPage="use-cases" currentPage="alternative-assets"/>
 
-      <section style={{ padding: '120px 48px 100px', maxWidth: 1400, margin: '0 auto' }}>
-        <Eyebrow theme={theme}>Use Case · 04</Eyebrow>
+      <section style={{ padding: '80px 48px 100px', maxWidth: 1400, margin: '0 auto' }}>
+        <Eyebrow theme={theme}>Use Case · 02</Eyebrow>
         <RevealText>
           <Display theme={theme} style={{ maxWidth: 980 }}>
             Alternative Assets for an era defined by <em style={{ fontStyle: 'italic', color: theme.accent }}>enforcement</em>.
@@ -169,13 +169,13 @@ export default function AltApp() {
               border: 'none', cursor: 'pointer',
               letterSpacing: 0.5,
             }}>Request a briefing →</button>
-            <button style={{
+{/*             <button style={{
               padding: '14px 28px', fontSize: 14, fontWeight: 500,
               fontFamily: 'Inter, sans-serif',
               background: 'transparent', color: theme.fg,
               border: `1px solid ${theme.rule}`, cursor: 'pointer',
               letterSpacing: 0.5,
-            }}>Download thesis (PDF)</button>
+            }}>Download thesis (PDF)</button> */}
           </div>
         </div>
       </section>

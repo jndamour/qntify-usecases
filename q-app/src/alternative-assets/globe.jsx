@@ -11,6 +11,8 @@ export function JurisdictionsMap({ theme }) {
   const [features, setFeatures] = useState(getMapFeatures())
   const [activeIdx, setActiveIdx] = useState(0)
   const [lambda, setLambda] = useState(20)
+  // tilt of the globe, in degrees. 0 means equator-on, 90 means pole-on
+  // default -15
   const phi = -15
 
   useEffect(() => {
