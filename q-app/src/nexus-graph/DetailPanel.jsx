@@ -22,13 +22,13 @@ export default function DetailPanel({
         <div className="nx-detail-empty">
           <div className="nx-detail-empty-big">Ø</div>
           No node selected.<br />
-          Hover over the web to see names. Click to dive deeper into any figure's connections and biography.
+          Hover over the node to see entity names. Click to dive deeper into any entity's connections.
         </div>
       </aside>
     );
   }
 
-  const cat = categories[selectedNode.cat];
+  const cat = categories.find(c => c.id === selectedNode.cat_id);
 
   return (
     <aside className="nx-detail">

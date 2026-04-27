@@ -298,13 +298,13 @@
 /* LAYOUT SELECTOR */
 .nx-layout-sel {
   position: absolute;
-  top: 24px; right: 24px;
+  bottom: 64px; right: 20px;
   z-index: 5;
   background: var(--nx-bg-panel);
   border: 1px solid var(--nx-line);
   box-shadow: 0 2px 12px rgba(26,24,20,0.06);
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   min-width: 180px;
 }
 .nx-ls-label {
@@ -313,8 +313,8 @@
   text-transform: uppercase;
   letter-spacing: 0.22em;
   color: var(--nx-ink-dim);
-  padding: 10px 14px 8px;
-  border-bottom: 1px solid var(--nx-line);
+  padding: 8px 14px 10px;
+  border-top: 1px solid var(--nx-line);
   cursor: pointer;
   user-select: none;
   display: flex;
@@ -325,8 +325,8 @@
 }
 .nx-ls-label:hover { color: var(--nx-accent); background: rgba(184,134,11,0.04); }
 .nx-layout-sel--collapsed .nx-ls-label {
-  border-bottom-color: transparent;
-  padding-bottom: 10px;
+  border-top-color: transparent;
+  padding-top: 10px;
 }
 .nx-ls-label-text { display: flex; align-items: center; gap: 8px; }
 .nx-ls-current {
@@ -342,12 +342,12 @@
   width: 8px; height: 8px;
   border-right: 1.5px solid currentColor;
   border-bottom: 1.5px solid currentColor;
-  transform: rotate(45deg) translate(-1px, -1px);
+  transform: rotate(-45deg) translate(1px, -1px);
   transition: transform 0.25s ease;
   color: var(--nx-ink-dim);
 }
 .nx-layout-sel--collapsed .nx-ls-chevron {
-  transform: rotate(-45deg) translate(1px, -1px);
+  transform: rotate(45deg) translate(-1px, -1px);
 }
 .nx-ls-options {
   display: flex;
@@ -446,7 +446,7 @@
 .nx-person-name {
   font-family: var(--nx-serif);
   font-weight: 400;
-  font-size: 34px;
+  font-size: 30px;
   line-height: 1;
   letter-spacing: -0.02em;
   margin: 14px 0 8px;

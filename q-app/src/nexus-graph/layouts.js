@@ -155,13 +155,13 @@ export function computeBalloon(nodes, links) {
 }
 
 export function computeHierarchical(nodes, links, categories) {
-  // Order rows by category. Use the order keys appear in `categories`.
-  const catOrder = Object.keys(categories);
+  // Order rows by category. Use the order entries appear in `categories`.
+  const catOrder = categories.map(c => c.id);
   const byCat = {};
   for (const c of catOrder) byCat[c] = [];
   for (const n of nodes) {
-    if (byCat[n.cat]) byCat[n.cat].push(n);
-    else { byCat[n.cat] = [n]; }
+    if (byCat[n.cat_id]) byCat[n.cat_id].push(n);
+    else { byCat[n.cat_id] = [n]; }
   }
   for (const row of Object.values(byCat)) row.sort((a, b) => b.degree - a.degree);
 

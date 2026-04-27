@@ -221,12 +221,13 @@ export default function EmApp() {
             The alpha in frontier is in the reconstruction. Qntify reconstructs.
           </Display>
           <div style={{ marginTop: 40, display: 'flex', gap: 16, flexWrap: 'wrap' }}>
-            <button style={{
+            <a href="request-demo.html" style={{
               padding: '14px 28px', fontSize: 14, fontWeight: 500,
               fontFamily: 'Inter, sans-serif',
               background: theme.fg, color: theme.bg,
               border: 'none', cursor: 'pointer', letterSpacing: 0.5,
-            }}>Request a briefing →</button>
+              textDecoration: 'none', display: 'inline-block',
+            }}>Request a briefing →</a>
 {/*             <button style={{
               padding: '14px 28px', fontSize: 14, fontWeight: 500,
               fontFamily: 'Inter, sans-serif',

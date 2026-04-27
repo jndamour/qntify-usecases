@@ -1,50 +1,302 @@
 [
-  ["musk",       "thiel",     "Co-founded PayPal"],
-  ["musk",       "hoffman",   "PayPal era"],
-  ["thiel",      "hoffman",   "Co-workers at PayPal"],
-  ["thiel",      "zuck",      "Early Facebook investor"],
-  ["jobs",       "woz",       "Co-founded Apple"],
-  ["jobs",       "gates",     "Rivals and occasional allies"],
-  ["gates",      "allen",     "Co-founded Microsoft"],
-  ["gates",      "buffett",   "Friendship & philanthropy"],
-  ["page",       "brin",      "Co-founded Google at Stanford"],
-  ["page",       "hinton",    "Hired at Google Brain"],
-  ["brin",       "musk",      "Early Tesla investor"],
-  ["hinton",     "lecun",     "Deep learning godfathers"],
-  ["altman",     "musk",      "Co-founded OpenAI"],
-  ["altman",     "thiel",     "Y Combinator network"],
-  ["altman",     "hoffman",   "Tech investor network"],
-  ["lecun",      "zuck",      "Meta Chief AI Scientist"],
-  ["turing",     "vonneumann","Contemporaries in early computing"],
-  ["vonneumann", "einstein",  "Princeton IAS colleagues"],
-  ["berners",    "turing",    "Intellectual lineage"],
-  ["obama",      "michelle",  "Married"],
-  ["obama",      "biden",     "President & VP"],
-  ["biden",      "harris",    "President & VP"],
-  ["obama",      "harris",    "Democratic allies"],
-  ["merkel",     "macron",    "European Council counterparts"],
-  ["obama",      "merkel",    "Close diplomatic ties"],
-  ["obama",      "oprah",     "Public endorsement & friendship"],
-  ["einstein",   "curie",     "Solvay Conference contemporaries"],
-  ["hawking",    "tyson",     "Fellow cosmology communicators"],
-  ["doudna",     "hinton",    "Scientific contemporaries"],
-  ["beyonce",    "jayz",      "Married & collaborators"],
-  ["jayz",       "kanye",     "Longtime collaborators, later feud"],
-  ["kanye",      "taylor",    "Public feud (2009–)"],
-  ["oprah",      "michelle",  "Public friendship"],
-  ["oprah",      "jayz",      "Interview & mutual respect"],
-  ["scorsese",   "deniro",    "Ten films together"],
-  ["jordan",     "lebron",    "GOAT debate"],
-  ["messi",      "ronaldo",   "Defining rivalry"],
-  ["serena",     "lebron",    "Close friends, Nike stablemates"],
-  ["jordan",     "obama",     "Chicago connections"],
-  ["buffett",    "munger",    "Berkshire partners"],
-  ["buffett",    "gates",     "Close friendship & Giving Pledge"],
-  ["soros",      "macron",    "Public policy dialogue"],
-  ["bezos",      "musk",      "Space industry rivals"],
-  ["zuck",       "gates",     "Younger tech generation"],
-  ["musk",       "obama",     "White House visits"],
-  ["tyson",      "obama",     "Science advocacy"],
-  ["hawking",    "obama",     "Medal of Freedom"],
-  ["taylor",     "beyonce",   "Mutual public admiration"]
+	[
+		1595,
+		1596,
+		"shareholder"
+	],
+	[
+		1599,
+		1596,
+		"SOE"
+	],
+	[
+		1600,
+		1601,
+		"address"
+	],
+	[
+		1596,
+		1600,
+		"100% subsidiary"
+	],
+	[
+		1596,
+		1607,
+		"branch"
+	],
+	[
+		1607,
+		1592,
+		"address"
+	],
+	[
+		1609,
+		1607,
+		"tenant"
+	],
+	[
+		1607,
+		1610,
+		"CEO"
+	],
+	[
+		1596,
+		1611,
+		"subsidiary"
+	],
+	[
+		1611,
+		1612,
+		"address"
+	],
+	[
+		1611,
+		1596,
+		"parent"
+	],
+	[
+		1611,
+		1615,
+		"WOS"
+	],
+	[
+		1615,
+		1612,
+		"address"
+	],
+	[
+		1611,
+		1596,
+		"Vostro"
+	],
+	[
+		1600,
+		1620,
+		"manager"
+	],
+	[
+		1600,
+		1619,
+		"manager"
+	],
+	[
+		1600,
+		1617,
+		"manager"
+	],
+	[
+		1600,
+		1616,
+		"manager"
+	],
+	[
+		1600,
+		1618,
+		"manager"
+	],
+	[
+		1596,
+		1621,
+		"100% subsidiary"
+	],
+	[
+		1621,
+		1622,
+		"address"
+	],
+	[
+		1596,
+		1623,
+		"subsidiary"
+	],
+	[
+		1623,
+		1624,
+		"address"
+	],
+	[
+		1596,
+		1625,
+		"branch"
+	],
+	[
+		1625,
+		1626,
+		"address"
+	],
+	[
+		1596,
+		1627,
+		"branch"
+	],
+	[
+		1627,
+		1628,
+		"address"
+	],
+	[
+		1596,
+		1629,
+		"branch"
+	],
+	[
+		1629,
+		1604,
+		"addres"
+	],
+	[
+		1596,
+		1630,
+		"branch"
+	],
+	[
+		1630,
+		1631,
+		"address"
+	],
+	[
+		1596,
+		1632,
+		"branch"
+	],
+	[
+		1632,
+		1633,
+		"address"
+	],
+	[
+		1634,
+		1636,
+		"address"
+	],
+	[
+		1596,
+		1634,
+		"dissolved"
+	],
+	[
+		1596,
+		1638,
+		"branch"
+	],
+	[
+		1638,
+		1637,
+		"address"
+	],
+	[
+		1596,
+		1639,
+		"joint venture"
+	],
+	[
+		1639,
+		1640,
+		"address"
+	],
+	[
+		1596,
+		1641,
+		"100% subsidiary"
+	],
+	[
+		1641,
+		1642,
+		"address"
+	],
+	[
+		1643,
+		1644,
+		"address"
+	],
+	[
+		1596,
+		1643,
+		"100% subsidiary"
+	],
+	[
+		1596,
+		1645,
+		"branch"
+	],
+	[
+		1645,
+		1646,
+		"address"
+	],
+	[
+		1596,
+		1647,
+		"branch"
+	],
+	[
+		1647,
+		1648,
+		"address"
+	],
+	[
+		1596,
+		1649,
+		"branch"
+	],
+	[
+		1649,
+		1650,
+		"address"
+	],
+	[
+		1596,
+		1651,
+		"100% subsidiary"
+	],
+	[
+		1651,
+		1652,
+		"address"
+	],
+	[
+		1596,
+		1653,
+		"100% subsidiary"
+	],
+	[
+		1653,
+		1654,
+		"address"
+	],
+	[
+		1596,
+		1655,
+		"joint venture"
+	],
+	[
+		1655,
+		1656,
+		"address"
+	],
+	[
+		1607,
+		1657,
+		"officer"
+	],
+	[
+		1607,
+		1658,
+		"manager"
+	],
+	[
+		1607,
+		1659,
+		"Manager"
+	],
+	[
+		1607,
+		1660,
+		"Officer"
+	],
+	[
+		1607,
+		1661,
+		"Manager"
+	]
 ]

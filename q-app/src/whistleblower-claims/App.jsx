@@ -87,7 +87,7 @@ export default function WBApp() {
             Qntify assembles specialized intelligence for whistleblower matters across
             political corruption, corporate fraud, and trade-based money laundering. Public
             filings, media, and corporate records are triangulated into consolidated tips
-            filed under the major federal programs.
+            filed under the major federal and state programs.
           </div>
         </RevealText>
         <div style={{ marginTop: 56, display: 'flex', gap: 48, flexWrap: 'wrap' }}>
@@ -129,11 +129,11 @@ export default function WBApp() {
           <div>
             <Eyebrow theme={theme}>Pattern Detection</Eyebrow>
             <Display theme={theme} style={{ fontSize: 'clamp(28px, 3.4vw, 44px)' }}>
-              Five clippings. One entity.
+              Five threads. One entity.
             </Display>
           </div>
           <div style={{ fontSize: 15, lineHeight: 1.7, color: theme.fgDim2, paddingTop: 28 }}>
-            An anonymized walk-through. Each clipping is a public signal — a regulatory
+            An anonymized walk-through. Each thread is a public signal — a regulatory
             filing, a market report, an audit footnote. Separately they are background
             noise. Consolidated, they describe a single beneficial owner moving value
             through layered intermediaries. A whistleblower case is initiated.
@@ -161,7 +161,7 @@ export default function WBApp() {
           <div>
             <Eyebrow theme={theme}>Programs</Eyebrow>
             <Display theme={theme} style={{ fontSize: 'clamp(26px, 3vw, 38px)' }}>
-              Federal whistleblower frameworks we file under.
+              Multiple whistleblower frameworks we have filed under.
             </Display>
           </div>
           <div style={{ fontSize: 14, lineHeight: 1.65, color: theme.fgDim2, maxWidth: 520 }}>
@@ -194,12 +194,13 @@ export default function WBApp() {
             If you have a signal, we can help you structure it into a filing.
           </Display>
           <div style={{ marginTop: 40, display: 'flex', gap: 16 }}>
-            <button style={{
+            <a href="request-demo.html" style={{
               padding: '14px 28px', fontSize: 14, fontWeight: 500,
               fontFamily: 'Inter, sans-serif',
               background: theme.fg, color: theme.bg,
               border: 'none', cursor: 'pointer', letterSpacing: 0.5,
-            }}>Request intake →</button>
+              textDecoration: 'none', display: 'inline-block',
+            }}>Request information →</a>
 {/*             <button style={{
               padding: '14px 28px', fontSize: 14, fontWeight: 500,
               fontFamily: 'Inter, sans-serif',

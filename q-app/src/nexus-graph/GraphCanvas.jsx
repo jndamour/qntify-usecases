@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 function hexToRgba(hex, a) {
   const h = hex.replace('#', '');
@@ -33,6 +33,10 @@ export default function GraphCanvas({
   const canvasRef = useRef(null);
   const wrapRef = useRef(null);
   const [tooltip, setTooltip] = useState({ visible: false, x: 0, y: 0, text: '' });
+  const categoriesById = useMemo(
+    () => new Map(categories.map(c => [c.id, c])),
+    [categories]
+  );
 
   // Local interaction state (refs to avoid re-renders during drag)
   const sizeRef = useRef({ width: 0, height: 0 });
@@ -86,13 +90,14 @@ export default function GraphCanvas({
 
   function isNodeVisible(n) {
     const { activeCats, searchQuery } = filterRef.current;
-    if (!activeCats.has(n.cat)) return false;
+    if (!activeCats.has(n.cat_id)) return false;
     if (searchQuery) {
       const q = searchQuery.toLowerCase();
-      const cat = categories[n.cat];
-      if (!n.name.toLowerCase().includes(q) &&
-          !n.role.toLowerCase().includes(q) &&
-          !(cat && cat.label.toLowerCase().includes(q))) return false;
+      const cat = categoriesById.get(n.cat_id);
+      const name = n.name?.toLowerCase() ?? '';
+      const role = n.role?.toLowerCase() ?? '';
+      const label = cat?.label?.toLowerCase() ?? '';
+      if (!name.includes(q) && !role.includes(q) && !label.includes(q)) return false;
     }
     return true;
   }
@@ -173,7 +178,7 @@ export default function GraphCanvas({
         const r = nodeRadius(n);
         const isFocus = focusId === n.id;
         const inFocus = focusSet ? focusSet.has(n.id) : true;
-        const cat = categories[n.cat];
+        const cat = categoriesById.get(n.cat_id);
         if (!cat) continue;
 
         if (isFocus) {
@@ -234,7 +239,7 @@ export default function GraphCanvas({
     }
     raf = requestAnimationFrame(draw);
     return () => cancelAnimationFrame(raf);
-  }, [categories, nodesRef, linksRef, onFpsUpdate]);
+  }, [categoriesById, nodesRef, linksRef, onFpsUpdate]);
 
   // Pointer interactions
   function handleMouseMove(e) {

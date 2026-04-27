@@ -42,11 +42,11 @@ export default function AboutApp() {
         <div className="section-head">
           <div>
             <span className="eyebrow">The Founders</span>
-            <h2>Two backgrounds, one <em>operating thesis</em>.</h2>
+            <h2>Two backgrounds, one <em>direction</em>.</h2>
           </div>
           <div className="head-meta">
             Headcount · <b>2</b><br/>
-            Founded · <b>Independently held</b><br/>
+            Founded · <b>2022 · Independently held</b><br/>
             Bench · <b>Vetted partners only</b>
           </div>
         </div>

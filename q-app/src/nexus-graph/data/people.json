@@ -1,50 +1,380 @@
 [
-  { "id": "turing",     "name": "Alan Turing",         "cat": "science",  "role": "Mathematician, cryptanalyst",        "bio": "Pioneer of theoretical computer science and artificial intelligence. Formalized the concepts of algorithm and computation with the Turing machine." },
-  { "id": "vonneumann", "name": "John von Neumann",    "cat": "science",  "role": "Mathematician, physicist",           "bio": "Contributed to game theory, quantum mechanics, and computing architecture that still bears his name." },
-  { "id": "berners",    "name": "Tim Berners-Lee",     "cat": "tech",     "role": "Inventor of the World Wide Web",     "bio": "Proposed the hypertext system that became the Web while at CERN in 1989." },
-  { "id": "jobs",       "name": "Steve Jobs",          "cat": "business", "role": "Co-founder, Apple",                  "bio": "Design-obsessed co-founder whose return to Apple reshaped consumer technology." },
-  { "id": "woz",        "name": "Steve Wozniak",       "cat": "tech",     "role": "Engineer, co-founder Apple",         "bio": "Designed the Apple I and Apple II. The engineering heart of early Apple." },
-  { "id": "gates",      "name": "Bill Gates",          "cat": "business", "role": "Co-founder, Microsoft",              "bio": "Built Microsoft into a software empire; now focuses on philanthropy via the Gates Foundation." },
-  { "id": "allen",      "name": "Paul Allen",          "cat": "business", "role": "Co-founder, Microsoft",              "bio": "Co-founded Microsoft with Gates; later invested broadly in science and sports." },
-  { "id": "musk",       "name": "Elon Musk",           "cat": "business", "role": "CEO, Tesla & SpaceX",                "bio": "Serial entrepreneur pushing into electric vehicles, private spaceflight, and beyond." },
-  { "id": "bezos",      "name": "Jeff Bezos",          "cat": "business", "role": "Founder, Amazon",                    "bio": "Built Amazon from an online bookstore into a global logistics and cloud giant." },
-  { "id": "zuck",       "name": "Mark Zuckerberg",     "cat": "tech",     "role": "Founder, Meta",                      "bio": "Founded Facebook in a Harvard dorm room; now leads Meta's push into social and VR." },
-  { "id": "page",       "name": "Larry Page",          "cat": "tech",     "role": "Co-founder, Google",                 "bio": "Co-invented PageRank with Sergey Brin; co-founded Google in a Stanford dorm." },
-  { "id": "brin",       "name": "Sergey Brin",         "cat": "tech",     "role": "Co-founder, Google",                 "bio": "Mathematician and co-founder of Google; met Page at Stanford." },
-  { "id": "altman",     "name": "Sam Altman",          "cat": "tech",     "role": "CEO, OpenAI",                        "bio": "Former Y Combinator president; leads OpenAI's push for general-purpose AI." },
-  { "id": "hinton",     "name": "Geoffrey Hinton",     "cat": "science",  "role": "Computer scientist",                 "bio": "Godfather of deep learning; Turing Award laureate whose backpropagation work underlies modern AI." },
-  { "id": "lecun",      "name": "Yann LeCun",          "cat": "science",  "role": "Chief AI Scientist, Meta",           "bio": "Developed convolutional neural networks; a Turing Award-winning deep learning pioneer." },
-
-  { "id": "obama",      "name": "Barack Obama",        "cat": "politics", "role": "44th U.S. President",                "bio": "First African-American U.S. president; known for the Affordable Care Act and a measured oratorical style." },
-  { "id": "michelle",   "name": "Michelle Obama",      "cat": "politics", "role": "Former First Lady, author",          "bio": "Attorney, author, and advocate for education and nutrition." },
-  { "id": "biden",      "name": "Joe Biden",           "cat": "politics", "role": "46th U.S. President",                "bio": "Six-term senator from Delaware, vice president under Obama, elected president in 2020." },
-  { "id": "harris",     "name": "Kamala Harris",       "cat": "politics", "role": "49th U.S. Vice President",           "bio": "Former California AG and senator; first woman to hold the U.S. vice presidency." },
-  { "id": "merkel",     "name": "Angela Merkel",       "cat": "politics", "role": "Former Chancellor of Germany",       "bio": "Led Germany for sixteen years through financial, refugee, and pandemic crises." },
-  { "id": "macron",     "name": "Emmanuel Macron",     "cat": "politics", "role": "President of France",                "bio": "Former investment banker who founded En Marche; youngest French president since Napoleon." },
-
-  { "id": "einstein",   "name": "Albert Einstein",     "cat": "science",  "role": "Theoretical physicist",              "bio": "Reshaped physics with relativity and laid groundwork for quantum theory." },
-  { "id": "curie",      "name": "Marie Curie",         "cat": "science",  "role": "Physicist, chemist",                 "bio": "Pioneer of radioactivity; first person to win Nobel Prizes in two different sciences." },
-  { "id": "hawking",    "name": "Stephen Hawking",     "cat": "science",  "role": "Theoretical physicist",              "bio": "Black hole thermodynamics and cosmology, plus a rare gift for public explanation." },
-  { "id": "tyson",      "name": "Neil deGrasse Tyson", "cat": "science",  "role": "Astrophysicist, communicator",       "bio": "Director of the Hayden Planetarium; popular science communicator." },
-  { "id": "doudna",     "name": "Jennifer Doudna",     "cat": "science",  "role": "Biochemist",                         "bio": "Shared 2020 Nobel Prize in Chemistry for the development of CRISPR-Cas9." },
-
-  { "id": "oprah",      "name": "Oprah Winfrey",       "cat": "culture",  "role": "Media executive, philanthropist",    "bio": "Transformed daytime television and built a cross-media empire with OWN and Harpo." },
-  { "id": "beyonce",    "name": "Beyoncé",             "cat": "culture",  "role": "Singer, performer",                  "bio": "From Destiny's Child to solo icon; one of the most decorated artists in Grammy history." },
-  { "id": "jayz",       "name": "Jay-Z",               "cat": "culture",  "role": "Rapper, mogul",                      "bio": "Built Roc Nation and Tidal alongside a decades-long recording career." },
-  { "id": "taylor",     "name": "Taylor Swift",        "cat": "culture",  "role": "Singer-songwriter",                  "bio": "Pop phenomenon whose Eras Tour became one of the highest-grossing in history." },
-  { "id": "kanye",      "name": "Kanye West",          "cat": "culture",  "role": "Musician, designer",                 "bio": "Producer turned rapper turned fashion provocateur; frequently controversial." },
-  { "id": "scorsese",   "name": "Martin Scorsese",     "cat": "culture",  "role": "Filmmaker",                          "bio": "New Hollywood auteur behind Taxi Driver, Goodfellas, and The Irishman." },
-  { "id": "deniro",     "name": "Robert De Niro",      "cat": "culture",  "role": "Actor",                              "bio": "Scorsese's long-time collaborator and one of the defining actors of his generation." },
-
-  { "id": "jordan",     "name": "Michael Jordan",      "cat": "sports",   "role": "Basketball legend",                  "bio": "Six-time NBA champion; redefined basketball's global reach." },
-  { "id": "lebron",     "name": "LeBron James",        "cat": "sports",   "role": "Basketball player",                  "bio": "Four-time NBA champion; all-time scoring leader with a media and business footprint to match." },
-  { "id": "serena",     "name": "Serena Williams",     "cat": "sports",   "role": "Tennis champion",                    "bio": "23 Grand Slam singles titles in the Open Era; retired 2022 as one of tennis's greatest." },
-  { "id": "messi",      "name": "Lionel Messi",        "cat": "sports",   "role": "Footballer",                         "bio": "Eight-time Ballon d'Or winner; led Argentina to the 2022 World Cup." },
-  { "id": "ronaldo",    "name": "Cristiano Ronaldo",   "cat": "sports",   "role": "Footballer",                         "bio": "Five-time Ballon d'Or; career-long rival to Messi and one of the most prolific goalscorers ever." },
-
-  { "id": "buffett",    "name": "Warren Buffett",      "cat": "business", "role": "Investor, CEO Berkshire Hathaway",   "bio": "The 'Oracle of Omaha'; proponent of value investing and large-scale philanthropy." },
-  { "id": "munger",     "name": "Charlie Munger",      "cat": "business", "role": "Investor, Berkshire Hathaway",       "bio": "Buffett's long-time partner and intellectual sparring partner." },
-  { "id": "soros",      "name": "George Soros",        "cat": "business", "role": "Investor, philanthropist",           "bio": "Hedge fund manager known for the 1992 Bank of England short and Open Society Foundations." },
-  { "id": "thiel",      "name": "Peter Thiel",         "cat": "business", "role": "Investor, PayPal co-founder",        "bio": "Founded PayPal with Musk and Levchin; later backed Palantir and Facebook early." },
-  { "id": "hoffman",    "name": "Reid Hoffman",        "cat": "business", "role": "Co-founder, LinkedIn",               "bio": "PayPal mafia alum; co-founded LinkedIn and invested across early Web 2.0." }
+	{
+		"id": 1592,
+		"name": "1 Park Ave, New York, NY 10016",
+		"cat_id": 224,
+		"bio": "details redacted"
+	},
+	{
+		"id": 1595,
+		"name": "Government of India",
+		"cat_id": 575,
+		"role": "Sovereign",
+		"bio": "details redacted"
+	},
+	{
+		"id": 1596,
+		"name": "Bank of Baroda Mumbai",
+		"cat_id": 656,
+		"role": "Target",
+		"bio": "details redacted"
+	},
+	{
+		"id": 1599,
+		"name": "Ministry of Finance",
+		"cat_id": 575,
+		"role": "India",
+		"bio": "details redacted"
+	},
+	{
+		"id": 1600,
+		"name": "Bank of Baroda (UK) Limited",
+		"cat_id": 657,
+		"role": "Subsidiary",
+		"bio": "details redacted"
+	},
+	{
+		"id": 1601,
+		"name": "32 City Rd, London EC1Y 2BD, United Kingdom",
+		"cat_id": 224,
+		"bio": "details redacted"
+	},
+	{
+		"id": 1604,
+		"name": "Rue de la Loi 28, 1040 Bruxelles, Belgium",
+		"cat_id": 224,
+		"bio": "details redacted"
+	},
+	{
+		"id": 1607,
+		"name": "Bank of Baroda (New York, USA)",
+		"cat_id": 657,
+		"role": "Subsidiary",
+		"bio": "details redacted"
+	},
+	{
+		"id": 1609,
+		"name": "Vornado Realty Trust",
+		"cat_id": 0,
+		"role": "Property Manager",
+		"bio": "details redacted"
+	},
+	{
+		"id": 1610,
+		"name": "Lalit Tyagi",
+		"cat_id": 390,
+		"bio": "details redacted"
+	},
+	{
+		"id": 1611,
+		"name": "Bank of Baroda (Uganda) Limited",
+		"cat_id": 657,
+		"role": "Subsidiary",
+		"bio": "details redacted"
+	},
+	{
+		"id": 1612,
+		"name": "Plot 18, Kampala Road, PO Box 7197, Kampala, Uganda",
+		"cat_id": 224,
+		"bio": "details redacted"
+	},
+	{
+		"id": 1615,
+		"name": "Baroda Capital Markets (U) Ltd.",
+		"cat_id": 0,
+		"role": "Subsidiary",
+		"bio": "details redacted"
+	},
+	{
+		"id": 1616,
+		"name": "Sanjay Kumar Grover",
+		"cat_id": 390,
+		"role": "Managing Director",
+		"bio": "details redacted"
+	},
+	{
+		"id": 1617,
+		"name": "Arun Aggarwal",
+		"cat_id": 390,
+		"role": "Deputy Managing Director",
+		"bio": "details redacted"
+	},
+	{
+		"id": 1618,
+		"name": "Vinay Sharma",
+		"cat_id": 390,
+		"role": "Chief Risk Officer",
+		"bio": "details redacted"
+	},
+	{
+		"id": 1619,
+		"name": "Karandeep Singh Rekhi",
+		"cat_id": 390,
+		"role": "Head of Treasury",
+		"bio": "details redacted"
+	},
+	{
+		"id": 1620,
+		"name": "Andrew D Jackson",
+		"cat_id": 390,
+		"role": "Head of Anti-Money Laundering",
+		"bio": "details redacted"
+	},
+	{
+		"id": 1621,
+		"name": "Bank of Baroda (New Zealand) Ltd",
+		"cat_id": 657,
+		"role": "Subsidiary",
+		"bio": "details redacted"
+	},
+	{
+		"id": 1622,
+		"name": "114 Dominion Road, Mount Eden, Auckland 1024, New Zealand",
+		"cat_id": 224,
+		"bio": "details redacted"
+	},
+	{
+		"id": 1623,
+		"name": "Bank of Baroda (Kenya) Ltd.",
+		"cat_id": 657,
+		"role": "Subsidiary",
+		"bio": "details redacted"
+	},
+	{
+		"id": 1624,
+		"name": "90, Muthithi Road P.O. Box 30033-00100, Nairobi, Kenya",
+		"cat_id": 224,
+		"bio": "details redacted"
+	},
+	{
+		"id": 1625,
+		"name": "The Bank of Baroda Limited (Port St. Louis, Mauritius)",
+		"cat_id": 657,
+		"role": "Subsidiary",
+		"bio": "details redacted"
+	},
+	{
+		"id": 1626,
+		"name": "Immeuble Bank of Baroda, 4eme etage, Post Box No.566 Sir William Newton St, Port Louis, Mauritius",
+		"cat_id": 224,
+		"role": "Subsidiary",
+		"bio": "details redacted"
+	},
+	{
+		"id": 1627,
+		"name": "Bank of Baroda (Suva, Fiji Islands)",
+		"cat_id": 657,
+		"role": "Subsidiary",
+		"bio": "details redacted"
+	},
+	{
+		"id": 1628,
+		"name": "86-88 Marks Street G.P.O. Box - 57 Suva (Fiji Islands)",
+		"cat_id": 224,
+		"bio": "details redacted"
+	},
+	{
+		"id": 1629,
+		"name": "Bank of Baroda (Brussels, Belgium)",
+		"cat_id": 657,
+		"role": "Subsidiary",
+		"bio": "details redacted"
+	},
+	{
+		"id": 1630,
+		"name": "Bank of Baroda (Sydney, Australia)",
+		"cat_id": 657,
+		"role": "Subsidiary",
+		"bio": "details redacted"
+	},
+	{
+		"id": 1631,
+		"name": "Suite 701-702,Level 7 265 Castlereagh Street Sydney, NSW 2000 , Australia",
+		"cat_id": 224,
+		"bio": "details redacted"
+	},
+	{
+		"id": 1632,
+		"name": "Bank of Baroda (Singapore)",
+		"cat_id": 657,
+		"role": "Subsidiary",
+		"bio": "details redacted"
+	},
+	{
+		"id": 1633,
+		"name": "9 Raffles Place, #34-02 Republic Plaza, Singapore-048619",
+		"cat_id": 224,
+		"bio": "details redacted"
+	},
+	{
+		"id": 1634,
+		"name": "Bank of Baroda (Hong Kong)",
+		"cat_id": 657,
+		"role": "Subsidiary",
+		"bio": "details redacted"
+	},
+	{
+		"id": 1636,
+		"name": "4th floor, Dina House, Ruttonjee Centre, 11Duddell Street, Central, Hong Kong",
+		"cat_id": 224,
+		"bio": "details redacted"
+	},
+	{
+		"id": 1637,
+		"name": "183 Tianhe N Rd, Tian He Bei, Tianhe District, Guangzhou, Guangdong Province, China",
+		"cat_id": 224,
+		"bio": "details redacted"
+	},
+	{
+		"id": 1638,
+		"name": "Bank of Baroda (Guangzhou, China)",
+		"cat_id": 657,
+		"role": "Subsidiary",
+		"bio": "details redacted"
+	},
+	{
+		"id": 1639,
+		"name": "INDIA INTERNATIONAL BANK (MALAYSIA) BERHAD",
+		"cat_id": 657,
+		"role": "Banking Intermediary",
+		"bio": "details redacted"
+	},
+	{
+		"id": 1640,
+		"name": "Ground Floor, Bangunan Yee Seng, 15, Jalan Raja Chulan, Bukit Bintang, 50200 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur, Malaysia",
+		"cat_id": 224,
+		"bio": "details redacted"
+	},
+	{
+		"id": 1641,
+		"name": "Bank of Baroda (Guyana) Inc",
+		"cat_id": 0,
+		"role": "Subsidiary",
+		"bio": "details redacted"
+	},
+	{
+		"id": 1642,
+		"name": "10 AVENUE OF THE REPUBLIC, GEORGETOWN, GUYANA",
+		"cat_id": 224,
+		"bio": "details redacted"
+	},
+	{
+		"id": 1643,
+		"name": "BANK OF BARODA (TRINIDAD & TOBAGO) - Acquired",
+		"cat_id": 657,
+		"bio": "details redacted"
+	},
+	{
+		"id": 1644,
+		"name": "90 INDEPENDENCE SQUARE, PORT OF SPAIN",
+		"cat_id": 224,
+		"bio": "details redacted"
+	},
+	{
+		"id": 1645,
+		"name": "Bank of Baroda (UAE)",
+		"cat_id": 657,
+		"role": "Subsidiary",
+		"bio": "details redacted"
+	},
+	{
+		"id": 1646,
+		"name": "Umm Hurrair Building, Al Doha Street, Al Karama, Dubai, U.A.E., P.O. Box 3162",
+		"cat_id": 224,
+		"bio": "details redacted"
+	},
+	{
+		"id": 1647,
+		"name": "Bank of Baroda (Oman)",
+		"cat_id": 657,
+		"role": "Subsidiary",
+		"bio": "details redacted"
+	},
+	{
+		"id": 1648,
+		"name": "GREATER MUTTRAH, Muscat, Oman",
+		"cat_id": 224,
+		"bio": "details redacted"
+	},
+	{
+		"id": 1649,
+		"name": "Bank of Baroda (Seychelles)",
+		"cat_id": 657,
+		"role": "Subsidiary",
+		"bio": "details redacted"
+	},
+	{
+		"id": 1650,
+		"name": "Trinity House, Albert Street P.O. Box 124 Victoria Mahe Seychelles",
+		"cat_id": 224,
+		"bio": "details redacted"
+	},
+	{
+		"id": 1651,
+		"name": "Bank of Baroda (Botswana) LTD.",
+		"cat_id": 657,
+		"role": "Subsidiary",
+		"bio": "details redacted"
+	},
+	{
+		"id": 1652,
+		"name": "Plot 14456, PO Box 216 ADD, Post Net KGALE View G-West, Gaborone, Botswana",
+		"cat_id": 224,
+		"bio": "details redacted"
+	},
+	{
+		"id": 1653,
+		"name": "Bank of Baroda (Tanzania) LTD",
+		"cat_id": 657,
+		"role": "Subsidiary",
+		"bio": "details redacted"
+	},
+	{
+		"id": 1654,
+		"name": "149/32, PO Box 5356, Ohio/Sokoine Drive, Dar-es-Salaam, Tanzania",
+		"cat_id": 224,
+		"bio": "details redacted"
+	},
+	{
+		"id": 1655,
+		"name": "Indo Zambia Bank Limited",
+		"cat_id": 657,
+		"bio": "details redacted"
+	},
+	{
+		"id": 1656,
+		"name": "Plot No. 6907, Cairo Road, P.O Box 35411, Lusaka",
+		"cat_id": 224,
+		"bio": "details redacted"
+	},
+	{
+		"id": 1657,
+		"name": "Satya Narayan Patra",
+		"cat_id": 390,
+		"bio": "details redacted"
+	},
+	{
+		"id": 1658,
+		"name": "Atul Tiwari",
+		"cat_id": 390,
+		"bio": "details redacted"
+	},
+	{
+		"id": 1659,
+		"name": "Akshay Ranjan",
+		"cat_id": 390,
+		"bio": "details redacted"
+	},
+	{
+		"id": 1660,
+		"name": "Samuel Abraham",
+		"cat_id": 390,
+		"bio": "details redacted"
+	},
+	{
+		"id": 1661,
+		"name": "Purnima Amin",
+		"cat_id": 390,
+		"bio": "details redacted"
+	}
 ]

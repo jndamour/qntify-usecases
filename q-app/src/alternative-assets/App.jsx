@@ -96,8 +96,7 @@ export default function AltApp() {
             fontSize: 17, lineHeight: 1.6, color: theme.fgDim2,
           }}>
             Qntify focuses on two asset classes where information asymmetry is the
-            determinant of return: legal claims and enforcement recoveries, and
-            productive farmland. Both reward depth over speed.
+            determinant of return: legal claims and enforcement recoveries. Both reward depth over speed.
           </div>
         </RevealText>
         <div style={{ marginTop: 64, display: 'flex', gap: 48, fontFamily: 'JetBrains Mono, monospace', fontSize: 11, letterSpacing: 2, color: theme.fgDim }}>
@@ -112,14 +111,14 @@ export default function AltApp() {
       <section style={{ padding: '100px 48px 40px', maxWidth: 1400, margin: '0 auto' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 80, alignItems: 'start' }}>
           <div>
-            <Eyebrow theme={theme}>Part I</Eyebrow>
+            <Eyebrow theme={theme}>Asset Classes</Eyebrow>
             <Display theme={theme} style={{ fontSize: 'clamp(28px, 3.4vw, 44px)' }}>
               Legal Claims & Enforcement
             </Display>
           </div>
           <div style={{ fontSize: 15, lineHeight: 1.7, color: theme.fgDim2, paddingTop: 32 }}>
             A claim is not a number — it is a network of counsel, forums, counter-parties
-            and recoverable assets distributed across jurisdictions. Underwriting a claim
+            and recoverable assets distributed across jurisdictions. Investing in a claim
             is underwriting that network. Enforcement is the long tail: the period between
             an award on paper and money returned to the claimant, where most of the
             structural alpha lives.
@@ -159,16 +158,17 @@ export default function AltApp() {
         <div style={{ maxWidth: 820 }}>
           <Eyebrow theme={theme}>Next</Eyebrow>
           <Display theme={theme}>
-            Patient, structured information compounds. Qntify supplies the structure.
+            Patient, structured information compounds in value - Qntify supplies the knowledge.
           </Display>
           <div style={{ marginTop: 40, display: 'flex', gap: 16 }}>
-            <button style={{
+            <a href="request-demo.html" style={{
               padding: '14px 28px', fontSize: 14, fontWeight: 500,
               fontFamily: 'Inter, sans-serif',
               background: theme.fg, color: theme.bg,
               border: 'none', cursor: 'pointer',
               letterSpacing: 0.5,
-            }}>Request a briefing →</button>
+              textDecoration: 'none', display: 'inline-block',
+            }}>Request a briefing →</a>
 {/*             <button style={{
               padding: '14px 28px', fontSize: 14, fontWeight: 500,
               fontFamily: 'Inter, sans-serif',

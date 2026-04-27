@@ -30,9 +30,9 @@ import './styles.css';
  * with the `style` prop, e.g. style={{ height: '720px' }}.
  *
  * Props:
- *   - people:      array of { id, name, cat, role, bio }
+ *   - people:      array of { id, name, cat_id, role, bio }
  *   - edges:       array of [sourceId, targetId, relationshipLabel]
- *   - categories:  object { [catId]: { label, color } }
+ *   - categories:  array of { id, label, color }
  *   - title:       optional canvas headline (JSX or string)
  *   - subtitle:    optional canvas subhead text
  *   - showHeader:  boolean — render the top brand/meta bar (default true)
@@ -46,8 +46,8 @@ export default function NexusGraph({
   categories = DEFAULT_CATEGORIES,
   title,
   subtitle = 'Click any node to inspect · drag to reposition · scroll to zoom',
-  showHeader = true,
-  showFooter = true,
+  showHeader = false,
+  showFooter = false,
   className = '',
   style,
 }) {
@@ -62,7 +62,7 @@ export default function NexusGraph({
     reheat,
   } = useGraphEngine({ people, edges, categories });
 
-  const [activeCats, setActiveCats] = useState(() => new Set(Object.keys(categories)));
+  const [activeCats, setActiveCats] = useState(() => new Set(categories.map(c => c.id)));
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedId, setSelectedId] = useState(null);
   const [fps, setFps] = useState(0);
@@ -70,7 +70,7 @@ export default function NexusGraph({
 
   // Reset active cats when categories prop changes
   useEffect(() => {
-    setActiveCats(new Set(Object.keys(categories)));
+    setActiveCats(new Set(categories.map(c => c.id)));
   }, [categories]);
 
   // Use a ref so canvas wrapper can receive imperative center commands
@@ -100,7 +100,7 @@ export default function NexusGraph({
 
   const selectedNode = selectedId ? nodeByIdRef.current[selectedId] : null;
   const defaultTitle = (
-    <>Who <em>knows</em> whom, and how does it <em>matter</em>?</>
+    <>Target <em>Bank of Baroda</em></>
   );
 
   return (

@@ -83,7 +83,8 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "colorScheme": "paper",
   "panelPosition": "floating",
   "cycleSeconds": 3,
-  "showAmbient": false
+  "showAmbient": false,
+  "mapHeight": 100
 }/*EDITMODE-END*/
 
 export default function App() {
@@ -137,76 +138,83 @@ export default function App() {
 
   return (
     <div style={{
-      width: '100vw', height: '100vh',
+      width: '100%', minHeight: '100vh',
       background: theme.bg,
-      overflow: 'hidden',
+      overflowX: 'hidden',
       position: 'relative',
       fontFamily: 'Inter, sans-serif',
       color: theme.fg,
     }}>
       <GlobalStyles theme={theme}/>
-      <BackgroundGradient theme={theme}/>
-      {tweaks.showAmbient && <ScanLines theme={theme}/>}
-      <SiteNav
-        theme={theme}
-        topPage="use-cases"
-        currentPage="asset-mapping"
-        variant="overlay"
-        extras={<>
-          <LiveClock />
-          <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-            <span style={{
-              width: 6, height: 6, background: theme.accent, borderRadius: '50%',
-              animation: 'qnt-pulse 2s infinite',
-            }}/>
-            LIVE
-          </span>
-        </>}
-      />
-      <MapView
-        assets={assets}
-        activeIdx={activeIdx}
-        theme={theme}
-        onMarkerClick={handleMarkerClick}
-      />
-      <DetailPanel
-        asset={activeAsset}
-        theme={theme}
-        position={tweaks.panelPosition}
-        index={activeIdx}
-        total={assets.length}
-        progress={progress}
-      />
-      <Sidebar
-        theme={theme}
-        assets={assets}
-        activeIdx={activeIdx}
-        onSelect={handleMarkerClick}
-      />
-      <Watermark theme={theme}/>
 
-{/*       <section style={{ padding: '120px 48px 140px', maxWidth: 1400, margin: '0 auto' }}>
+      <div style={{
+        position: 'relative',
+        width: '100%',
+        height: `${tweaks.mapHeight}vh`,
+        overflow: 'hidden',
+      }}>
+        <BackgroundGradient theme={theme}/>
+        {tweaks.showAmbient && <ScanLines theme={theme}/>}
+        <SiteNav
+          theme={theme}
+          topPage="use-cases"
+          currentPage="asset-mapping"
+          variant="overlay"
+          extras={<>
+            <LiveClock />
+            <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+              <span style={{
+                width: 6, height: 6, background: theme.accent, borderRadius: '50%',
+                animation: 'qnt-pulse 2s infinite',
+              }}/>
+              LIVE
+            </span>
+          </>}
+        />
+        <MapView
+          assets={assets}
+          activeIdx={activeIdx}
+          theme={theme}
+          onMarkerClick={handleMarkerClick}
+        />
+        <DetailPanel
+          asset={activeAsset}
+          theme={theme}
+          position={tweaks.panelPosition}
+          index={activeIdx}
+          total={assets.length}
+          progress={progress}
+        />
+        <Sidebar
+          theme={theme}
+          assets={assets}
+          activeIdx={activeIdx}
+          onSelect={handleMarkerClick}
+        />
+        <Watermark theme={theme}/>
+      </div>
+
+      <section style={{ padding: '120px 48px 140px', maxWidth: 1400, margin: '0 auto' }}>
         <div style={{ maxWidth: 820 }}>
           <Eyebrow theme={theme}>Next</Eyebrow>
           <Display theme={theme}>
-            The alpha in frontier is in the reconstruction. Qntify reconstructs.
+            Find out how Qntify can help you trace assets.
           </Display>
           <div style={{ marginTop: 40, display: 'flex', gap: 16, flexWrap: 'wrap' }}>
-            <button style={{
+            <a href="request-demo.html" style={{
               padding: '14px 28px', fontSize: 14, fontWeight: 500,
               fontFamily: 'Inter, sans-serif',
               background: theme.fg, color: theme.bg,
               border: 'none', cursor: 'pointer', letterSpacing: 0.5,
-            }}>Request a briefing →</button>
+              textDecoration: 'none', display: 'inline-block',
+            }}>Request information →</a>
           </div>
         </div>
-      </section> */}
+      </section>
 
-      <SiteFooter theme={theme} variant="overlay"/>
+      <SiteFooter theme={theme}/>
       {editMode && <TweaksPanel tweaks={tweaks} onChange={updateTweak} theme={theme}/>}
     </div>
-
-    
   )
 }
 
@@ -410,7 +418,7 @@ function TweaksPanel({ tweaks, onChange, theme }) {
   const panelText = isLight ? theme.fg : '#fff'
   return (
     <div style={{
-      position: 'absolute', bottom: 48, right: 24, zIndex: 200,
+      position: 'fixed', bottom: 48, right: 24, zIndex: 200,
       width: 240,
       background: panelBg,
       border: `1px solid ${theme.accent}`,
@@ -471,6 +479,14 @@ function TweaksPanel({ tweaks, onChange, theme }) {
           <input type="range" min="2" max="15" step="1"
             value={tweaks.cycleSeconds}
             onChange={e => onChange('cycleSeconds', Number(e.target.value))}
+            style={{ width: '100%', accentColor: theme.accent }}
+          />
+        </TweakRow>
+
+        <TweakRow label={`MAP HEIGHT (${tweaks.mapHeight}vh)`}>
+          <input type="range" min="50" max="100" step="5"
+            value={tweaks.mapHeight}
+            onChange={e => onChange('mapHeight', Number(e.target.value))}
             style={{ width: '100%', accentColor: theme.accent }}
           />
         </TweakRow>

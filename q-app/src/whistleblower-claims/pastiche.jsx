@@ -91,7 +91,7 @@ export function NewsPastiche({ theme, variant = 'standard' }) {
         position: 'absolute', top: 16, left: 16,
         fontFamily: 'JetBrains Mono, monospace', fontSize: 10,
         letterSpacing: 2, color: theme.fgDim,
-      }}>PATTERN-DETECTION · LIVE MONITOR</div>
+      }}>PATTERN DETECTED</div>
       <div style={{
         position: 'absolute', bottom: 16, right: 20,
         fontFamily: 'JetBrains Mono, monospace', fontSize: 9,

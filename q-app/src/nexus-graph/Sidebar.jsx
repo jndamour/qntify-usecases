@@ -11,7 +11,7 @@ export default function Sidebar({
 }) {
   const counts = useMemo(() => {
     const c = {};
-    for (const n of nodes) c[n.cat] = (c[n.cat] || 0) + 1;
+    for (const n of nodes) c[n.cat_id] = (c[n.cat_id] || 0) + 1;
     return c;
   }, [nodes]);
 
@@ -36,22 +36,22 @@ export default function Sidebar({
       </div>
 
       <div>
-        <div className="nx-section-label">Domains</div>
+        <div className="nx-section-label">Entity Types</div>
         <div className="nx-filters">
-          {Object.entries(categories).map(([key, cat]) => {
-            const off = !activeCats.has(key);
+          {categories.map(cat => {
+            const off = !activeCats.has(cat.id);
             return (
               <div
-                key={key}
+                key={cat.id}
                 className={`nx-filter${off ? ' nx-filter--off' : ''}`}
-                onClick={() => onToggleCat(key)}
+                onClick={() => onToggleCat(cat.id)}
               >
                 <div className="nx-filter-left">
                   <div className="nx-filter-swatch" style={{ background: cat.color }} />
                   <div>{cat.label}</div>
                 </div>
                 <div className="nx-filter-count">
-                  {String(counts[key] || 0).padStart(2, '0')}
+                  {String(counts[cat.id] || 0).padStart(2, '0')}
                 </div>
               </div>
             );
@@ -71,8 +71,8 @@ export default function Sidebar({
             <div className="nx-stat-label">Edges</div>
           </div>
           <div className="nx-stat">
-            <div className="nx-stat-value">{Object.keys(categories).length}</div>
-            <div className="nx-stat-label">Domains</div>
+            <div className="nx-stat-value">{categories.length}</div>
+            <div className="nx-stat-label">Entity Types</div>
           </div>
           <div className="nx-stat">
             <div className="nx-stat-value">{density}%</div>
@@ -84,7 +84,7 @@ export default function Sidebar({
       <div>
         <div className="nx-section-label">Legend</div>
         <div className="nx-legend-note">
-          Each node is a public figure. Edges represent documented associations — mentorships, rivalries, collaborations, public disputes. Node size scales with centrality in the network.
+          Each node is an entity. Edges represent documented associations. Node size scales with centrality in the network.
         </div>
       </div>
     </aside>
